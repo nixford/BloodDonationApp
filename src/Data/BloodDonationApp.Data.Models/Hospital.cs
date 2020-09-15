@@ -1,11 +1,24 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
 
     public class Hospital
     {
+        public Hospital()
+        {
+            this.Recipients = new HashSet<Recipient>();
+        }
+
+        public string Name { get; set; }
+
+        public string Phone { get; set; }
+
+        public string Email { get; set; }
+
         public Location HospitalLocation { get; set; }
+
+        public BloodBank BloodBank { get; set; }
+
+        public ICollection<Recipient> Recipients { get; set; }
     }
 }

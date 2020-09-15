@@ -2,7 +2,6 @@
 {
     using BloodDonationApp.Common;
     using BloodDonationApp.Web.Controllers;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

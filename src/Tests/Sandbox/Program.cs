@@ -13,9 +13,7 @@
     using BloodDonationApp.Data.Seeding;
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Services.Messaging;
-
     using CommandLine;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

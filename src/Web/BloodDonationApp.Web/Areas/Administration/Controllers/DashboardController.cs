@@ -2,7 +2,6 @@
 {
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Web.ViewModels.Administration.Dashboard;
-
     using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController

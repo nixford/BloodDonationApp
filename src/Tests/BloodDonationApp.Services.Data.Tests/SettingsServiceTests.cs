@@ -8,11 +8,8 @@
     using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Data.Repositories;
-
     using Microsoft.EntityFrameworkCore;
-
     using Moq;
-
     using Xunit;
 
     public class SettingsServiceTests

@@ -12,7 +12,6 @@
     using BloodDonationApp.Services.Mapping;
     using BloodDonationApp.Services.Messaging;
     using BloodDonationApp.Web.ViewModels;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;

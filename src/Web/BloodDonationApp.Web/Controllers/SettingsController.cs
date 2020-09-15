@@ -7,7 +7,6 @@
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Web.ViewModels.Settings;
-
     using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController

@@ -6,7 +6,6 @@
 
     using BloodDonationApp.Data.Common.Models;
     using BloodDonationApp.Data.Common.Repositories;
-
     using Microsoft.EntityFrameworkCore;
 
     public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>

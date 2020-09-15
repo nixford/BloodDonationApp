@@ -6,7 +6,6 @@
 
     using BloodDonationApp.Common;
     using BloodDonationApp.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 
