@@ -17,7 +17,7 @@
 
         public Location HospitalLocation { get; set; }
 
-        public BloodBank BloodBank { get; set; }
+        public virtual BloodBank BloodBank { get; set; }
 
         public ICollection<Recipient> Recipients { get; set; }
     }

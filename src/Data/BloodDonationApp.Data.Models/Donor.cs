@@ -1,6 +1,10 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     using BloodDonationApp.Data.Common.Models;
+    using BloodDonationApp.Data.Models.Enums;
 
     public class Donor : BaseDeletableModel<string>
     {
@@ -18,6 +22,12 @@
 
         public Location DonorLocation { get; set; }
 
-        // Available...
+        public EmergencyStatus DonorAveilableStatus { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(BloodType))]
+        public string BloodTypeId { get; set; }
+
+        public BloodType BloodType { get; set; }
     }
 }

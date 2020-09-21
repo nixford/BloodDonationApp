@@ -11,6 +11,8 @@
             this.BloodBags = new HashSet<BloodBag>();
         }
 
+        public virtual Hospital Hospital { get; set; }
+
         public ICollection<BloodBag> BloodBags { get; set; }
     }
 }

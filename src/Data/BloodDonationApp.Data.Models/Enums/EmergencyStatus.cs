@@ -1,6 +1,6 @@
 ﻿namespace BloodDonationApp.Data.Models.Enums
 {
-    public enum RecipientEmergency
+    public enum EmergencyStatus
     {
         AsSoonAsPossible = 1,
         WithinDay = 2,
