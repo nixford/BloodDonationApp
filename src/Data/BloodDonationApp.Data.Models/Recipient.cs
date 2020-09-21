@@ -1,13 +1,17 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
 
     using BloodDonationApp.Data.Common.Models;
     using BloodDonationApp.Data.Models.Enums;
 
     public class Recipient : BaseDeletableModel<string>
     {
+        public Recipient()
+        {
+            this.RecipientsDonationRequests = new HashSet<RecipientDonationRequest>();
+        }
+
         public string FirstName { get; set; }
 
         public string MiddleName { get; set; }
@@ -25,5 +29,7 @@
         public virtual Hospital Hospital { get; set; }
 
         public virtual BloodType BloodType { get; set; }
+
+        public virtual ICollection<RecipientDonationRequest> RecipientsDonationRequests { get; set; }
     }
 }

@@ -11,6 +11,7 @@
         public DonationRequest()
         {
             this.HospitaslDonationRequests = new HashSet<HospitalDonationRequest>();
+            this.RecipientsDonationRequests = new HashSet<RecipientDonationRequest>();
         }
 
         public DateTime PublishedOn { get; set; }
@@ -24,5 +25,7 @@
         public double NeededQuantity { get; set; }
 
         public virtual ICollection<HospitalDonationRequest> HospitaslDonationRequests { get; set; }
+
+        public virtual ICollection<RecipientDonationRequest> RecipientsDonationRequests { get; set; }
     }
 }
