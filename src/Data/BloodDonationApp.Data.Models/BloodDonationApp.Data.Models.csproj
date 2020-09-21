@@ -22,9 +22,5 @@
   <ItemGroup>
     <ProjectReference Include="..\BloodDonationApp.Data.Common\BloodDonationApp.Data.Common.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-  </ItemGroup>
   
 </Project>

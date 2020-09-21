@@ -9,6 +9,7 @@
         public Hospital()
         {
             this.Recipients = new HashSet<Recipient>();
+            this.HospitalsDonationRequests = new HashSet<HospitalDonationRequest>();
         }
 
         public string Name { get; set; }
@@ -20,5 +21,7 @@
         public virtual BloodBank BloodBank { get; set; }
 
         public virtual ICollection<Recipient> Recipients { get; set; }
+
+        public virtual ICollection<HospitalDonationRequest> HospitalsDonationRequests { get; set; }
     }
 }
