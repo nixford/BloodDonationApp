@@ -23,6 +23,38 @@
         {
         }
 
+        public DbSet<BloodBag> BloodBags { get; set; }
+
+        public DbSet<BloodBank> BloodBanks { get; set; }
+
+        public DbSet<BloodType> BloodTypes { get; set; }
+
+        public DbSet<Contact> Contacts { get; set; }
+
+        public DbSet<Disease> Diseases { get; set; }
+
+        public DbSet<DonationRequest> DonationRequests { get; set; }
+
+        public DbSet<Donor> Donors { get; set; }
+
+        public DbSet<DonorDonationEvent> DonorsDonationEvents { get; set; }
+
+        public DbSet<DonationEvent> DonationEvents { get; set; }
+
+        public DbSet<Examination> Examinations { get; set; }
+
+        public DbSet<ExaminationDonor> ExaminationsDonors { get; set; }
+
+        public DbSet<Hospital> Hospitals { get; set; }
+
+        public DbSet<HospitalDonationRequest> HospitalsDonationRequests { get; set; }
+
+        public DbSet<Location> Locations { get; set; }
+
+        public DbSet<Recipient> Recipients { get; set; }
+
+        public DbSet<RecipientDonationRequest> RecipientsDonationRequests { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
