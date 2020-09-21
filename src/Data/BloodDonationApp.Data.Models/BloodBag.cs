@@ -10,11 +10,9 @@
     {
         public double Quantity { get; set; }
 
-        public Donor Donor { get; set; }
-
         public DateTime CollectionDate { get; set; }
 
-        public Examination Examination { get; set; }
+        public virtual Donor Donor { get; set; }
 
         public virtual BloodType BloodType { get; set; }
     }

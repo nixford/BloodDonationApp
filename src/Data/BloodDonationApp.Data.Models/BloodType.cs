@@ -7,6 +7,6 @@
     {
         public BloodGroup BloodGroup { get; set; }
 
-        public RhesusFactor RhesusFactor { get; set; }
+        public BloodRhesusFactor RhesusFactor { get; set; }
     }
 }

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public enum RhesusFactor
+    public enum BloodRhesusFactor
     {
         Positive = 1,
         Negative = 2,
