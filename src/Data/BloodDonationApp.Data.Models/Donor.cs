@@ -10,6 +10,7 @@
         public Donor()
         {
             this.ExaminationsDonors = new HashSet<ExaminationDonor>();
+            this.DonorsDonationEvents = new HashSet<DonorDonationEvent>();
         }
 
         public string FirstName { get; set; }
@@ -29,5 +30,7 @@
         public virtual BloodType BloodType { get; set; }
 
         public virtual ICollection<ExaminationDonor> ExaminationsDonors { get; set; }
+
+        public virtual ICollection<DonorDonationEvent> DonorsDonationEvents { get; set; }
     }
 }

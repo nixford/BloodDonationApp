@@ -14,11 +14,13 @@
             this.RecipientsDonationRequests = new HashSet<RecipientDonationRequest>();
         }
 
+        public string Content { get; set; }
+
         public DateTime PublishedOn { get; set; }
 
         public EmergencyStatus EmergencyStatus { get; set; }
 
-        public Contact HospitalContact { get; set; }
+        public virtual Contact HospitalContact { get; set; }
 
         public BloodType NeededBloodType { get; set; }
 
