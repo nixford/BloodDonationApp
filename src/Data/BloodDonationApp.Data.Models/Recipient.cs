@@ -20,16 +20,10 @@
 
         public EmergencyStatus RecipientEmergency { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(Hospital))]
-        public Hospital HospitalId { get; set; }
+        public virtual Contact PhoneAndEmailRecipient { get; set; }
 
-        public Hospital Hospital { get; set; }
+        public virtual Hospital Hospital { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(BloodType))]
-        public string BloodTypeId { get; set; }
-
-        public BloodType BloodType { get; set; }
+        public virtual BloodType BloodType { get; set; }
     }
 }

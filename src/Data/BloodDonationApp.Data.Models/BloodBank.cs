@@ -13,6 +13,6 @@
 
         public virtual Hospital Hospital { get; set; }
 
-        public ICollection<BloodBag> BloodBags { get; set; }
+        public virtual ICollection<BloodBag> BloodBags { get; set; }
     }
 }

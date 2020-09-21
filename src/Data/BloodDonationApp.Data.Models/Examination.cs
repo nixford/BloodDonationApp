@@ -1,15 +1,19 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+
     using BloodDonationApp.Data.Common.Models;
 
     public class Examination : BaseDeletableModel<string>
     {
-        public bool HepatitisC { get; set; }
+        public Examination()
+        {
+            this.Diseases = new HashSet<Disease>();
+        }
 
-        public bool HepatitisB { get; set; }
+        public DateTime ExaminationDate { get; set; }
 
-        public bool HIV { get; set; }
-
-        public bool Syphilis { get; set; }
+        public virtual ICollection<Disease> Diseases { get; set; }
     }
 }

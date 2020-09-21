@@ -16,18 +16,12 @@
 
         public int Age { get; set; }
 
-        public string Phone { get; set; }
+        public virtual Contact PhoneAndEmailDonor { get; set; }
 
-        public string Email { get; set; }
+        public virtual Location DonorLocation { get; set; }
 
-        public Location DonorLocation { get; set; }
+        public virtual EmergencyStatus DonorAveilableStatus { get; set; }
 
-        public EmergencyStatus DonorAveilableStatus { get; set; }
-
-        [Required]
-        [ForeignKey(nameof(BloodType))]
-        public string BloodTypeId { get; set; }
-
-        public BloodType BloodType { get; set; }
+        public virtual BloodType BloodType { get; set; }
     }
 }

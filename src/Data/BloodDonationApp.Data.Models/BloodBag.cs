@@ -16,10 +16,6 @@
 
         public Examination Examination { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(BloodType))]
-        public string BloodTypeId { get; set; }
-
-        public BloodType BloodType { get; set; }
+        public virtual BloodType BloodType { get; set; }
     }
 }

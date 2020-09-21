@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public class Hospital
+    using BloodDonationApp.Data.Common.Models;
+
+    public class Hospital : BaseDeletableModel<string>
     {
         public Hospital()
         {
@@ -11,14 +13,12 @@
 
         public string Name { get; set; }
 
-        public string Phone { get; set; }
+        public virtual Contact PhoneAndEmailHospital { get; set; }
 
-        public string Email { get; set; }
-
-        public Location HospitalLocation { get; set; }
+        public virtual Location HospitalLocation { get; set; }
 
         public virtual BloodBank BloodBank { get; set; }
 
-        public ICollection<Recipient> Recipients { get; set; }
+        public virtual ICollection<Recipient> Recipients { get; set; }
     }
 }
