@@ -2,10 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonationApp.Data.Common.Models;
 
-    public class DonationEvent : BaseModel<string>
+    public class DonationEvent : BaseDeletableModel<string>
     {
         public DonationEvent()
         {
@@ -13,6 +14,9 @@
         }
 
         public DateTime DateOfDonation { get; set; }
+
+        [ForeignKey(nameof(DonationRequest))]
+        public string DonationRequestId { get; set; }
 
         public DonationRequest DonationRequest { get; set; }
 

@@ -2,11 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonationApp.Data.Common.Models;
     using BloodDonationApp.Data.Models.Enums;
 
-    public class DonationRequest : BaseModel<string>
+    public class DonationRequest : BaseDeletableModel<string>
     {
         public DonationRequest()
         {
@@ -20,9 +21,15 @@
 
         public EmergencyStatus EmergencyStatus { get; set; }
 
-        public virtual Contact HospitalContact { get; set; }
+        [ForeignKey(nameof(Contact))]
+        public string ContactId { get; set; }
 
-        public BloodType NeededBloodType { get; set; }
+        public virtual Contact Contact { get; set; }
+
+        [ForeignKey(nameof(BloodType))]
+        public string BloodTypeId { get; set; }
+
+        public virtual BloodType BloodType { get; set; }
 
         public double NeededQuantity { get; set; }
 

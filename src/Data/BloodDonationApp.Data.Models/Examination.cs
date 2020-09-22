@@ -2,20 +2,23 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonationApp.Data.Common.Models;
 
-    public class Examination : BaseModel<string>
+    public class Examination : BaseDeletableModel<string>
     {
         public Examination()
         {
-            this.Diseases = new HashSet<Disease>();
             this.ExaminationsDonors = new HashSet<ExaminationDonor>();
         }
 
         public DateTime ExaminationDate { get; set; }
 
-        public virtual ICollection<Disease> Diseases { get; set; }
+        [ForeignKey(nameof(Disease))]
+        public string DiseaseId { get; set; }
+
+        public virtual Disease Disease { get; set; }
 
         public virtual ICollection<ExaminationDonor> ExaminationsDonors { get; set; }
     }

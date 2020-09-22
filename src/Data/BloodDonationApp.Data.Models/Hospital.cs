@@ -1,10 +1,11 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonationApp.Data.Common.Models;
 
-    public class Hospital : BaseModel<string>
+    public class Hospital : BaseDeletableModel<string>
     {
         public Hospital()
         {
@@ -14,9 +15,18 @@
 
         public string Name { get; set; }
 
-        public virtual Contact PhoneAndEmailHospital { get; set; }
+        [ForeignKey(nameof(Contact))]
+        public string ContactId { get; set; }
 
-        public virtual Location HospitalLocation { get; set; }
+        public virtual Contact Contact { get; set; }
+
+        [ForeignKey(nameof(Location))]
+        public string LocationId { get; set; }
+
+        public virtual Location Location { get; set; }
+
+        [ForeignKey(nameof(BloodBank))]
+        public string BloodBankId { get; set; }
 
         public virtual BloodBank BloodBank { get; set; }
 

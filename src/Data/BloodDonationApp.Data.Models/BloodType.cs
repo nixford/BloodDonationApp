@@ -3,7 +3,7 @@
     using BloodDonationApp.Data.Common.Models;
     using BloodDonationApp.Data.Models.Enums;
 
-    public class BloodType : BaseModel<string>
+    public class BloodType : BaseDeletableModel<string>
     {
         public BloodGroup BloodGroup { get; set; }
 

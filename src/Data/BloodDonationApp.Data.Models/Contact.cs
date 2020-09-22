@@ -2,7 +2,7 @@
 {
     using BloodDonationApp.Data.Common.Models;
 
-    public class Contact : BaseModel<string>
+    public class Contact : BaseDeletableModel<string>
     {
         public string Phone { get; set; }
 
