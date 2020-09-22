@@ -3,7 +3,7 @@
     using BloodDonationApp.Data.Common.Models;
     using BloodDonationApp.Data.Models.Enums;
 
-    public class Disease : BaseDeletableModel<string>
+    public class Disease : BaseModel<string>
     {
         public string DiseaseName { get; set; }
 

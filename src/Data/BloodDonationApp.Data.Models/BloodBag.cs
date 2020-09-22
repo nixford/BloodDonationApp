@@ -6,7 +6,7 @@
 
     using BloodDonationApp.Data.Common.Models;
 
-    public class BloodBag : BaseDeletableModel<string>
+    public class BloodBag : BaseModel<string>
     {
         public double Quantity { get; set; }
 

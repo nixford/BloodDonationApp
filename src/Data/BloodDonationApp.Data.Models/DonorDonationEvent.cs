@@ -1,6 +1,8 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
-    public class DonorDonationEvent
+    using BloodDonationApp.Data.Common.Models;
+
+    public class DonorDonationEvent : BaseModel<string>
     {
         public string DonorId { get; set; }
 

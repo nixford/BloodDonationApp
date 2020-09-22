@@ -6,7 +6,7 @@
     using BloodDonationApp.Data.Common.Models;
     using BloodDonationApp.Data.Models.Enums;
 
-    public class DonationRequest : BaseDeletableModel<string>
+    public class DonationRequest : BaseModel<string>
     {
         public DonationRequest()
         {

@@ -5,7 +5,7 @@
     using BloodDonationApp.Data.Common.Models;
     using BloodDonationApp.Data.Models.Enums;
 
-    public class Recipient : BaseDeletableModel<string>
+    public class Recipient : BaseModel<string>
     {
         public Recipient()
         {

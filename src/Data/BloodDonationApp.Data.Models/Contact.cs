@@ -1,6 +1,8 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
-    public class Contact
+    using BloodDonationApp.Data.Common.Models;
+
+    public class Contact : BaseModel<string>
     {
         public string Phone { get; set; }
 

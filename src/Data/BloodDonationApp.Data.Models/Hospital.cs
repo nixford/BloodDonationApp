@@ -4,7 +4,7 @@
 
     using BloodDonationApp.Data.Common.Models;
 
-    public class Hospital : BaseDeletableModel<string>
+    public class Hospital : BaseModel<string>
     {
         public Hospital()
         {
