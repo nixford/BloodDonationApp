@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace BloodDonationApp.Data.Migrations
+﻿namespace BloodDonationApp.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class ChangingRelationsOfHospitalBloodBnaksAndExamination : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

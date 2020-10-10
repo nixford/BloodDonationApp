@@ -1,17 +1,27 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonationApp.Data.Common.Models;
     using BloodDonationApp.Data.Models.Enums;
+    using Microsoft.AspNetCore.Identity;
 
-    public class Recipient : BaseDeletableModel<string>
+    public class Recipient : IdentityUser, IAuditInfo, IDeletableEntity
     {
         public Recipient()
         {
             this.RecipientsDonationRequests = new HashSet<RecipientDonationRequest>();
         }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
 
         public string FirstName { get; set; }
 
