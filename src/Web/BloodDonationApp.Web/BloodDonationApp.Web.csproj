@@ -47,72 +47,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\assets\.sass-cache\03f7563936555af25ed76a25faac13ac47635709\about.scssc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\assets\.sass-cache\03f7563936555af25ed76a25faac13ac47635709\features.scssc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\assets\.sass-cache\03f7563936555af25ed76a25faac13ac47635709\footer.scssc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\assets\.sass-cache\03f7563936555af25ed76a25faac13ac47635709\gallery.scssc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\assets\.sass-cache\03f7563936555af25ed76a25faac13ac47635709\header.scssc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\assets\.sass-cache\03f7563936555af25ed76a25faac13ac47635709\pricing.scssc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\assets\.sass-cache\03f7563936555af25ed76a25faac13ac47635709\review.scssc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\assets\.sass-cache\03f7563936555af25ed76a25faac13ac47635709\slider.scssc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\assets\.sass-cache\05e40c16e07218e3bc43358ea0c3cb86c24a7d5b\about.scssc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\assets\.sass-cache\05e40c16e07218e3bc43358ea0c3cb86c24a7d5b\header.scssc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\assets\.sass-cache\05e40c16e07218e3bc43358ea0c3cb86c24a7d5b\slider.scssc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\assets\.sass-cache\26fe87a029a5193b1d6ed36900fa69ae7edb547d\style.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\26fe87a029a5193b1d6ed36900fa69ae7edb547d\_variable.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\30f32e2e4f90d1089ae5b38f7a3193f8b4391bc2\style.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\30f32e2e4f90d1089ae5b38f7a3193f8b4391bc2\_variable.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\3a416854cc9021fd0b3018c88bf854e35109f84c\basic_setup.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\3a8f91f4404a31575e487a92604ad89c9bdada51\basic_setup.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\3d1baef330597db9bd0fd23a93609cf52f6ee54d\style.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\3d1baef330597db9bd0fd23a93609cf52f6ee54d\_variable.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\6474a3d4b0629bea971d701cf9c416682ca7e632\basic_setup.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\7518acd6aadb1f7574d555d374ff90d0adef0ef2\style.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\7518acd6aadb1f7574d555d374ff90d0adef0ef2\_variable.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\ab1731c95c67dd9e92510b107e159ce031792aff\style.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\ab1731c95c67dd9e92510b107e159ce031792aff\_variable.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\bdcda4b9533c9f6ce255960a661c810f7755a390\design.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\bdcda4b9533c9f6ce255960a661c810f7755a390\features.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\bdcda4b9533c9f6ce255960a661c810f7755a390\footer.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\bdcda4b9533c9f6ce255960a661c810f7755a390\gallery.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\bdcda4b9533c9f6ce255960a661c810f7755a390\header.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\bdcda4b9533c9f6ce255960a661c810f7755a390\products.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\bdcda4b9533c9f6ce255960a661c810f7755a390\review.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\bdcda4b9533c9f6ce255960a661c810f7755a390\slider.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\bdcda4b9533c9f6ce255960a661c810f7755a390\update.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\bdcda4b9533c9f6ce255960a661c810f7755a390\why_choos.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\d40a99c0290f977234388c7987a135c19e63303e\about.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\d40a99c0290f977234388c7987a135c19e63303e\features.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\d40a99c0290f977234388c7987a135c19e63303e\footer.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\d40a99c0290f977234388c7987a135c19e63303e\gallery.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\d40a99c0290f977234388c7987a135c19e63303e\header.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\d40a99c0290f977234388c7987a135c19e63303e\pricing.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\d40a99c0290f977234388c7987a135c19e63303e\review.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\d40a99c0290f977234388c7987a135c19e63303e\slider.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\d9889af3f758d1ef1c6651a2941b0457a811b1da\basic_setup.scssc" />
-    <None Include="wwwroot\assets\.sass-cache\dee0820f6c196d10b5861616947d0ade7a54bc67\basic_setup.scssc" />
     <None Include="wwwroot\assets\scss\.sass-cache\87f88134b2e274406d696eddf2817a21a5f37943\style.scssc" />
     <None Include="wwwroot\assets\scss\.sass-cache\87f88134b2e274406d696eddf2817a21a5f37943\_variable.scssc" />
   </ItemGroup>
@@ -193,19 +127,10 @@
     <Content Update="wwwroot\assets\images\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\assets\images\slider\slide-02.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\assets\images\slider\slide-03.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\assets\images\testimonial\member-01.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\assets\images\testimonial\member-02.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\assets\images\testimonial\member-03.jpg">
+    <Content Update="wwwroot\assets\images\slider\slide-02.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\assets\js\bootstrap.min.js">
