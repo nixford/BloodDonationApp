@@ -7,21 +7,13 @@
     using BloodDonationApp.Data.Common.Models;
     using Microsoft.AspNetCore.Identity;
 
-    public class Hospital : IdentityUser, IAuditInfo, IDeletableEntity
+    public class Hospital
     {
         public Hospital()
         {
             this.Recipients = new HashSet<Recipient>();
             this.HospitalsDonationRequests = new HashSet<HospitalDonationRequest>();
         }
-
-        public DateTime CreatedOn { get; set; }
-
-        public DateTime? ModifiedOn { get; set; }
-
-        public bool IsDeleted { get; set; }
-
-        public DateTime? DeletedOn { get; set; }
 
         public string Name { get; set; }
 
