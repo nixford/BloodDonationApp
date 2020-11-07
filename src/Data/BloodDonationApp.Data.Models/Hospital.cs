@@ -4,16 +4,16 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    using BloodDonationApp.Data.Common.Models;
-    using Microsoft.AspNetCore.Identity;
-
     public class Hospital
     {
         public Hospital()
         {
             this.Recipients = new HashSet<Recipient>();
             this.HospitalsDonationRequests = new HashSet<HospitalDonationRequest>();
+            this.Id = Guid.NewGuid().ToString();
         }
+
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
