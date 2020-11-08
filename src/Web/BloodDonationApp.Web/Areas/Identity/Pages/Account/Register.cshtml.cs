@@ -8,6 +8,7 @@
     using System.Threading.Tasks;
 
     using BloodDonationApp.Data.Models;
+    using BloodDonationApp.Data.Models.Enums;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -24,6 +25,7 @@
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -46,6 +48,10 @@
 
         public class InputModel
         {
+            [Required]
+            [Display(Name = "You are:")]
+            public int id { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -77,6 +83,8 @@
             {
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                await this._userManager.AddToRoleAsync(user, ((Role)this.Input.id).ToString());
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
