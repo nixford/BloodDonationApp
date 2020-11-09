@@ -4,16 +4,21 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Hospital
+    using BloodDonationApp.Data.Common.Models;
+
+    public class HospitalData : BaseDeletableModel<string>
     {
-        public Hospital()
+        public HospitalData()
         {
             this.Recipients = new HashSet<Recipient>();
             this.HospitalsDonationRequests = new HashSet<HospitalDonationRequest>();
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public string Id { get; set; }
+        [ForeignKey(nameof(ApplicationUser))]
+        public string ApplicationUserId { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
 
         public string Name { get; set; }
 

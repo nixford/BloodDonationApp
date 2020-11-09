@@ -35,7 +35,7 @@
 
         public DbSet<DonationRequest> DonationRequests { get; set; }
 
-        public DbSet<Donor> Donors { get; set; }
+        public DbSet<DonorData> DonorsData { get; set; }
 
         public DbSet<DonorDonationEvent> DonorsDonationEvents { get; set; }
 
@@ -45,7 +45,7 @@
 
         public DbSet<ExaminationDonor> ExaminationsDonors { get; set; }
 
-        public DbSet<Hospital> Hospitals { get; set; }
+        public DbSet<HospitalData> HospitaslData { get; set; }
 
         public DbSet<HospitalDonationRequest> HospitalsDonationRequests { get; set; }
 
@@ -53,7 +53,9 @@
 
         public DbSet<Recipient> Recipients { get; set; }
 
-        public DbSet<RecipientDonationRequest> RecipientsDonationRequests { get; set; }
+        public DbSet<ApplicationUserHospitalData> ApplicationUsersHospitalsData { get; set; }
+
+        public DbSet<ApplicationUserDonorData> ApplicationUsersDonorsData { get; set; }
 
         public DbSet<Setting> Settings { get; set; }
 

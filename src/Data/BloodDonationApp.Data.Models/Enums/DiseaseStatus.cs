@@ -2,7 +2,7 @@
 {
     public enum DiseaseStatus
     {
-        Negative = 1,
-        Positive = 2,
+        Negative = 0,
+        Positive = 1,
     }
 }

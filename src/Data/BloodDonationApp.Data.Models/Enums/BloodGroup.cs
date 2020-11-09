@@ -6,9 +6,9 @@
 
     public enum BloodGroup
     {
-        AB = 1,
-        A = 2,
-        B = 3,
-        Zero = 4,
+        AB = 0,
+        A = 1,
+        B = 2,
+        Zero = 3,
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonationApp.Data.Common.Models;
@@ -10,7 +9,7 @@
     {
         public Examination()
         {
-            this.ExaminationsDonors = new HashSet<ExaminationDonor>();
+            this.Id = Guid.NewGuid().ToString();
         }
 
         public DateTime ExaminationDate { get; set; }
@@ -19,7 +18,5 @@
         public string DiseaseId { get; set; }
 
         public virtual Disease Disease { get; set; }
-
-        public virtual ICollection<ExaminationDonor> ExaminationsDonors { get; set; }
     }
 }

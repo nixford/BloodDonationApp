@@ -6,10 +6,10 @@
 
     public class DonorDonationEvent : BaseDeletableModel<string>
     {
-        [ForeignKey(nameof(Donor))]
-        public string DonorId { get; set; }
+        [ForeignKey(nameof(DonorData))]
+        public string DonorDataId { get; set; }
 
-        public Donor Donor { get; set; }
+        public DonorData DonorData { get; set; }
 
         [ForeignKey(nameof(DonationEvent))]
         public string DonationEventId { get; set; }

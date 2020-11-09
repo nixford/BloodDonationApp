@@ -1,11 +1,16 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
+    using System;
+
     using BloodDonationApp.Data.Common.Models;
     using BloodDonationApp.Data.Models.Enums;
 
-    public class Disease
+    public class Disease : BaseDeletableModel<string>
     {
-        public string Id { get; set; }
+        public Disease()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
 
         public string DiseaseName { get; set; }
 

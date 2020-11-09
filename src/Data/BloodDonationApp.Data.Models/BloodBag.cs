@@ -14,7 +14,7 @@
         [ForeignKey(nameof(Donor))]
         public string DonorId { get; set; }
 
-        public virtual Donor Donor { get; set; }
+        public virtual DonorData Donor { get; set; }
 
         [ForeignKey(nameof(BloodType))]
         public string BloodTypeId { get; set; }

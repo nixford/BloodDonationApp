@@ -8,8 +8,8 @@
     {
         public Location()
         {
-            this.HospitalsAdresses = new HashSet<Hospital>();
-            this.DonorsLocations = new HashSet<Donor>();
+            this.HospitalsAdresses = new HashSet<HospitalData>();
+            this.DonorsLocations = new HashSet<DonorData>();
         }
 
         public string Country { get; set; }
@@ -18,8 +18,8 @@
 
         public string AdressDescription { get; set; }
 
-        public virtual ICollection<Hospital> HospitalsAdresses { get; set; }
+        public virtual ICollection<HospitalData> HospitalsAdresses { get; set; }
 
-        public virtual ICollection<Donor> DonorsLocations { get; set; }
+        public virtual ICollection<DonorData> DonorsLocations { get; set; }
     }
 }

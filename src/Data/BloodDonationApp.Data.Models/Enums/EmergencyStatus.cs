@@ -2,9 +2,9 @@
 {
     public enum EmergencyStatus
     {
-        AsSoonAsPossible = 1,
-        WithinDay = 2,
-        WithinWeek = 3,
-        WithinMonth = 4,
+        AsSoonAsPossible = 0,
+        WithinDay = 1,
+        WithinWeek = 2,
+        WithinMonth = 3,
     }
 }

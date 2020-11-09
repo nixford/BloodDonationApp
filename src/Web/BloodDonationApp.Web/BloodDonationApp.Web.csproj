@@ -9,6 +9,142 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\css\**" />
+    <Compile Remove="wwwroot\js\**" />
+    <Compile Remove="wwwroot\lib\**" />
+    <Content Remove="wwwroot\css\**" />
+    <Content Remove="wwwroot\js\**" />
+    <Content Remove="wwwroot\lib\**" />
+    <EmbeddedResource Remove="wwwroot\css\**" />
+    <EmbeddedResource Remove="wwwroot\js\**" />
+    <EmbeddedResource Remove="wwwroot\lib\**" />
+    <None Remove="wwwroot\css\**" />
+    <None Remove="wwwroot\js\**" />
+    <None Remove="wwwroot\lib\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.bundle.js" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.bundle.js.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.bundle.min.js" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.bundle.min.js.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.js" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.js.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.min.js" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.min.js.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\bootstrap-grid.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\bootstrap-reboot.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\bootstrap.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_alert.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_background-variant.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_badge.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_border-radius.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_box-shadow.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_breakpoints.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_buttons.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_caret.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_clearfix.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_deprecate.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_float.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_forms.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_gradients.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_grid-framework.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_grid.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_hover.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_image.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_list-group.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_lists.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_nav-divider.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_pagination.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_reset-text.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_resize.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_screen-reader.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_size.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_table-row.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_text-emphasis.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_text-hide.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_text-truncate.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_transition.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\mixins\_visibility.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_align.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_background.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_borders.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_clearfix.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_display.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_embed.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_flex.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_float.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_interactions.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_overflow.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_position.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_screenreaders.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_shadows.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_sizing.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_spacing.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_stretched-link.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_text.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\utilities\_visibility.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\vendor\_rfs.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_alert.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_badge.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_breadcrumb.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_button-group.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_buttons.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_card.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_carousel.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_close.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_code.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_custom-forms.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_dropdown.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_forms.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_functions.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_grid.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_images.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_input-group.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_jumbotron.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_list-group.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_media.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_mixins.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_modal.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_nav.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_navbar.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_pagination.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_popover.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_print.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_progress.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_reboot.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_root.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_spinners.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_tables.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_toasts.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_tooltip.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_transitions.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_type.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_utilities.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\scss\_variables.scss" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\css\bootstrap-grid.css" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\css\bootstrap-grid.css.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\css\bootstrap-grid.min.css" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\css\bootstrap-grid.min.css.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\css\bootstrap-reboot.css" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\css\bootstrap-reboot.css.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\css\bootstrap-reboot.min.css" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\css\bootstrap-reboot.min.css.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\css\bootstrap.css" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\css\bootstrap.css.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\css\bootstrap.min.css" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\css\bootstrap.min.css.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.bundle.js" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.bundle.js.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.bundle.min.js" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.bundle.min.js.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.js" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.js.map" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.min.js" />
+    <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.min.js.map" />
+  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
@@ -46,11 +182,6 @@
     <ProjectReference Include="..\..\Services\BloodDonationApp.Services\BloodDonationApp.Services.csproj" />
     <ProjectReference Include="..\BloodDonationApp.Web.Infrastructure\BloodDonationApp.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\BloodDonationApp.Web.ViewModels\BloodDonationApp.Web.ViewModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\lib\bootstrap\dist\css\" />
-    <Folder Include="wwwroot\lib\bootstrap\dist\js\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,8 +2,7 @@
 {
     public enum Role
     {
-        Administrator = 0,
-        Donor = 1,
-        Recipient = 2,
+        Donor = 0,
+        Hospital = 1,
     }
 }

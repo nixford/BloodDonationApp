@@ -6,26 +6,19 @@
 
     using BloodDonationApp.Data.Common.Models;
     using BloodDonationApp.Data.Models.Enums;
-    using Microsoft.AspNetCore.Identity;
 
-    public class Donor : IdentityUser, IAuditInfo, IDeletableEntity
+    public class DonorData : BaseDeletableModel<string>
     {
-        public Donor()
+        public DonorData()
         {
-            this.ExaminationsDonors = new HashSet<ExaminationDonor>();
             this.DonorsDonationEvents = new HashSet<DonorDonationEvent>();
-            this.Roles = new HashSet<IdentityUserRole<string>>();
-            this.Claims = new HashSet<IdentityUserClaim<string>>();
-            this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Id = Guid.NewGuid().ToString();
         }
 
-        public DateTime CreatedOn { get; set; }
+        [ForeignKey(nameof(ApplicationUser))]
+        public string ApplicationUserId { get; set; }
 
-        public DateTime? ModifiedOn { get; set; }
-
-        public bool IsDeleted { get; set; }
-
-        public DateTime? DeletedOn { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
         public string FirstName { get; set; }
 
@@ -52,14 +45,11 @@
 
         public virtual BloodType BloodType { get; set; }
 
-        public virtual ICollection<ExaminationDonor> ExaminationsDonors { get; set; }
+        [ForeignKey(nameof(Examination))]
+        public string ExaminationId { get; set; }
+
+        public virtual Examination Examination { get; set; }
 
         public virtual ICollection<DonorDonationEvent> DonorsDonationEvents { get; set; }
-
-        public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
-
-        public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
-
-        public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
     }
 }

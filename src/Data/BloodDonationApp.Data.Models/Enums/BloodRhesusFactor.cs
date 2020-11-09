@@ -6,7 +6,7 @@
 
     public enum BloodRhesusFactor
     {
-        Positive = 1,
-        Negative = 2,
+        Positive = 0,
+        Negative = 1,
     }
 }
