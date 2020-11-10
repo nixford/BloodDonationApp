@@ -19,8 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BloodDonationApp.Common\BloodDonationApp.Common.csproj" />
     <ProjectReference Include="..\..\Data\BloodDonationApp.Data.Common\BloodDonationApp.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\BloodDonationApp.Data.Models\BloodDonationApp.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\BloodDonationApp.Web.ViewModels\BloodDonationApp.Web.ViewModels.csproj" />
     <ProjectReference Include="..\BloodDonationApp.Services.Mapping\BloodDonationApp.Services.Mapping.csproj" />
   </ItemGroup>
 

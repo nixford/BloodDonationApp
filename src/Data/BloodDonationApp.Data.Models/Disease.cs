@@ -14,7 +14,7 @@
 
         public string DiseaseName { get; set; }
 
-        public string Description { get; set; }
+        public string DiseaseDescription { get; set; }
 
         public DiseaseStatus DiseaseStatus { get; set; }
     }

@@ -1,8 +1,33 @@
 ﻿namespace BloodDonationApp.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using BloodDonationApp.Web.ViewModels.Donor;
+    using BloodDonationApp.Web.ViewModels.Hospital;
+
     public interface IUsersService
     {
-        T GetById<T>(string id);
+        T GetUserById<T>(string id);
 
+        T GetUserByName<T>(string userName);
+
+        Task CreateDonorProfileAsync(DonorDataProfileInputModel input, string userId);
+
+        Task CreateHospitalProfileAsync(HospitalProfileInputModel input, string userId);
+
+        IEnumerable<T> GetAllDonors<T>(string role);
+
+        IEnumerable<T> GetAllHospitals<T>(string role);
+
+        IEnumerable<T> GetTopDonors<T>();
+
+        string GetUserEmailById(string userId);
+
+        Task<bool> AddAdmin(string userName, string email, string password);
+
+        Task<string> RemoveAdminAsync(string email, string role);
+
+        Task<string> RemoveUserAsync(string email);
     }
 }
