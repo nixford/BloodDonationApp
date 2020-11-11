@@ -11,7 +11,7 @@
         public HospitalData()
         {
             this.Recipients = new HashSet<Recipient>();
-            this.HospitalsDonationRequests = new HashSet<HospitalDonationRequest>();
+            this.HospitalsDonationRequests = new HashSet<HospitalDataRequest>();
             this.Id = Guid.NewGuid().ToString();
         }
 
@@ -39,6 +39,6 @@
 
         public virtual ICollection<Recipient> Recipients { get; set; }
 
-        public virtual ICollection<HospitalDonationRequest> HospitalsDonationRequests { get; set; }
+        public virtual ICollection<HospitalDataRequest> HospitalsDonationRequests { get; set; }
     }
 }

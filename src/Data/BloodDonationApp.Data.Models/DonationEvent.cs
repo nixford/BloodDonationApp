@@ -18,7 +18,7 @@
         [ForeignKey(nameof(DonationRequest))]
         public string DonationRequestId { get; set; }
 
-        public DonationRequest DonationRequest { get; set; }
+        public Request DonationRequest { get; set; }
 
         public virtual ICollection<DonorDonationEvent> DonorsDonationEvents { get; set; }
     }

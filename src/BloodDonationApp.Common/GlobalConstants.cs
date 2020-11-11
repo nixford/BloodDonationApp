@@ -10,5 +10,7 @@
 
         public const string NotAvailableUserNameErrorMessage = "The username is already in use! Please, try another one.";
         public const string NotAvailableEmailErrorMessage = "The email is already in use! Please try another one.";
+
+        public const int TopDonorsNumber = 10;
     }
 }

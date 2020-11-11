@@ -16,9 +16,9 @@
 
         Task CreateHospitalProfileAsync(HospitalProfileInputModel input, string userId);
 
-        IEnumerable<T> GetAllDonors<T>(string role);
+        IEnumerable<T> GetAllDonors<T>();
 
-        IEnumerable<T> GetAllHospitals<T>(string role);
+        IEnumerable<T> GetAllHospitals<T>();
 
         IEnumerable<T> GetTopDonors<T>();
 

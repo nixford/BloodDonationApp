@@ -126,10 +126,10 @@
             await this.appUserHospitalRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAllDonors<T>(string role)
+        public IEnumerable<T> GetAllDonors<T>()
         {
             var roleObj = this.roleRepository.All()
-                .FirstOrDefault(r => r.Name == role);
+                .FirstOrDefault(r => r.Name == "Donor");
 
             var donors = this.userRepository.All()
                 .Where(u => u.Roles.All(r => r.RoleId == roleObj.Id));
@@ -137,10 +137,10 @@
             return donors.To<T>().ToList();
         }
 
-        public IEnumerable<T> GetAllHospitals<T>(string role)
+        public IEnumerable<T> GetAllHospitals<T>()
         {
             var roleObj = this.roleRepository.All()
-                .FirstOrDefault(r => r.Name == role);
+                .FirstOrDefault(r => r.Name == "Hospital");
 
             var hospitals = this.userRepository.All()
                 .Where(u => u.Roles.All(r => r.RoleId == roleObj.Id));
@@ -159,10 +159,13 @@
             return user;
         }
 
-        // TODO:
         public IEnumerable<T> GetTopDonors<T>()
         {
-            throw new System.NotImplementedException();
+            var topDonors = this.appUserDonorRepository.All()
+                .OrderByDescending(u => u.DonorData.DonorsDonationEvents.Count)
+                .Take(GlobalConstants.TopDonorsNumber);
+
+            return topDonors.To<T>().ToList();
         }
 
         public T GetUserById<T>(string id)

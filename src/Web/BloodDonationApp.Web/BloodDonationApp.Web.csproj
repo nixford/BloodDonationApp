@@ -190,6 +190,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Users\AddDonor.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\assets\config-scss.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -427,7 +430,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Donor\" />
-    <Folder Include="Views\Hospital\" />
+    <Folder Include="Views\Requests\" />
   </ItemGroup>
 </Project>

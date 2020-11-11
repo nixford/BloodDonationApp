@@ -33,7 +33,7 @@
 
         public DbSet<Disease> Diseases { get; set; }
 
-        public DbSet<DonationRequest> DonationRequests { get; set; }
+        public DbSet<Request> DonationRequests { get; set; }
 
         public DbSet<DonorData> DonorsData { get; set; }
 
@@ -47,7 +47,7 @@
 
         public DbSet<HospitalData> HospitaslData { get; set; }
 
-        public DbSet<HospitalDonationRequest> HospitalsDonationRequests { get; set; }
+        public DbSet<HospitalDataRequest> HospitalsDonationRequests { get; set; }
 
         public DbSet<Location> Locations { get; set; }
 
