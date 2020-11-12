@@ -46,11 +46,26 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
+            services
+                .ConfigureApplicationCookie(options =>
+                {
+                    options.AccessDeniedPath = "/Users/AddDonor";
+                });
+
             services.AddControllersWithViews(
                 options =>
-                    {
-                        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-                    }).AddRazorRuntimeCompilation();
+                {
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                }).AddRazorRuntimeCompilation();
+
+            services
+               .Configure<CookieTempDataProviderOptions>(options =>
+               {
+                   options.Cookie.IsEssential = true;
+               });
+
+            services.AddSession();
+
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);

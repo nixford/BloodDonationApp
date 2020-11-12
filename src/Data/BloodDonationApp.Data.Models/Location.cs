@@ -1,5 +1,6 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
+    using System;
     using System.Collections.Generic;
 
     using BloodDonationApp.Data.Common.Models;
@@ -10,6 +11,7 @@
         {
             this.HospitalsAdresses = new HashSet<HospitalData>();
             this.DonorsLocations = new HashSet<DonorData>();
+            this.Id = Guid.NewGuid().ToString();
         }
 
         public string Country { get; set; }

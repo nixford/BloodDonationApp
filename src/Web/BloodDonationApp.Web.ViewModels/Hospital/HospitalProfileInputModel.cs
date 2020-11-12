@@ -1,8 +1,9 @@
 ﻿namespace BloodDonationApp.Web.ViewModels.Hospital
 {
     using BloodDonationApp.Data.Models;
+    using BloodDonationApp.Services.Mapping;
 
-    public class HospitalProfileInputModel
+    public class HospitalProfileInputModel : IMapFrom<ApplicationUser>
     {
         public string Name { get; set; }
 

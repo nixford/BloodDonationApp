@@ -74,9 +74,13 @@
                     {
                         DiseaseName = input.DiseaseName,
                         DiseaseDescription = input.DiseaseDescription,
+                        DiseaseStatus = input.DiseaseStatus,
                     },
                 },
             };
+
+            //await this.donorRepository.AddAsync(donorData);
+            //await this.donorRepository.SaveChangesAsync();
 
             var appUserDonorData = new ApplicationUserDonorData
             {
@@ -86,9 +90,6 @@
 
             await this.appUserDonorRepository.AddAsync(appUserDonorData);
             await this.appUserDonorRepository.SaveChangesAsync();
-
-            await this.donorRepository.AddAsync(donorData);
-            await this.donorRepository.SaveChangesAsync();
         }
 
         public async Task CreateHospitalProfileAsync(HospitalProfileInputModel input, string userId)

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201109191016_AlteringModels")]
-    partial class AlteringModels
+    [Migration("20201112181410_AddAppUserDonorData2")]
+    partial class AddAppUserDonorData2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -349,7 +349,7 @@ namespace BloodDonationApp.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("DiseaseDescription")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DiseaseName")
@@ -401,52 +401,6 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("DonationEvents");
-                });
-
-            modelBuilder.Entity("BloodDonationApp.Data.Models.DonationRequest", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("BloodTypeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("EmergencyStatus")
-                        .HasColumnType("int");
-
-                    b.Property<string>("HospitalId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("NeededQuantity")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("PublishedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BloodTypeId");
-
-                    b.HasIndex("HospitalId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("DonationRequests");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.DonorData", b =>
@@ -660,7 +614,7 @@ namespace BloodDonationApp.Data.Migrations
                     b.ToTable("HospitaslData");
                 });
 
-            modelBuilder.Entity("BloodDonationApp.Data.Models.HospitalDonationRequest", b =>
+            modelBuilder.Entity("BloodDonationApp.Data.Models.HospitalDataRequest", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -671,9 +625,6 @@ namespace BloodDonationApp.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DonationRequestId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("HospitalDataId")
                         .HasColumnType("nvarchar(450)");
 
@@ -683,13 +634,16 @@ namespace BloodDonationApp.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.Property<string>("RequestId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("DonationRequestId");
+                    b.HasKey("Id");
 
                     b.HasIndex("HospitalDataId");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("RequestId");
 
                     b.ToTable("HospitalsDonationRequests");
                 });
@@ -780,6 +734,52 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Recipients");
+                });
+
+            modelBuilder.Entity("BloodDonationApp.Data.Models.Request", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BloodTypeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmergencyStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HospitalId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("NeededQuantity")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("PublishedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BloodTypeId");
+
+                    b.HasIndex("HospitalId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("DonationRequests");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.Setting", b =>
@@ -957,20 +957,9 @@ namespace BloodDonationApp.Data.Migrations
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.DonationEvent", b =>
                 {
-                    b.HasOne("BloodDonationApp.Data.Models.DonationRequest", "DonationRequest")
+                    b.HasOne("BloodDonationApp.Data.Models.Request", "DonationRequest")
                         .WithMany()
                         .HasForeignKey("DonationRequestId");
-                });
-
-            modelBuilder.Entity("BloodDonationApp.Data.Models.DonationRequest", b =>
-                {
-                    b.HasOne("BloodDonationApp.Data.Models.BloodType", "BloodType")
-                        .WithMany()
-                        .HasForeignKey("BloodTypeId");
-
-                    b.HasOne("BloodDonationApp.Data.Models.HospitalData", "Hospital")
-                        .WithMany()
-                        .HasForeignKey("HospitalId");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.DonorData", b =>
@@ -1044,15 +1033,15 @@ namespace BloodDonationApp.Data.Migrations
                         .HasForeignKey("LocationId");
                 });
 
-            modelBuilder.Entity("BloodDonationApp.Data.Models.HospitalDonationRequest", b =>
+            modelBuilder.Entity("BloodDonationApp.Data.Models.HospitalDataRequest", b =>
                 {
-                    b.HasOne("BloodDonationApp.Data.Models.DonationRequest", "DonationRequest")
-                        .WithMany()
-                        .HasForeignKey("DonationRequestId");
-
                     b.HasOne("BloodDonationApp.Data.Models.HospitalData", "HospitalData")
                         .WithMany("HospitalsDonationRequests")
                         .HasForeignKey("HospitalDataId");
+
+                    b.HasOne("BloodDonationApp.Data.Models.Request", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.Recipient", b =>
@@ -1064,6 +1053,17 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.HospitalData", null)
                         .WithMany("Recipients")
                         .HasForeignKey("HospitalDataId");
+                });
+
+            modelBuilder.Entity("BloodDonationApp.Data.Models.Request", b =>
+                {
+                    b.HasOne("BloodDonationApp.Data.Models.BloodType", "BloodType")
+                        .WithMany()
+                        .HasForeignKey("BloodTypeId");
+
+                    b.HasOne("BloodDonationApp.Data.Models.HospitalData", "Hospital")
+                        .WithMany()
+                        .HasForeignKey("HospitalId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

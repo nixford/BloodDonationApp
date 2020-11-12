@@ -4,8 +4,9 @@
 
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Data.Models.Enums;
+    using BloodDonationApp.Services.Mapping;
 
-    public class DonorDataProfileInputModel
+    public class DonorDataProfileInputModel : IMapFrom<ApplicationUser>
     {
         public string FirstName { get; set; }
 
@@ -19,7 +20,7 @@
 
         public BloodGroup BloodGroup { get; set; }
 
-        public BloodRhesusFactor RhesusFactor { get; set; }
+        public RhesusFactor RhesusFactor { get; set; }
 
         public string Country { get; set; }
 
