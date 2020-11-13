@@ -46,12 +46,6 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
-            services
-                .ConfigureApplicationCookie(options =>
-                {
-                    options.AccessDeniedPath = "/Users/AddDonor";
-                });
-
             services.AddControllersWithViews(
                 options =>
                 {

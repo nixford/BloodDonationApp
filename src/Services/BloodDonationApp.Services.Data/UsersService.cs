@@ -20,6 +20,7 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDeletableEntityRepository<DonorData> donorRepository;
         private readonly IDeletableEntityRepository<ApplicationUserDonorData> appUserDonorRepository;
+        private readonly IDeletableEntityRepository<HospitalData> hospitalRepository;
         private readonly IDeletableEntityRepository<ApplicationUserHospitalData> appUserHospitalRepository;
 
         public UsersService(
@@ -28,7 +29,8 @@
             IDeletableEntityRepository<DonorData> donorRepository,
             IDeletableEntityRepository<ApplicationUserDonorData> appUserDonorRepository,
             IDeletableEntityRepository<ApplicationUserHospitalData> appUserHospitalRepository,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IDeletableEntityRepository<HospitalData> hospitalRepository)
         {
             this.userRepository = userRepository;
             this.roleRepository = roleRepository;
@@ -36,6 +38,7 @@
             this.appUserDonorRepository = appUserDonorRepository;
             this.appUserHospitalRepository = appUserHospitalRepository;
             this.userManager = userManager;
+            this.hospitalRepository = hospitalRepository;
         }
 
         public async Task CreateDonorProfileAsync(DonorDataProfileInputModel input, string userId)
@@ -46,6 +49,7 @@
 
             var donorData = new DonorData
             {
+                ApplicationUserId = user.Id,
                 FirstName = input.FirstName,
                 MiddleName = input.MiddleName,
                 LastName = input.LastName,
@@ -67,20 +71,10 @@
                     BloodGroup = input.BloodGroup,
                     RhesusFactor = input.RhesusFactor,
                 },
-                Examination = new Examination
-                {
-                    ExaminationDate = input.ExaminationDate,
-                    Disease = new Disease
-                    {
-                        DiseaseName = input.DiseaseName,
-                        DiseaseDescription = input.DiseaseDescription,
-                        DiseaseStatus = input.DiseaseStatus,
-                    },
-                },
             };
 
-            //await this.donorRepository.AddAsync(donorData);
-            //await this.donorRepository.SaveChangesAsync();
+            await this.donorRepository.AddAsync(donorData);
+            await this.donorRepository.SaveChangesAsync();
 
             var appUserDonorData = new ApplicationUserDonorData
             {
@@ -100,6 +94,7 @@
 
             var hospitalData = new HospitalData
             {
+                ApplicationUserId = userId,
                 Name = input.Name,
                 Contact = new Contact
                 {
@@ -114,14 +109,14 @@
                 },
             };
 
+            await this.hospitalRepository.AddAsync(hospitalData);
+            await this.hospitalRepository.SaveChangesAsync();
+
             var appUserHospitalData = new ApplicationUserHospitalData
             {
                 ApplicationUserId = userId,
                 HospitalDataId = hospitalData.Id,
             };
-
-            await this.appUserHospitalRepository.AddAsync(appUserHospitalData);
-            await this.appUserHospitalRepository.SaveChangesAsync();
 
             await this.appUserHospitalRepository.AddAsync(appUserHospitalData);
             await this.appUserHospitalRepository.SaveChangesAsync();

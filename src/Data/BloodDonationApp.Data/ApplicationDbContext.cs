@@ -33,29 +33,31 @@
 
         public DbSet<Disease> Diseases { get; set; }
 
-        public DbSet<Request> DonationRequests { get; set; }
+        public DbSet<Request> Requests { get; set; }
 
-        public DbSet<DonorData> DonorsData { get; set; }
+        public DbSet<DonorData> DonorData { get; set; }
 
-        public DbSet<DonorDonationEvent> DonorsDonationEvents { get; set; }
+        public DbSet<DonorDonationEvent> DonorDonationEvents { get; set; }
 
         public DbSet<DonationEvent> DonationEvents { get; set; }
 
         public DbSet<Examination> Examinations { get; set; }
 
-        public DbSet<ExaminationDonor> ExaminationsDonors { get; set; }
+        public DbSet<ExaminationDonor> ExaminationDonors { get; set; }
 
-        public DbSet<HospitalData> HospitaslData { get; set; }
+        public DbSet<HospitalData> HospitalData { get; set; }
 
-        public DbSet<HospitalDataRequest> HospitalsDonationRequests { get; set; }
+        public DbSet<HospitalDataRequest> HospitalDonationRequests { get; set; }
+
+        public DbSet<HospitalBloodBank> HospitalBloodBanks { get; set; }
 
         public DbSet<Location> Locations { get; set; }
 
         public DbSet<Recipient> Recipients { get; set; }
 
-        public DbSet<ApplicationUserHospitalData> ApplicationUsersHospitalsData { get; set; }
+        public DbSet<ApplicationUserHospitalData> ApplicationUserHospitalData { get; set; }
 
-        public DbSet<ApplicationUserDonorData> ApplicationUsersDonorsData { get; set; }
+        public DbSet<ApplicationUserDonorData> ApplicationUserDonorData { get; set; }
 
         public DbSet<Setting> Settings { get; set; }
 

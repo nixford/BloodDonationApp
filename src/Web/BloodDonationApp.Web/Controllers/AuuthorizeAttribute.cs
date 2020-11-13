@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BloodDonationApp.Web.Controllers
+﻿namespace BloodDonationApp.Web.Controllers
 {
+    using System;
+
     internal class AuuthorizeAttribute : Attribute
     {
     }

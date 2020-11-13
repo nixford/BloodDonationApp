@@ -1,6 +1,9 @@
 ﻿namespace BloodDonationApp.Web.ViewModels.Request
 {
-    public class RequestInfoViewModel
+    using BloodDonationApp.Data.Models;
+    using BloodDonationApp.Services.Mapping;
+
+    public class RequestInfoViewModel : IMapFrom<ApplicationUser>
     {
         public string HospitalName { get; set; }
 
