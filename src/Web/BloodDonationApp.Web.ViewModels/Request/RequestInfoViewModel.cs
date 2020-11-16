@@ -5,6 +5,8 @@
 
     public class RequestInfoViewModel : IMapFrom<ApplicationUser>
     {
+        public string Id { get; set; }
+
         public string HospitalName { get; set; }
 
         public string Content { get; set; }

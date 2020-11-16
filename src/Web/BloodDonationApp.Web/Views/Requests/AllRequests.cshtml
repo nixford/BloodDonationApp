@@ -3,6 +3,39 @@
     ViewData["Title"] = "AllRequests";
 }
 
-<div class="container">
-    <h1>@ViewData["Title"]</h1>
-</div>
+<section class="py-5">
+    <div class="container">
+        <h1 style="margin: 2%; text-align: center;">@ViewData["Title"]</h1>
+        <div style="padding: 5%;">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">EmergencyStatus</th>
+                        <th scope="col">HospitalName</th>
+                        <th scope="col">BloodGroup</th>
+                        <th scope="col">RhesusFactor</th>
+                        <th scope="col">Content</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var request in @Model.Requests)
+                    {
+                    <tr>
+                        <th scope="row">@request.EmergencyStatus</th>
+                        <td>@request.HospitalName</td>
+                        <td>@request.BloodGroup</td>
+                        <td>@request.RhesusFactor</td>
+                        <td>@request.Content</td>
+                        <td>
+                            <div class="button-holder">
+                                <a href="/Trips/Details?tripId=@request.Id" class="btn btn-info text-uppercase">Details</a>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

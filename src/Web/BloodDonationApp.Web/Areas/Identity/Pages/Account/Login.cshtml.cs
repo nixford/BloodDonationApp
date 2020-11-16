@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
-    using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
