@@ -110,12 +110,10 @@
                         if (roleCurrUser == "Donor")
                         {
                             returnUrl = "/Users/AddDonor";
-                            return this.LocalRedirect(returnUrl);
                         }
                         else if (roleCurrUser == "Hospital")
                         {
                             returnUrl = "/Users/AddHospital";
-                            return this.LocalRedirect(returnUrl);
                         }
 
                         return this.LocalRedirect(returnUrl);

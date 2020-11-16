@@ -3,7 +3,6 @@
     using System.Diagnostics;
 
     using BloodDonationApp.Web.ViewModels;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
@@ -13,7 +12,6 @@
             return this.View();
         }
 
-        [Authorize(Roles = "Donor")]
         public IActionResult Privacy()
         {
             return this.View();

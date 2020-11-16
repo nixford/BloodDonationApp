@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
@@ -82,7 +82,18 @@
                 var result = await this.signInManager.PasswordSignInAsync(this.Input.Email, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var user = await this.userManager.FindByNameAsync(this.Input.Email);
+                    if (this.userManager.IsInRoleAsync(user, "Donor").Result)
+                    {
+                        returnUrl = "/Requests/AllRequests";
+                    }
+                    else if (this.userManager.IsInRoleAsync(user, "Hospital").Result)
+                    {
+                        returnUrl = "/Recipients/AllRecipients";
+                    }
+
                     this.logger.LogInformation("User logged in.");
+
                     return this.LocalRedirect(returnUrl);
                 }
 
