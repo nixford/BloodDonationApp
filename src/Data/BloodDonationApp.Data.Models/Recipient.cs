@@ -23,8 +23,15 @@
 
         public EmergencyStatus RecipientEmergency { get; set; }
 
+        [ForeignKey(nameof(Request))]
+        public string RequestId { get; set; }
+
+        public Request Request { get; set; }
+
         [ForeignKey(nameof(HospitalData))]
-        public string HospitalId { get; set; }
+        public string HospitalDataId { get; set; }
+
+        public HospitalData HospitalData { get; set; }
 
         [ForeignKey(nameof(BloodType))]
         public string BloodTypeId { get; set; }

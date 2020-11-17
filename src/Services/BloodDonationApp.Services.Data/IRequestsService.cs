@@ -7,7 +7,7 @@
 
     public interface IRequestsService
     {
-        Task CreateRequestAsync(string hospitalId, RequestInputViewModel input);
+        Task<string> CreateRequestAsync(string hospitalId, RequestInputViewModel input);
 
         T GetById<T>(string id);
 

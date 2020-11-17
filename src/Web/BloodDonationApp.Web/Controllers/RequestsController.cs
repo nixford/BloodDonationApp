@@ -6,16 +6,16 @@
 
     public class RequestsController : BaseController
     {
-        private readonly IUsersService usersService;
+        private readonly IRequestsService requestsService;
 
-        public RequestsController(IUsersService usersService)
+        public RequestsController(IRequestsService requestsService)
         {
-            this.usersService = usersService;
+            this.requestsService = requestsService;
         }
 
         public IActionResult AllRequests(AllRequestsViewModel viewModel)
         {
-            viewModel.Requests = this.usersService.GetAllDonors<RequestInfoViewModel>();
+            viewModel.Requests = this.requestsService.AllRequests<RequestInfoViewModel>();
 
             return this.View(viewModel);
         }

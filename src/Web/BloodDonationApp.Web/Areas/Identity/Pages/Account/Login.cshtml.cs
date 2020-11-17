@@ -88,7 +88,7 @@
                     }
                     else if (this.userManager.IsInRoleAsync(user, "Hospital").Result)
                     {
-                        returnUrl = "/Recipients/AllRecipients";
+                        returnUrl = "/Recipients/AllHospRecip";
                     }
 
                     this.logger.LogInformation("User logged in.");

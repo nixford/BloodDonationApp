@@ -9,6 +9,7 @@
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Mapping;
     using BloodDonationApp.Web.ViewModels.Request;
+    using Microsoft.AspNetCore.Authorization;
 
     public class RequestsService : IRequestsService
     {
@@ -25,7 +26,7 @@
             this.hospitalDataRepository = hospitalDataRepository;
         }
 
-        public async Task CreateRequestAsync(string hospitalId, RequestInputViewModel input)
+        public async Task<string> CreateRequestAsync(string hospitalId, RequestInputViewModel input)
         {
             var hospitalData = this.hospitalDataRepository.All()
                 .Where(u => u.Id == hospitalId)
@@ -56,6 +57,8 @@
 
             await this.requestsHospitalDataRepository.AddAsync(userHospital);
             await this.requestsHospitalDataRepository.SaveChangesAsync();
+
+            return request.Id;
         }
 
         public async Task DeleteAsync(string hospitalId)

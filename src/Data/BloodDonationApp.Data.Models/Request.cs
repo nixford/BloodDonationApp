@@ -24,6 +24,11 @@
 
         public EmergencyStatus EmergencyStatus { get; set; }
 
+        [ForeignKey(nameof(Recipient))]
+        public string RecipientId { get; set; }
+
+        public Recipient Recipient { get; set; }
+
         [ForeignKey(nameof(BloodType))]
         public string BloodTypeId { get; set; }
 
