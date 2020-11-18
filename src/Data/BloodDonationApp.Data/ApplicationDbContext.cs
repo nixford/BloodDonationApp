@@ -57,6 +57,8 @@
 
         public DbSet<RecipientRequest> RecipientRequests { get; set; }
 
+        public DbSet<RecipientHospitalData> RecipientHospitalData { get; set; }
+
         public DbSet<ApplicationUserHospitalData> ApplicationUserHospitalData { get; set; }
 
         public DbSet<ApplicationUserDonorData> ApplicationUserDonorData { get; set; }

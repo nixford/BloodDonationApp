@@ -19,22 +19,22 @@
 
         public RequestsService(
             IDeletableEntityRepository<Request> requestsRepository,
-            IDeletableEntityRepository<HospitalDataRequest> requestsHospitalDataRepository, IDeletableEntityRepository<HospitalData> hospitalDataRepository = null)
+            IDeletableEntityRepository<HospitalDataRequest> requestsHospitalDataRepository,
+            IDeletableEntityRepository<HospitalData> hospitalDataRepository = null)
         {
             this.requestsRepository = requestsRepository;
             this.requestsHospitalDataRepository = requestsHospitalDataRepository;
             this.hospitalDataRepository = hospitalDataRepository;
         }
 
-        public async Task<string> CreateRequestAsync(string hospitalId, RequestInputViewModel input)
+        public async Task<string> CreateRequestAsync(string userId, RequestInputViewModel input)
         {
             var hospitalData = this.hospitalDataRepository.All()
-                .Where(u => u.Id == hospitalId)
+                .Where(hd => hd.ApplicationUserId == userId)
                 .FirstOrDefault();
 
             var request = new Request
             {
-                HospitalId = hospitalId,
                 Content = input.Content,
                 PublishedOn = input.PublishedOn,
                 EmergencyStatus = input.EmergencyStatus,
@@ -46,14 +46,16 @@
                 NeededQuantity = input.NeededQuantity,
             };
 
+            request.HospitalId = hospitalData.ApplicationUserId;
+
+            await this.requestsRepository.AddAsync(request);
+            await this.requestsRepository.SaveChangesAsync();
+
             var userHospital = new HospitalDataRequest
             {
                 HospitalDataId = hospitalData.Id,
                 RequestId = request.Id,
             };
-
-            await this.requestsRepository.AddAsync(request);
-            await this.requestsRepository.SaveChangesAsync();
 
             await this.requestsHospitalDataRepository.AddAsync(userHospital);
             await this.requestsHospitalDataRepository.SaveChangesAsync();

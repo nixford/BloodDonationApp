@@ -1,0 +1,52 @@
+﻿@model BloodDonationApp.Web.ViewModels.Recipient.AllRecipientsViewMode
+@{
+    ViewData["Title"] = "AllHospRecip";
+}
+
+<section class="py-5">
+    <div class="container">
+        <h1 style="margin: 2%; text-align: center;">@ViewData["Title"]</h1>
+        <div style="padding: 5%;">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">BloodGroup</th>
+                        <th scope="col">RhesusFactor</th>
+                        <th scope="col">Needed quantity</th>
+                        <th scope="col">Request donation</th>
+                        <th scope="col">Delete Recipient</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var recipient in @Model.Recipients)
+                    {
+                        <tr>
+                            <th scope="row">@(recipient.FirstName + ' ' + recipient.LastName)</th>
+                            <td>@recipient.Age</td>
+                            <td>@recipient.BloodType.BloodGroup</td>
+                            <td>@recipient.BloodType.RhesusFactor</td>
+                            <td>@recipient.NeededQuantity</td>
+                            <td>
+                                <form asp-controller="Requests" asp-action="AddRequest" method="get">
+                                    <button class="btn btn-primary"> Set Request</button>
+                                    <input type="hidden" name="recipientId" value="@recipient.Id" />
+                                </form>
+                            </td>
+                            <td>                                
+                                <form asp-controller="Recipients" asp-action="Delete" method="post">
+                                    <button class="btn btn-danger">Delete Recipient</button>
+                                    <input type="hidden" name="recipientId" value="@recipient.Id" />
+                                </form>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+                <a class="btn btn-success" asp-area="" asp-controller="Recipients" asp-action="AddRecipient">
+                    Register Recipient
+                </a>
+            </div>
+        </div>
+    </section>

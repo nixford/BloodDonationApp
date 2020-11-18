@@ -1,5 +1,6 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonationApp.Data.Common.Models;
@@ -9,6 +10,7 @@
     {
         public Recipient()
         {
+            this.Id = Guid.NewGuid().ToString();
         }
 
         public string FirstName { get; set; }

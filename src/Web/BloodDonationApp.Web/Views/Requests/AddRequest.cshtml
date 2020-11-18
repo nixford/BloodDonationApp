@@ -1,0 +1,61 @@
+﻿@model BloodDonationApp.Web.ViewModels.Request.RequestInputViewModel
+@{
+    ViewData["Title"] = "AddRequest";
+}
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="col-md-2">
+        <form asp-action="AddRequest" asp-controller="Requests" method="post">
+            <h4>Insert the necessery donor data.</h4>
+            <hr />
+            <div class="col-md-offset-2">
+                <div class="form-group">
+                    <label asp-for="@Model.EmergencyStatus" class="control-label"></label>
+                    <select asp-for="@Model.EmergencyStatus"
+                            class="form-Content"
+                            asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.EmergencyStatus>()">
+                        <option>Select type ...</option>
+                    </select>
+                    <span asp-validation-for="@Model.EmergencyStatus" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.NeededQuantity"></label>
+                <input asp-for="@Model.NeededQuantity" class="form-control" />
+                <span asp-validation-for="@Model.NeededQuantity" class="text-danger"></span>
+            </div>
+            <div class="col-md-offset-2">
+                <div class="form-group">
+                    <label asp-for="@Model.BloodGroup" class="control-label"></label>
+                    <select asp-for="@Model.BloodGroup"
+                            class="form-Content"
+                            asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.BloodGroup>()">
+                        <option>Select type ...</option>
+                    </select>
+                    <span asp-validation-for="@Model.BloodGroup" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-offset-2">
+                <div class="form-group">
+                    <label asp-for="@Model.RhesusFactor" class="control-label"></label>
+                    <select asp-for="@Model.RhesusFactor"
+                            class="form-Content"
+                            asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.RhesusFactor>()">
+                        <option>Select type ...</option>
+                    </select>
+                    <span asp-validation-for="@Model.RhesusFactor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.PublishedOn"></label>
+                <input asp-for="@Model.PublishedOn" class="form-control" />
+                <span asp-validation-for="@Model.PublishedOn" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Publish Request</button>
+        </form>
+    </div>
+</div>

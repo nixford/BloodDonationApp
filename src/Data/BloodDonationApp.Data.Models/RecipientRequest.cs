@@ -1,0 +1,19 @@
+﻿namespace BloodDonationApp.Data.Models
+{
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    using BloodDonationApp.Data.Common.Models;
+
+    public class RecipientRequest : BaseDeletableModel<string>
+    {
+        [ForeignKey(nameof(Recipient))]
+        public string RecipientId { get; set; }
+
+        public Recipient Recipient { get; set; }
+
+        [ForeignKey(nameof(Request))]
+        public string RequestId { get; set; }
+
+        public Request Request { get; set; }
+    }
+}

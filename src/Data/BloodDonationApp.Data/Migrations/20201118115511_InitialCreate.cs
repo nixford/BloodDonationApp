@@ -444,75 +444,6 @@ namespace BloodDonationApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Recipients",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    MiddleName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Age = table.Column<int>(nullable: false),
-                    NeededQuantity = table.Column<double>(nullable: false),
-                    RecipientEmergency = table.Column<int>(nullable: false),
-                    HospitalId = table.Column<string>(nullable: true),
-                    BloodTypeId = table.Column<string>(nullable: true),
-                    HospitalDataId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Recipients", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Recipients_BloodTypes_BloodTypeId",
-                        column: x => x.BloodTypeId,
-                        principalTable: "BloodTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Recipients_HospitalData_HospitalDataId",
-                        column: x => x.HospitalDataId,
-                        principalTable: "HospitalData",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Requests",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    HospitalId = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
-                    PublishedOn = table.Column<DateTime>(nullable: false),
-                    EmergencyStatus = table.Column<int>(nullable: false),
-                    BloodTypeId = table.Column<string>(nullable: true),
-                    NeededQuantity = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Requests", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Requests_BloodTypes_BloodTypeId",
-                        column: x => x.BloodTypeId,
-                        principalTable: "BloodTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Requests_HospitalData_HospitalId",
-                        column: x => x.HospitalId,
-                        principalTable: "HospitalData",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ApplicationUserDonorData",
                 columns: table => new
                 {
@@ -609,6 +540,111 @@ namespace BloodDonationApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Recipients",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    MiddleName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Age = table.Column<int>(nullable: false),
+                    NeededQuantity = table.Column<double>(nullable: false),
+                    RecipientEmergency = table.Column<int>(nullable: false),
+                    RequestId = table.Column<string>(nullable: true),
+                    HospitalDataId = table.Column<string>(nullable: true),
+                    BloodTypeId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Recipients", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Recipients_BloodTypes_BloodTypeId",
+                        column: x => x.BloodTypeId,
+                        principalTable: "BloodTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Recipients_HospitalData_HospitalDataId",
+                        column: x => x.HospitalDataId,
+                        principalTable: "HospitalData",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RecipientHospitalData",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    HospitalDataId = table.Column<string>(nullable: true),
+                    RecipientId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RecipientHospitalData", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RecipientHospitalData_HospitalData_HospitalDataId",
+                        column: x => x.HospitalDataId,
+                        principalTable: "HospitalData",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_RecipientHospitalData_Recipients_RecipientId",
+                        column: x => x.RecipientId,
+                        principalTable: "Recipients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Requests",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    HospitalId = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    PublishedOn = table.Column<DateTime>(nullable: false),
+                    EmergencyStatus = table.Column<int>(nullable: false),
+                    RecipientId = table.Column<string>(nullable: true),
+                    BloodTypeId = table.Column<string>(nullable: true),
+                    NeededQuantity = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Requests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Requests_BloodTypes_BloodTypeId",
+                        column: x => x.BloodTypeId,
+                        principalTable: "BloodTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Requests_HospitalData_HospitalId",
+                        column: x => x.HospitalId,
+                        principalTable: "HospitalData",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Requests_Recipients_RecipientId",
+                        column: x => x.RecipientId,
+                        principalTable: "Recipients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DonationEvents",
                 columns: table => new
                 {
@@ -654,6 +690,35 @@ namespace BloodDonationApp.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_HospitalDonationRequests_Requests_RequestId",
+                        column: x => x.RequestId,
+                        principalTable: "Requests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RecipientRequests",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    RecipientId = table.Column<string>(nullable: true),
+                    RequestId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RecipientRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RecipientRequests_Recipients_RecipientId",
+                        column: x => x.RecipientId,
+                        principalTable: "Recipients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_RecipientRequests_Requests_RequestId",
                         column: x => x.RequestId,
                         principalTable: "Requests",
                         principalColumn: "Id",
@@ -949,6 +1014,36 @@ namespace BloodDonationApp.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RecipientHospitalData_HospitalDataId",
+                table: "RecipientHospitalData",
+                column: "HospitalDataId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipientHospitalData_IsDeleted",
+                table: "RecipientHospitalData",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipientHospitalData_RecipientId",
+                table: "RecipientHospitalData",
+                column: "RecipientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipientRequests_IsDeleted",
+                table: "RecipientRequests",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipientRequests_RecipientId",
+                table: "RecipientRequests",
+                column: "RecipientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipientRequests_RequestId",
+                table: "RecipientRequests",
+                column: "RequestId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Recipients_BloodTypeId",
                 table: "Recipients",
                 column: "BloodTypeId");
@@ -962,6 +1057,11 @@ namespace BloodDonationApp.Data.Migrations
                 name: "IX_Recipients_IsDeleted",
                 table: "Recipients",
                 column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Recipients_RequestId",
+                table: "Recipients",
+                column: "RequestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Requests_BloodTypeId",
@@ -979,13 +1079,50 @@ namespace BloodDonationApp.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Requests_RecipientId",
+                table: "Requests",
+                column: "RecipientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Settings_IsDeleted",
                 table: "Settings",
                 column: "IsDeleted");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Recipients_Requests_RequestId",
+                table: "Recipients",
+                column: "RequestId",
+                principalTable: "Requests",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_HospitalData_AspNetUsers_ApplicationUserId",
+                table: "HospitalData");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Recipients_HospitalData_HospitalDataId",
+                table: "Recipients");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Requests_HospitalData_HospitalId",
+                table: "Requests");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Recipients_BloodTypes_BloodTypeId",
+                table: "Recipients");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Requests_BloodTypes_BloodTypeId",
+                table: "Requests");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Recipients_Requests_RequestId",
+                table: "Recipients");
+
             migrationBuilder.DropTable(
                 name: "ApplicationUserDonorData");
 
@@ -1023,7 +1160,10 @@ namespace BloodDonationApp.Data.Migrations
                 name: "HospitalDonationRequests");
 
             migrationBuilder.DropTable(
-                name: "Recipients");
+                name: "RecipientHospitalData");
+
+            migrationBuilder.DropTable(
+                name: "RecipientRequests");
 
             migrationBuilder.DropTable(
                 name: "Settings");
@@ -1038,22 +1178,16 @@ namespace BloodDonationApp.Data.Migrations
                 name: "DonorData");
 
             migrationBuilder.DropTable(
-                name: "Requests");
-
-            migrationBuilder.DropTable(
                 name: "Examinations");
-
-            migrationBuilder.DropTable(
-                name: "BloodTypes");
-
-            migrationBuilder.DropTable(
-                name: "HospitalData");
 
             migrationBuilder.DropTable(
                 name: "Diseases");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "HospitalData");
 
             migrationBuilder.DropTable(
                 name: "BloodBanks");
@@ -1063,6 +1197,15 @@ namespace BloodDonationApp.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Locations");
+
+            migrationBuilder.DropTable(
+                name: "BloodTypes");
+
+            migrationBuilder.DropTable(
+                name: "Requests");
+
+            migrationBuilder.DropTable(
+                name: "Recipients");
         }
     }
 }
