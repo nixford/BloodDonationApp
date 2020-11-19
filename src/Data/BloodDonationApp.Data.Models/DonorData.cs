@@ -11,7 +11,7 @@
     {
         public DonorData()
         {
-            this.DonorsDonationEvents = new HashSet<DonorDonationEvent>();
+            this.DonorsDonationEvents = new HashSet<DonationEvent>();
             this.Id = Guid.NewGuid().ToString();
         }
 
@@ -50,6 +50,6 @@
 
         public virtual Examination Examination { get; set; }
 
-        public virtual ICollection<DonorDonationEvent> DonorsDonationEvents { get; set; }
+        public virtual ICollection<DonationEvent> DonorsDonationEvents { get; set; }
     }
 }

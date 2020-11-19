@@ -37,7 +37,7 @@
 
         public DbSet<DonorData> DonorData { get; set; }
 
-        public DbSet<DonorDonationEvent> DonorDonationEvents { get; set; }
+        public DbSet<DonorEvent> DonorDonationEvents { get; set; }
 
         public DbSet<DonationEvent> DonationEvents { get; set; }
 
@@ -49,7 +49,7 @@
 
         public DbSet<HospitalDataRequest> HospitalDonationRequests { get; set; }
 
-        public DbSet<HospitalBloodBank> HospitalBloodBanks { get; set; }
+        public DbSet<HospitalDataBloodBank> HospitalBloodBanks { get; set; }
 
         public DbSet<Location> Locations { get; set; }
 

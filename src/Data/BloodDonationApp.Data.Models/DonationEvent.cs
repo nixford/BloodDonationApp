@@ -1,7 +1,6 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonationApp.Data.Common.Models;
@@ -10,17 +9,19 @@
     {
         public DonationEvent()
         {
-            this.DonorsDonationEvents = new HashSet<DonorDonationEvent>();
             this.Id = Guid.NewGuid().ToString();
         }
 
         public DateTime DateOfDonation { get; set; }
 
-        [ForeignKey(nameof(DonationRequest))]
-        public string DonationRequestId { get; set; }
+        [ForeignKey(nameof(Request))]
+        public string RequestId { get; set; }
 
-        public Request DonationRequest { get; set; }
+        public Request Request { get; set; }
 
-        public virtual ICollection<DonorDonationEvent> DonorsDonationEvents { get; set; }
+        [ForeignKey(nameof(Donor))]
+        public string DonorId { get; set; }
+
+        public ApplicationUser Donor { get; set; }
     }
 }

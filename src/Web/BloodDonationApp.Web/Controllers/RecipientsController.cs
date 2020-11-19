@@ -62,5 +62,12 @@
 
             return this.RedirectToAction("AllHospRecip", "Recipients");
         }
+
+        public IActionResult DetailsRecipient(string recipientId)
+        {
+            var viewModel = this.recipientsService.GetById<RecipientInfoViewModel>(recipientId);
+
+            return this.View(viewModel);
+        }
     }
 }

@@ -17,6 +17,7 @@
                         <th scope="col">Needed quantity</th>
                         <th scope="col">Request donation</th>
                         <th scope="col">Delete Recipient</th>
+                        <th scope="col">Recipient Info</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,8 +37,14 @@
                             </td>
                             <td>                                
                                 <form asp-controller="Recipients" asp-action="Delete" method="post">
-                                    <button class="btn btn-danger">Delete Recipient</button>
+                                    <button class="btn btn-danger">Delete</button>
                                     <input type="hidden" name="recipientId" value="@recipient.Id" />
+                                </form>
+                            </td>
+                            <td>
+                                <form asp-controller="Recipients" asp-action="DetailsRecipient" method="post">
+                                    <button class="btn btn-warning">Info</button>
+                                    <input type="hidden" name="recipientId" value="@recipient.Id"/>
                                 </form>
                             </td>
                         </tr>
