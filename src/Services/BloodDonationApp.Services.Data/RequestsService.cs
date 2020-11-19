@@ -16,15 +16,18 @@
         private readonly IDeletableEntityRepository<Request> requestsRepository;
         private readonly IDeletableEntityRepository<HospitalDataRequest> requestsHospitalDataRepository;
         private readonly IDeletableEntityRepository<HospitalData> hospitalDataRepository;
+        private readonly IDeletableEntityRepository<RecipientRequest> recipientRequesDataRepository;
 
         public RequestsService(
             IDeletableEntityRepository<Request> requestsRepository,
             IDeletableEntityRepository<HospitalDataRequest> requestsHospitalDataRepository,
-            IDeletableEntityRepository<HospitalData> hospitalDataRepository = null)
+            IDeletableEntityRepository<HospitalData> hospitalDataRepository,
+            IDeletableEntityRepository<RecipientRequest> recipientRequesDataRepository)
         {
             this.requestsRepository = requestsRepository;
             this.requestsHospitalDataRepository = requestsHospitalDataRepository;
             this.hospitalDataRepository = hospitalDataRepository;
+            this.recipientRequesDataRepository = recipientRequesDataRepository;
         }
 
         public async Task<string> CreateRequestAsync(string userId, RequestInputViewModel input)
@@ -35,6 +38,7 @@
 
             var request = new Request
             {
+                HospitalName = hospitalData.Name,
                 Content = input.Content,
                 PublishedOn = input.PublishedOn,
                 EmergencyStatus = input.EmergencyStatus,
@@ -46,7 +50,7 @@
                 NeededQuantity = input.NeededQuantity,
             };
 
-            request.HospitalId = hospitalData.ApplicationUserId;
+            request.HospitalId = hospitalData.Id;
 
             await this.requestsRepository.AddAsync(request);
             await this.requestsRepository.SaveChangesAsync();

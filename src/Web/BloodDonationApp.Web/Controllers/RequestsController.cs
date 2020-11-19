@@ -13,7 +13,6 @@
         private readonly IRequestsService requestsService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IRecipientsService recipientsService;
-        // private string recipientId;
 
         public RequestsController(
             IRequestsService requestsService,
@@ -26,9 +25,10 @@
         }
 
         [HttpGet]
-        public IActionResult AddRequest(//string recipientId)
+        public IActionResult AddRequest(string recipientId)
         {
-            // this.recipientId = recipientId;
+            this.TempData.Remove("Id");
+            this.TempData.Add("Id", recipientId);
             return this.View();
         }
 
@@ -36,7 +36,7 @@
         [HttpPost]
         public async Task<IActionResult> AddRequest(RequestInputViewModel input)
         {
-            //string recipientId = this.recipientId;
+            var recipientId = this.TempData["Id"].ToString();
 
             var userId = this.userManager.GetUserId(this.User);
 

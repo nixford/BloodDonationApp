@@ -6,6 +6,8 @@
 
     public class RequestInputViewModel
     {
+        public string RecipientId { get; set; }
+
         public string Content { get; set; }
 
         public DateTime PublishedOn { get; set; }

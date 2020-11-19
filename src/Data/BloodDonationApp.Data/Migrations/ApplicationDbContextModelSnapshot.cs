@@ -861,6 +861,9 @@ namespace BloodDonationApp.Data.Migrations
                     b.Property<string>("HospitalId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("HospitalName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 

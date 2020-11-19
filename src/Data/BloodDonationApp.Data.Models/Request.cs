@@ -18,6 +18,8 @@
 
         public HospitalData Hospital { get; set; }
 
+        public string HospitalName { get; set; }
+
         public string Content { get; set; }
 
         public DateTime PublishedOn { get; set; }

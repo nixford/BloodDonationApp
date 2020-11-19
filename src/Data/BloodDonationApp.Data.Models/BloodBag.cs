@@ -7,6 +7,11 @@
 
     public class BloodBag : BaseDeletableModel<string>
     {
+        public BloodBag()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         public double Quantity { get; set; }
 
         public DateTime CollectionDate { get; set; }

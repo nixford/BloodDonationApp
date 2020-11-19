@@ -1,11 +1,17 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonationApp.Data.Common.Models;
 
     public class RecipientRequest : BaseDeletableModel<string>
     {
+        public RecipientRequest()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         [ForeignKey(nameof(Recipient))]
         public string RecipientId { get; set; }
 

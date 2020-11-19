@@ -11,6 +11,7 @@
         public DonationEvent()
         {
             this.DonorsDonationEvents = new HashSet<DonorDonationEvent>();
+            this.Id = Guid.NewGuid().ToString();
         }
 
         public DateTime DateOfDonation { get; set; }

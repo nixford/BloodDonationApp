@@ -1,11 +1,18 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
+    using System;
+
     using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonationApp.Data.Common.Models;
 
     public class HospitalDataRequest : BaseDeletableModel<string>
     {
+        public HospitalDataRequest()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         [ForeignKey(nameof(HospitalData))]
         public string HospitalDataId { get; set; }
 
