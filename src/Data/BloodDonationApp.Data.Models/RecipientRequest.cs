@@ -12,12 +12,10 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        [ForeignKey(nameof(Recipient))]
         public string RecipientId { get; set; }
 
         public Recipient Recipient { get; set; }
 
-        [ForeignKey(nameof(Request))]
         public string RequestId { get; set; }
 
         public Request Request { get; set; }

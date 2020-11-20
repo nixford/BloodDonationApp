@@ -13,12 +13,10 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        [ForeignKey(nameof(HospitalData))]
         public string HospitalDataId { get; set; }
 
         public HospitalData HospitalData { get; set; }
 
-        [ForeignKey(nameof(Request))]
         public string RequestId { get; set; }
 
         public Request Request { get; set; }

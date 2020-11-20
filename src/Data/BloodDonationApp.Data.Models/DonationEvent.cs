@@ -1,7 +1,6 @@
 ﻿namespace BloodDonationApp.Data.Models
 {
     using System;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonationApp.Data.Common.Models;
 
@@ -14,14 +13,12 @@
 
         public DateTime DateOfDonation { get; set; }
 
-        [ForeignKey(nameof(Request))]
         public string RequestId { get; set; }
 
         public Request Request { get; set; }
 
-        [ForeignKey(nameof(Donor))]
-        public string DonorId { get; set; }
+        public string UserDonorId { get; set; }
 
-        public ApplicationUser Donor { get; set; }
+        public ApplicationUser UserDonor { get; set; }
     }
 }

@@ -12,5 +12,7 @@
         public const string NotAvailableEmailErrorMessage = "The email is already in use! Please try another one.";
 
         public const int TopDonorsNumber = 10;
+
+        private const string DeleteSuccessMessage = "You have successfully deleted the request for donation!";
     }
 }

@@ -37,8 +37,6 @@
 
         public DbSet<DonorData> DonorData { get; set; }
 
-        public DbSet<DonorEvent> DonorDonationEvents { get; set; }
-
         public DbSet<DonationEvent> DonationEvents { get; set; }
 
         public DbSet<Examination> Examinations { get; set; }

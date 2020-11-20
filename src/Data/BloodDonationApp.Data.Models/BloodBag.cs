@@ -16,10 +16,10 @@
 
         public DateTime CollectionDate { get; set; }
 
-        [ForeignKey(nameof(Donor))]
-        public string DonorId { get; set; }
+        [ForeignKey(nameof(DonorData))]
+        public string DonorDataId { get; set; }
 
-        public virtual DonorData Donor { get; set; }
+        public virtual DonorData DonorData { get; set; }
 
         [ForeignKey(nameof(BloodType))]
         public string BloodTypeId { get; set; }

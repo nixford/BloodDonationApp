@@ -12,12 +12,10 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        [ForeignKey(nameof(HospitalData))]
         public string HospitalDataId { get; set; }
 
         public HospitalData HospitalData { get; set; }
 
-        [ForeignKey(nameof(Recipient))]
         public string RecipientId { get; set; }
 
         public Recipient Recipient { get; set; }

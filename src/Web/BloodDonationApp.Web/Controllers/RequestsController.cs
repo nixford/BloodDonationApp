@@ -5,6 +5,7 @@
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Web.ViewModels.Request;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -52,6 +53,16 @@
             viewModel.Requests = this.requestsService.AllRequests<RequestInfoViewModel>();
 
             return this.View(viewModel);
+        }
+
+        [Authorize(Roles = "Hospital")]
+        public async Task<IActionResult> Delete(string requestId)
+        {
+            // var hospitalId = this.userManager.GetUserId(this.User);
+
+            await this.requestsService.DeleteAsync(requestId);
+
+            return this.RedirectToAction("AllRequests", "Requests");
         }
     }
 }

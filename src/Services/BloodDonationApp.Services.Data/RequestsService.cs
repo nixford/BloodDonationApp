@@ -9,7 +9,6 @@
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Mapping;
     using BloodDonationApp.Web.ViewModels.Request;
-    using Microsoft.AspNetCore.Authorization;
 
     public class RequestsService : IRequestsService
     {
@@ -67,10 +66,10 @@
             return request.Id;
         }
 
-        public async Task DeleteAsync(string hospitalId)
+        public async Task DeleteAsync(string requestId)
         {
             var request = this.requestsRepository.All()
-                .Where(r => r.HospitalId == hospitalId)
+                .Where(r => r.Id == requestId)
                 .FirstOrDefault();
 
             if (request == null)

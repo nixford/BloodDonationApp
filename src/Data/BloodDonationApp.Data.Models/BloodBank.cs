@@ -9,15 +9,17 @@
     {
         public BloodBank()
         {
-            this.BloodBags = new HashSet<BloodBag>();
             this.Id = Guid.NewGuid().ToString();
         }
 
-        [ForeignKey(nameof(Hospital))]
-        public string HospitalId { get; set; }
+        [ForeignKey(nameof(HospitalData))]
+        public string HospitalDataId { get; set; }
 
-        public HospitalData Hospital { get; set; }
+        public HospitalData HospitalData { get; set; }
 
-        public virtual ICollection<BloodBag> BloodBags { get; set; }
+        [ForeignKey(nameof(BloodBag))]
+        public string BloodBagId { get; set; }
+
+        public BloodBag BloodBag { get; set; }
     }
 }
