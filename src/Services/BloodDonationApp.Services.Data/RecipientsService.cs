@@ -42,11 +42,8 @@
                 Age = input.Age,
                 NeededQuantity = input.NeededQuantity,
                 RecipientEmergency = input.RecipientEmergency,
-                BloodType = new BloodType
-                {
-                    BloodGroup = input.BloodGroup,
-                    RhesusFactor = input.RhesusFactor,
-                },
+                BloodGroup = input.BloodGroup,
+                RhesusFactor = input.RhesusFactor,
             };
 
             var recipientHospitalData = new RecipientHospitalData

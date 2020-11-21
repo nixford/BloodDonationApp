@@ -1,0 +1,27 @@
+﻿@model BloodDonationApp.Web.ViewModels.Recipient.RecipientInfoViewModel
+
+@{ ViewData["Title"] = "DetailsRecipient"; }
+
+<div class="container">
+    <div>
+        <hr class="bg-success" style="height: 2px" />
+    </div>
+    <div class="container-fluid">
+        <h4 class="text-md-left">First Name: @Model.FirstName</h4>
+        <h4 class="text-md-left">Middle Name: @Model.MiddleName</h4>
+        <h4 class="text-md-left">Last Name: @Model.LastName</h4>
+        <h4 class="text-md-left">Age: @Model.Age</h4>
+        <h4 class="text-md-left">NeededQuantity: @Model.NeededQuantity</h4>
+        <h4 class="text-md-left">Recipient Emergency: @Model.RecipientEmergency</h4>
+        <h4 class="text-md-left">Blood Group: @Model.BloodGroup</h4>
+        <h4 class="text-md-left">RhesusFactor: @Model.RhesusFactor</h4>
+    </div>
+    <div>
+        <hr class="bg-success" style="height: 2px" />
+    </div>
+</div>
+<div class="container">
+    <form asp-controller="Recipients" asp-action="AllHospRecip">
+        <button class="btn btn-info">Back All Recipients</button>
+    </form>
+</div>

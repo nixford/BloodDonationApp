@@ -26,8 +26,8 @@
                         <tr>
                             <th scope="row">@(recipient.FirstName + ' ' + recipient.LastName)</th>
                             <td>@recipient.Age</td>
-                            <td>@recipient.BloodType.BloodGroup</td>
-                            <td>@recipient.BloodType.RhesusFactor</td>
+                            <td>@recipient.BloodGroup</td>
+                            <td>@recipient.RhesusFactor</td>
                             <td>@recipient.NeededQuantity</td>
                             <td>
                                 <form asp-controller="Requests" asp-action="AddRequest" method="get">
@@ -35,7 +35,7 @@
                                     <input type="hidden" name="recipientId" value="@recipient.Id" />
                                 </form>
                             </td>
-                            <td>                                
+                            <td>
                                 <form asp-controller="Recipients" asp-action="Delete" method="post">
                                     <button class="btn btn-danger">Delete</button>
                                     <input type="hidden" name="recipientId" value="@recipient.Id" />
@@ -44,16 +44,28 @@
                             <td>
                                 <form asp-controller="Recipients" asp-action="DetailsRecipient" method="post">
                                     <button class="btn btn-warning">Info</button>
-                                    <input type="hidden" name="recipientId" value="@recipient.Id"/>
+                                    <input type="hidden" name="recipientId" value="@recipient.Id" />
                                 </form>
                             </td>
                         </tr>
-                        }
-                    </tbody>
-                </table>
+                    }
+                </tbody>
+            </table>
+            <div>
                 <a class="btn btn-success" asp-area="" asp-controller="Recipients" asp-action="AddRecipient">
                     Register Recipient
                 </a>
             </div>
+            <div>
+                <table>
+                    <tr><td>&nbsp;</td></tr>
+                </table>
+            </div>
+            <div>
+                <a class="btn btn-outline-dark" asp-area="" asp-controller="BloodBanks" asp-action="HospitalBlBags">
+                    Blood Bank
+                </a>
+            </div>
         </div>
-    </section>
+    </div>
+</section>

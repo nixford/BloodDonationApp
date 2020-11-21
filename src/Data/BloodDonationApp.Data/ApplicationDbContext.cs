@@ -27,8 +27,6 @@
 
         public DbSet<BloodBank> BloodBanks { get; set; }
 
-        public DbSet<BloodType> BloodTypes { get; set; }
-
         public DbSet<Contact> Contacts { get; set; }
 
         public DbSet<Disease> Diseases { get; set; }

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
+
     using BloodDonationApp.Data.Common.Models;
 
     public class BloodBank : BaseDeletableModel<string>
@@ -10,6 +11,7 @@
         public BloodBank()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.BloodBags = new HashSet<BloodBag>();
         }
 
         [ForeignKey(nameof(HospitalData))]
@@ -17,9 +19,6 @@
 
         public HospitalData HospitalData { get; set; }
 
-        [ForeignKey(nameof(BloodBag))]
-        public string BloodBagId { get; set; }
-
-        public BloodBag BloodBag { get; set; }
+        public virtual ICollection<BloodBag> BloodBags { get; set; }
     }
 }

@@ -54,37 +54,5 @@
 
             return this.View(viewModel);
         }
-
-        [Authorize]
-        public IActionResult AddHospital()
-        {
-            var userId = this.userManager.GetUserId(this.User);
-            var viewModel = this.usersService.GetUserById<HospitalProfileInputModel>(userId);
-
-            if (viewModel == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(viewModel);
-        }
-
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> AddHospital(HospitalProfileInputModel inputModel)
-        {
-            var userId = this.userManager.GetUserId(this.User);
-
-            await this.usersService.CreateHospitalProfileAsync(inputModel, userId);
-
-            return this.RedirectToAction("AllRequests", "Requests");
-        }
-
-        public IActionResult AllHospitals(AllHospitalsViewModel viewModel)
-        {
-            viewModel.Hospitals = this.usersService.GetAllDonors<HospitalInfoViewModel>();
-
-            return this.View(viewModel);
-        }
     }
 }

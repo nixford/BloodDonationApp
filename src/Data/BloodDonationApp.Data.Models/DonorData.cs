@@ -40,10 +40,9 @@
 
         public virtual EmergencyStatus DonorAveilableStatus { get; set; }
 
-        [ForeignKey(nameof(BloodType))]
-        public string BloodTypeId { get; set; }
+        public BloodGroup BloodGroup { get; set; }
 
-        public virtual BloodType BloodType { get; set; }
+        public RhesusFactor RhesusFactor { get; set; }
 
         [ForeignKey(nameof(Examination))]
         public string ExaminationId { get; set; }

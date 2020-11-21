@@ -1,0 +1,41 @@
+﻿@model BloodDonationApp.Web.ViewModels.Hospital.AllHospitalsViewModel
+@{
+    ViewData["Title"] = "All Hospitals";
+}
+
+<section class="py-5">
+    <div class="container">
+        <h1 style="margin: 2%; text-align: center;">@ViewData["Title"]</h1>
+        <div style="padding: 5%;">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Hospital name:</th>
+                        <th scope="col">Recipients count:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var hospital in @Model.Hospitals)
+                    {
+                        <tr>
+                            <th>@hospital.Name</th>
+                            <td>@Model.RecipientCount</td>                            
+                            <td>
+                                <form asp-controller="DonationEvents" asp-action="Create" method="post">
+                                    <button class="btn btn-primary"> Donate Whitout Request</button>
+                                    <input type="hidden" name="recipientId" value="@hospital.Id" />
+                                </form>
+                            </td>
+                            <td>
+                                <form asp-controller="Hospitals" asp-action="DetailsHospital" method="post">
+                                    <button class="btn btn-warning">Blood Reservs</button>
+                                    <input type="hidden" name="recipientId" value="@hospital.Id" />
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

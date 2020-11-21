@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using BloodDonationApp.Data.Common.Models;
+    using BloodDonationApp.Data.Models.Enums;
 
     public class BloodBag : BaseDeletableModel<string>
     {
@@ -16,14 +17,18 @@
 
         public DateTime CollectionDate { get; set; }
 
+        [ForeignKey(nameof(BloodBank))]
+        public string BloodBankId { get; set; }
+
+        public BloodBank BloodBank { get; set; }
+
         [ForeignKey(nameof(DonorData))]
         public string DonorDataId { get; set; }
 
         public virtual DonorData DonorData { get; set; }
 
-        [ForeignKey(nameof(BloodType))]
-        public string BloodTypeId { get; set; }
+        public BloodGroup BloodGroup { get; set; }
 
-        public virtual BloodType BloodType { get; set; }
+        public RhesusFactor RhesusFactor { get; set; }
     }
 }

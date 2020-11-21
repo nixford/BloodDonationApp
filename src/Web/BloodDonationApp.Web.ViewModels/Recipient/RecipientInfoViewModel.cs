@@ -20,6 +20,8 @@
 
         public EmergencyStatus RecipientEmergency { get; set; }
 
-        public BloodType BloodType { get; set; }
+        public BloodGroup BloodGroup { get; set; }
+
+        public RhesusFactor RhesusFactor { get; set; }
     }
 }

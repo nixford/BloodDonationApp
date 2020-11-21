@@ -41,11 +41,8 @@
                 Content = input.Content,
                 PublishedOn = input.PublishedOn,
                 EmergencyStatus = input.EmergencyStatus,
-                BloodType = new BloodType
-                {
-                    BloodGroup = input.BloodGroup,
-                    RhesusFactor = input.RhesusFactor,
-                },
+                BloodGroup = input.BloodGroup,
+                RhesusFactor = input.RhesusFactor,
                 NeededQuantity = input.NeededQuantity,
             };
 
