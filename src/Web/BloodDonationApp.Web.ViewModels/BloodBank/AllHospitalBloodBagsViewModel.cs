@@ -1,8 +1,6 @@
 ﻿namespace BloodDonationApp.Web.ViewModels.BloodBank
 {
-    using System.Collections.Generic;
-
-    using BloodDonationApp.Data.Models;
+    using BloodDonationApp.Web.ViewModels.Hospital;
 
     public class AllHospitalBloodBagsViewModel
     {
@@ -21,5 +19,7 @@
         public double ZeroPositiveQuantity { get; set; }
 
         public double ZeroNegativeQuantity { get; set; }
+
+        public HospitalInfoViewModel HospitalInfo { get; set; }
     }
 }

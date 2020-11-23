@@ -1,6 +1,5 @@
 ﻿namespace BloodDonationApp.Web.Controllers
 {
-    using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Web.ViewModels.BloodBank;
@@ -20,7 +19,7 @@
             this.userManager = userManager;
         }
 
-        public IActionResult HospitalBlBags(AllHospitalBloodBagsViewModel viewModel)
+        public IActionResult HospitalBlBags(string hospitalDataId, AllHospitalBloodBagsViewModel viewModel)
         {
             var userHospitalId = this.userManager.GetUserId(this.User);
 

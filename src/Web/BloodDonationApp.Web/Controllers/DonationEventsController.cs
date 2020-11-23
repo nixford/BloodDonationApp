@@ -41,7 +41,7 @@
 
             await this.donationEventsService.CreateDonation(requestOrHospitalId, userDonorId);
 
-            return this.RedirectToAction("AllRequests", "Requests");
+            return this.RedirectToAction("QAndA", "Home");
         }
     }
 }

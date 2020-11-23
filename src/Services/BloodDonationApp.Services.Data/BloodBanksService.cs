@@ -22,14 +22,15 @@
             this.hospitalDataRepository = hospitalDataRepository;
         }
 
-        public IEnumerable<BloodBag> GetHospitalBloodBagsById(string userHospitalId)
+        public IEnumerable<BloodBag> GetHospitalBloodBagsById(params string[] id)
         {
             var hospitalData = this.hospitalDataRepository.All()
-                .FirstOrDefault(hd => hd.ApplicationUserId == userHospitalId);
+                .FirstOrDefault(hd => hd.ApplicationUserId == id[0]);
 
             var bloodBank = this.bloodBankRepository
                 .All()
-                .Where(bb => bb.HospitalDataId == hospitalData.Id)
+                .Where(bb => hospitalData != null ? bb.HospitalDataId == hospitalData.Id :
+                bb.HospitalDataId == id[0])
                 .FirstOrDefault();
 
             var bloodBags = this.bloodBangRepository.All()

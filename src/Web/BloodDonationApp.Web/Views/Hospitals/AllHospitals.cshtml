@@ -11,6 +11,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Hospital name:</th>
+                        <th scope="col">Contacts:</th>
                         <th scope="col">Recipients count:</th>
                         <th scope="col">Donate Directly to Hospital:</th>
                         <th scope="col">Blood Reservs:</th>
@@ -19,22 +20,28 @@
                 <tbody>
                     @foreach (var hospital in @Model.Hospitals)
                     {
-                        <tr>
-                            <th>@hospital.Name</th>
-                            <td>@hospital.RecipientCount</td>                            
-                            <td>
-                                <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
-                                    <button class="btn btn-primary"> Donate Whitout Request</button>
-                                    <input type="hidden" name="requestOrHospitalId" value="@hospital.Id" />
-                                </form>
-                            </td>
-                            <td>
-                                <form asp-controller="Hospitals" asp-action="DetailsHospital" method="get">
-                                    <button class="btn btn-warning">Blood Reservs</button>
-                                    <input type="hidden" name="userHospitalId" value="@hospital.Id" />
-                                </form>
-                            </td>
-                        </tr>
+                    <tr>
+                        <th>@hospital.Name</th>
+                        <td> 
+                            <form asp-area="" asp-controller="Hospitals" asp-action="Contacts" method="get">
+                                <button class="btn btn-link">Contacts</button>
+                                <input type="hidden" name="hospitalDataId" value="@hospital.Id" />
+                            </form>
+                        </td>
+                        <td>@hospital.RecipientCount</td>
+                        <td>
+                            <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
+                                <button class="btn btn-primary"> Donate Whitout Request</button>
+                                <input type="hidden" name="requestOrHospitalId" value="@hospital.Id" />
+                            </form>
+                        </td>
+                        <td>
+                            <form asp-area="" asp-controller="Hospitals" asp-action="DetailsHospital" method="get">
+                                <button class="btn btn-warning">Blood Reservs</button>
+                                <input type="hidden" name="hospitalDataId" value="@hospital.Id" />
+                            </form>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
