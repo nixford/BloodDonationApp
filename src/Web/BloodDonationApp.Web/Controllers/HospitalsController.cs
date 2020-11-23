@@ -54,20 +54,15 @@
 
         public IActionResult AllHospitals(AllHospitalsViewModel viewModel)
         {
-            var userHospitalId = this.userManager.GetUserId(this.User);
 
             viewModel.Hospitals = this.hospitalsService.GetAllHospitals<HospitalInfoViewModel>();
-            viewModel.RecipientCount =
-                    this.recipientsService
-                    .AllHospitalRecipients<AllRecipientsViewMode>(userHospitalId)
-                    .Count();
 
             return this.View(viewModel);
         }
 
-        public IActionResult DetailsHospital(string userHospitalId)
+        public IActionResult DetailsHospital(string hospitalDataId)
         {
-            var viewModel = this.hospitalsService.GetHospitalDataById<HospitalInfoViewModel>(userHospitalId);
+            var viewModel = this.hospitalsService.GetHospitalDataById<HospitalInfoViewModel>(hospitalDataId);
 
             return this.View(viewModel);
         }

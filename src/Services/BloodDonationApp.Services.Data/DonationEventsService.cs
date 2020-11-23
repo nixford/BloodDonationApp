@@ -43,7 +43,7 @@
             var hospitalData = this.hospitalDataUserRepository.All()
                 .FirstOrDefault(hd =>
                 request != null ?
-                hd.Id == request.HospitalId : hd.ApplicationUserId == requestOrHospitalId);
+                hd.Id == request.HospitalId : hd.Id == requestOrHospitalId);
 
             var bloodBank = this.bloodBankRepository.All()
                 .FirstOrDefault(bbk => bbk.HospitalDataId == hospitalData.Id);
@@ -51,7 +51,7 @@
             var donationEvent = new DonationEvent
             {
                 DateOfDonation = DateTime.UtcNow,
-                RequestId = requestOrHospitalId,
+                RequestId = request != null ? requestOrHospitalId : null,
                 UserDonorId = userDonorId,
             };
 

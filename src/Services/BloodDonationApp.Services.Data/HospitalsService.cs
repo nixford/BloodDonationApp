@@ -15,17 +15,20 @@
         private readonly IDeletableEntityRepository<HospitalData> hospitalsRepository;
         private readonly IDeletableEntityRepository<ApplicationUserHospitalData> appUsersHospitalRepository;
         private readonly IDeletableEntityRepository<ApplicationRole> rolesRepository;
+        private readonly IDeletableEntityRepository<Recipient> recipientRepository;
 
         public HospitalsService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<HospitalData> hospitalsRepository,
             IDeletableEntityRepository<ApplicationUserHospitalData> appUsersHospitalRepository,
-            IDeletableEntityRepository<ApplicationRole> rolesRepository)
+            IDeletableEntityRepository<ApplicationRole> rolesRepository,
+            IDeletableEntityRepository<Recipient> recipientRepository)
         {
             this.usersRepository = usersRepository;
             this.hospitalsRepository = hospitalsRepository;
             this.appUsersHospitalRepository = appUsersHospitalRepository;
             this.rolesRepository = rolesRepository;
+            this.recipientRepository = recipientRepository;
         }
 
         public async Task CreateHospitalProfileAsync(HospitalProfileInputModel input, string userId)
@@ -66,25 +69,32 @@
 
         public IEnumerable<T> GetAllHospitals<T>()
         {
-            var roleObj = this.rolesRepository.All()
-                .FirstOrDefault(r => r.Name == "Hospital");
+            var hospitalDatas = this.hospitalsRepository.All()
+                .Select(hd => new HospitalData
+                {
+                    Name = hd.Name,
+                    Id = hd.Id,
+                    RecipientCount = this.recipientRepository.All()
+                                    .Where(r => r.HospitalDataId == hd.Id)
+                                    .Count(),
+                })
+                .To<T>()
+                .ToList();
 
-            var hospitals = this.usersRepository.All()
-                .Where(u => u.Roles.All(r => r.RoleId == roleObj.Id));
-
-            return hospitals.To<T>().ToList();
+            return hospitalDatas;
         }
 
-        public T GetHospitalDataById<T>(string userHospitalId)
+        public T GetHospitalDataById<T>(string userHospitalOrHospitalDataId)
         {
             var userHospital = this.usersRepository
                 .All()
-                .Where(u => u.Id == userHospitalId)
+                .Where(u => u.Id == userHospitalOrHospitalDataId)
                 .FirstOrDefault();
 
             var hospitalData = this.hospitalsRepository
                 .All()
-                .Where(hd => hd.ApplicationUserId == userHospital.Id)
+                .Where(hd => userHospital != null ? hd.ApplicationUserId == userHospital.Id :
+                    hd.Id == userHospitalOrHospitalDataId)
                 .To<T>()
                 .FirstOrDefault();
 

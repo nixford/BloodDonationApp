@@ -13,7 +13,7 @@
 
         public DateTime DateOfDonation { get; set; }
 
-        public string RequestId { get; set; }
+        public string? RequestId { get; set; }
 
         public Request Request { get; set; }
 

@@ -12,6 +12,8 @@
                     <tr>
                         <th scope="col">Hospital name:</th>
                         <th scope="col">Recipients count:</th>
+                        <th scope="col">Donate Directly to Hospital:</th>
+                        <th scope="col">Blood Reservs:</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,17 +21,17 @@
                     {
                         <tr>
                             <th>@hospital.Name</th>
-                            <td>@Model.RecipientCount</td>                            
+                            <td>@hospital.RecipientCount</td>                            
                             <td>
-                                <form asp-controller="DonationEvents" asp-action="Create" method="post">
+                                <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
                                     <button class="btn btn-primary"> Donate Whitout Request</button>
-                                    <input type="hidden" name="recipientId" value="@hospital.Id" />
+                                    <input type="hidden" name="requestOrHospitalId" value="@hospital.Id" />
                                 </form>
                             </td>
                             <td>
-                                <form asp-controller="Hospitals" asp-action="DetailsHospital" method="post">
+                                <form asp-controller="Hospitals" asp-action="DetailsHospital" method="get">
                                     <button class="btn btn-warning">Blood Reservs</button>
-                                    <input type="hidden" name="recipientId" value="@hospital.Id" />
+                                    <input type="hidden" name="userHospitalId" value="@hospital.Id" />
                                 </form>
                             </td>
                         </tr>

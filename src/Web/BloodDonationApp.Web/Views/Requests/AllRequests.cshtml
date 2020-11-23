@@ -28,36 +28,42 @@
                 <tbody>
                     @foreach (var request in @Model.Requests)
                     {
-                    <tr>
-                        <th scope="row">@request.EmergencyStatus</th>
-                        <td>@request.HospitalName</td>
-                        <td>@request.BloodGroup</td>
-                        <td>@request.RhesusFactor</td>
-                        <td>@request.Content</td>
-                        @if (this.User.IsInRole("Donor"))
-                        {
-                            <td>
-                                <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
-                                    <button class="btn btn-primary">Donattion</button>
-                                    <input type="hidden" name="requestId" value="@request.Id" />
-                                    <span asp-validation-for="@request.Id"></span>
-                                </form>
-                            </td>
-                        }
-                        else if (this.User.IsInRole("Hospital"))
-                        {
-                            <td>
-                                <form asp-area="" asp-controller="Requests" asp-action="Delete">
-                                    <button class="btn btn-danger">Delete</button>
-                                    <input type="hidden" name="requestId" value="@request.Id"/>
-                                    <span asp-validation-for="@request.Id"></span>
-                                </form>
-                            </td>
-                        }
-                    </tr>
+                        <tr>
+                            <th scope="row">@request.EmergencyStatus</th>
+                            <td>@request.HospitalName</td>
+                            <td>@request.BloodGroup</td>
+                            <td>@request.RhesusFactor</td>
+                            <td>@request.Content</td>
+                            @if (this.User.IsInRole("Donor"))
+                            {
+                                <td>
+                                    <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
+                                        <button class="btn btn-primary">Donattion</button>
+                                        <input type="hidden" name="requestOrHospitalId" value="@request.Id" />
+                                        <span asp-validation-for="@request.Id"></span>
+                                    </form>
+                                </td>
+                            }
+                            else if (this.User.IsInRole("Hospital"))
+                            {
+                                <td>
+                                    <form asp-area="" asp-controller="Requests" asp-action="Delete">
+                                        <button class="btn btn-danger">Delete</button>
+                                        <input type="hidden" name="requestId" value="@request.Id" />
+                                        <span asp-validation-for="@request.Id"></span>
+                                    </form>
+                                </td>
+                            }
+                        </tr>
                     }
                 </tbody>
             </table>
+        </div>
+        <div>
+            <hr class="bg-success" style="height: 2px" />
+        </div>
+        <div>
+            <a class="btn btn-outline-success" href="/Hospitals/AllHospitals">All Hospitals</a>
         </div>
     </div>
 </section>

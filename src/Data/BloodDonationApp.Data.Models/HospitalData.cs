@@ -15,6 +15,8 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
+        public int RecipientCount { get; set; }
+
         [ForeignKey(nameof(ApplicationUser))]
         public string ApplicationUserId { get; set; }
 
@@ -37,7 +39,7 @@
 
         public virtual BloodBank BloodBank { get; set; }
 
-        public virtual ICollection<Recipient> Recipients { get; set; }
+        public virtual IEnumerable<Recipient> Recipients { get; set; }
 
         public virtual ICollection<HospitalDataRequest> HospitalsDonationRequests { get; set; }
     }

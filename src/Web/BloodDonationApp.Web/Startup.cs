@@ -77,6 +77,7 @@
             services.AddTransient<IRecipientsService, RecipientsService>();
             services.AddTransient<IDonationEventsService, DonationEventsService>();
             services.AddTransient<IBloodBanksService, BloodBanksService>();
+            services.AddTransient<IHospitalsService, HospitalsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
