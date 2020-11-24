@@ -12,12 +12,6 @@
 
         T GetUserByName<T>(string userName);
 
-        Task CreateDonorProfileAsync(DonorDataProfileInputModel input, string userId);
-
-        IEnumerable<T> GetAllDonors<T>();
-
-        IEnumerable<T> GetTopDonors<T>();
-
         string GetUserEmailById(string userId);
 
         Task<bool> AddAdmin(string userName, string email, string password);

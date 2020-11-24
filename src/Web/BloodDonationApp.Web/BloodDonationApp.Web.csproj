@@ -190,7 +190,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Users\AddDonor.cshtml">
+    <Content Update="Views\Donors\AddDonor.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\assets\config-scss.bat">
@@ -263,9 +263,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\assets\images\logo.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\assets\images\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\assets\images\slider\slide-03.jpg">

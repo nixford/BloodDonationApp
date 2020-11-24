@@ -3,5 +3,38 @@
     this.ViewData["Title"] = "Admin dashboard";
 }
 
-<h1>@this.ViewData["Title"]</h1>
-Settings: @this.Model.SettingsCount
+<div class="slogan text-center">
+    <br />
+    <br />
+    <h1>@this.ViewData["Title"]</h1>
+</div>
+
+<div class="container">
+    <br />
+    <br />
+    <br />
+    <div class="row text-center">
+        <div class="col-md-3">
+            <a class="btn btn-primary" asp-area="Administration" asp-controller="Dashboard" asp-action="RemoveDonor">
+                Delete donor
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-primary" asp-area="Administration" asp-controller="Dashboard" asp-action="RemoveHospital">
+                Delete hospital
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-primary" asp-area="Administration" asp-controller="Users" asp-action="RegisterAdmin">
+                Add new administrator
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-primary" asp-area="Administration" asp-controller="Users" asp-action="RemoveAdmin">
+                Delete administrator
+            </a>
+        </div>
+    </div>
+</div>
+
+
