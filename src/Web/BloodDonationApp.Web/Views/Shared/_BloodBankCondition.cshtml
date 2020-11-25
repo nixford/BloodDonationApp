@@ -1,0 +1,20 @@
+﻿@model BloodDonationApp.Web.ViewModels.BloodBank.AllHospitalBloodBagsViewModel
+
+<div class="container-fluid">
+    <div>
+        <hr class="bg-success" style="height: 2px" />
+    </div>
+    <div class="container-fluid">
+        <h4 class="text-md-left">AB-Positive: @((Model.ABPositiveQuantity / 10000) * 100) % from 10L of total Capacity</h4>
+        <h4 class="text-md-left">AB-Negative: @((Model.ABNegativeQuantity / 10000) * 100) % from 10L of total Capacity</h4>
+        <h4 class="text-md-left">A-Positive: @((Model.APositiveQuantity / 10000) * 100) % from 10L of total Capacity</h4>
+        <h4 class="text-md-left">A-Negative: @((Model.ANegativeQuantity / 10000) * 100) % from 10L of total Capacity</h4>
+        <h4 class="text-md-left">B-Positive: @((Model.BPositiveQuantity / 10000) * 100) % from 10L of total Capacity</h4>
+        <h4 class="text-md-left">B-Negative: @((Model.BNegativeQuantity / 10000) * 100) % from 10L of total Capacity</h4>
+        <h4 class="text-md-left">Zero-Positive: @((Model.ZeroPositiveQuantity / 10000) * 100) % from 10L of total Capacity</h4>
+        <h4 class="text-md-left">Zero-Negative: @((Model.ZeroPositiveQuantity / 10000) * 100) % from 10L of total Capacity</h4>
+    </div>
+    <div>
+        <hr class="bg-success" style="height: 2px" />
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿@using BloodDonationApp.Common
+@{ this.ViewData["Title"] = "Questions and Answers"; }
+
+
+<div>
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<div class="container">
+    <form asp-area="" asp-controller="Requests" asp-action="AllRequests">
+        <button class="btn btn-outline-primary">Back to All Requests</button>
+    </form>
+</div>
+
+@section Links {
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="https://ncth.bg/">National Center for blood donation</a>
+    </li>
+}

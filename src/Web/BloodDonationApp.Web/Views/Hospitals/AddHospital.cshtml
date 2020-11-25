@@ -1,0 +1,44 @@
+﻿@model BloodDonationApp.Web.ViewModels.Hospital.HospitalProfileInputModel
+@{
+    ViewData["Title"] = "AddHospital";
+}
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="col-md-2">
+        <form asp-controller="Hospitals" asp-action="AddHospital" method="post">
+            <h4>Insert the necessery donor data.</h4>
+            <hr />
+            <div class="form-group">
+                <label asp-for="@Model.Name"></label>
+                <input asp-for="@Model.Name" class="form-control" />
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Phone"></label>
+                <input asp-for="@Model.Phone" class="form-control" />
+                <span asp-validation-for="@Model.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Email"></label>
+                <input asp-for="@Model.Email" class="form-control" />
+                <span asp-validation-for="@Model.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Country"></label>
+                <input asp-for="@Model.Country" class="form-control" />
+                <span asp-validation-for="@Model.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.AdressDescription"></label>
+                <input asp-for="@Model.AdressDescription" class="form-control" />
+                <span asp-validation-for="@Model.AdressDescription" class="text-danger"></span>
+            </div>            
+
+            <button type="submit" class="btn btn-primary">Insert Data</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model BloodDonationApp.Web.ViewModels.Administration.Users.RegisterAdminInputModel
+@{
+    this.ViewData["Title"] = "Register Administrator";
+}
+
+<div class="container">
+    <div class="row text-center">
+        <h3>@this.ViewData["Title"]</h3>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+        <form asp-action="RegisterAdmin" method="post">
+            <div class="form-group">
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" class="form-control" placeholder="Enter username" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" placeholder="Enter email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" placeholder="Enter password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" placeholder="Enter password" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary pull-right" />
+            </div>
+            <div class="col-md-4"></div>
+        </form>
+            </div>
+        </div>
+</div>

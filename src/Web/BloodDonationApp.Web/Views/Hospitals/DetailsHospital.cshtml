@@ -1,0 +1,26 @@
+﻿@model BloodDonationApp.Web.ViewModels.BloodBank.AllHospitalBloodBagsViewModel
+
+@{ ViewData["Title"] = "BloodBank Reserve"; }
+
+<div class="text-center">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<div class="container-fluid">
+    <div>
+        <hr class="bg-success" style="height: 2px" />
+        <h4 class="text-md-left">Hospital: @Model.HospitalInfo.Name</h4>
+        <h4 class="text-md-left">Phone: @Model.HospitalInfo.Contact.Phone</h4>
+        <h4 class="text-md-left">Email: @Model.HospitalInfo.Contact.Email</h4>
+        <table><tr height=20px></tr></table>
+    </div>
+    @await Html.PartialAsync("_BloodBankCondition");
+    <div>
+        <hr class="bg-success" style="height: 2px" />
+    </div>
+</div>
+<div class="container">
+    <form asp-controller="Requests" asp-action="AllRequests">
+        <button class="btn btn-info">Back To All Hospitals</button>
+    </form>
+</div>

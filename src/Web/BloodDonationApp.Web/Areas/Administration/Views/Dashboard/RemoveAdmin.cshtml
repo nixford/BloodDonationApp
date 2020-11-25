@@ -1,0 +1,14 @@
+﻿@model BloodDonationApp.Web.ViewModels.Administration.Users.RemoveUserInputModel
+@{
+    this.ViewData["Title"] = "Remove Administrator";
+}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="RemoveAdmin" method="post">
+                    @Html.DisplayFor(x => Model)
+                </form>
+            </div>
+        </div>
+    </div>
