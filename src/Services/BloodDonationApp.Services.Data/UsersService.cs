@@ -17,6 +17,7 @@
         private readonly IDeletableEntityRepository<ApplicationRole> roleRepository;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
+        private readonly IDeletableEntityRepository<Location> locationRepository;
 
         public UsersService(
             IDeletableEntityRepository<ApplicationRole> roleRepository,

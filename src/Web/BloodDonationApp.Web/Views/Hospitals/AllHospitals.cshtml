@@ -11,6 +11,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Hospital name:</th>
+                        <th scope="col">Adress:</th>
                         <th scope="col">Contacts:</th>
                         <th scope="col">Recipients count:</th>
                         <th scope="col">Donate Directly to Hospital:</th>
@@ -22,7 +23,8 @@
                     {
                     <tr>
                         <th>@hospital.Name</th>
-                        <td> 
+                        <td>@Html.DisplayFor(x => hospital.Location)</td>
+                        <td>
                             <form asp-area="" asp-controller="Hospitals" asp-action="Contacts" method="get">
                                 <button class="btn btn-link">Contacts</button>
                                 <input type="hidden" name="hospitalDataId" value="@hospital.Id" />
@@ -32,7 +34,7 @@
                         <td>
                             <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
                                 <button class="btn btn-primary"> Donate Whitout Request</button>
-                                <input type="hidden" name="requestOrHospitalId" value="@hospital.Id" />                                
+                                <input type="hidden" name="requestOrHospitalId" value="@hospital.Id" />
                             </form>
                         </td>
                         <td>

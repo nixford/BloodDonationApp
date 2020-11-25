@@ -56,7 +56,6 @@
 
         public IActionResult AllHospitals(AllHospitalsViewModel viewModel)
         {
-
             viewModel.Hospitals = this.hospitalsService.GetAllHospitals<HospitalInfoViewModel>();
 
             return this.View(viewModel);

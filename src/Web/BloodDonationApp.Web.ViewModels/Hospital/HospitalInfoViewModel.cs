@@ -1,10 +1,8 @@
 ﻿namespace BloodDonationApp.Web.ViewModels.Hospital
 {
-    using System.Collections.Generic;
 
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Mapping;
-    using BloodDonationApp.Web.ViewModels.BloodBank;
 
     public class HospitalInfoViewModel : IMapFrom<HospitalData>
     {

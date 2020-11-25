@@ -54,6 +54,7 @@
                 <label asp-for="@Model.PublishedOn"></label>
                 <input asp-for="@Model.PublishedOn" class="form-control" />
                 <span asp-validation-for="@Model.PublishedOn" class="text-danger"></span>
+                @*@Html.TextBoxFor(x => x, new { type = "date" })*@
             </div>            
             <button type="submit" class="btn btn-primary">Publish Request</button>
         </form>

@@ -1,5 +1,7 @@
 ﻿namespace BloodDonationApp.Web.Controllers
 {
+    using System.Linq;
+
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Web.ViewModels.BloodBank;
@@ -9,14 +11,17 @@
     public class BloodBanksController : BaseController
     {
         private readonly IBloodBanksService bloodBanksService;
+        private readonly IHospitalsService hospitalsService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public BloodBanksController(
             IBloodBanksService bloodBanksService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IHospitalsService hospitalsService)
         {
             this.bloodBanksService = bloodBanksService;
             this.userManager = userManager;
+            this.hospitalsService = hospitalsService;
         }
 
         public IActionResult HospitalBlBags(string hospitalDataId, AllHospitalBloodBagsViewModel viewModel)
@@ -72,6 +77,17 @@
                     }
                 }
             }
+
+            var hospitalData = this.hospitalsService
+                .GetAllHospitals<HospitalData>()
+                .FirstOrDefault(hd => hd.ApplicationUserId == userHospitalId);
+
+            viewModel.HospitalInfo.Location = new Location
+            {
+                Country = hospitalData.Location.Country,
+                City = hospitalData.Location.City,
+                AdressDescription = hospitalData.Location.AdressDescription,
+            };
 
             return this.View(viewModel);
         }

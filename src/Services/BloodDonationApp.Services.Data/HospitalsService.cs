@@ -77,6 +77,17 @@
                     RecipientCount = this.recipientRepository.All()
                                     .Where(r => r.HospitalDataId == hd.Id)
                                     .Count(),
+                    Location = new Location
+                    {
+                        Country = hd.Location.Country,
+                        City = hd.Location.City,
+                        AdressDescription = hd.Location.AdressDescription,
+                    },
+                    Contact = new Contact
+                    {
+                        Phone = hd.Contact.Phone,
+                        Email = hd.Contact.Email,
+                    },
                 })
                 .To<T>()
                 .ToList();

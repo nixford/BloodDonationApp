@@ -1,5 +1,6 @@
 ﻿namespace BloodDonationApp.Web.ViewModels.BloodBank
 {
+    using BloodDonationApp.Data.Models;
     using BloodDonationApp.Web.ViewModels.Hospital;
 
     public class AllHospitalBloodBagsViewModel
