@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
-    <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon">    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+    <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon">
     <link rel="shortcut icon" href="assets/images/fav.jpg">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/fontawsom-all.min.css">
@@ -17,25 +18,25 @@
 </head>
 
 <body>
-    <header class="continer-fluid ">
-        <div class="header-top">
-            <div class="container">
-                <nav class="navbar navbar-expand-sm">
-                    <div class="container">
-                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                            <partial name="_LoginPartial" />
-                            <ul class="navbar-nav flex-grow-1">
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                </li>                                
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <partial name="_LoginPartial" />
+                    </li>
+                </ul>
             </div>
-        </div>
+        </nav>
     </header>
-    
+
     <div>
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
@@ -45,29 +46,53 @@
     </div>
 
     <!--*************** Footer  Starts Here *************** -->
-    <footer id="contact" class="container-fluid">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-6, text-white">
-                    &copy; @DateTime.UtcNow - @GlobalConstants.SystemName
+    <footer class="modal-footer modal-footer-dark bg-danger text-white">
+        <div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-5 col-xs-12 about-company text-white">
+                        <h6 class="font-weight-bold" style="font-family:Arial">About the Application</h6>
+                        <p class="pr-3 text-white">BloodDonationApp is a web application developed through ASP.NET Core and its goal is to provide easy and fast way for connection between hospitals (regarding their demand for blood and blood plasma) and the potential donors.</p>
+                    </div>
+                    <div class="col-lg-3 col-xs-12">
+                        <h6 class="font-weight-bold" style="font-family:Arial" class="mt-lg-0 mt-sm-3">Links</h6>
+                        <ul class="m-0 p-0">
+                            <li >
+                                <a class="text-white" href="https://ncth.bg/">
+                                    Nationalt Blood Donation Center
+                                </a>
+                            </li>                                                 
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-xs-12 location">
+                        <h6 class="font-weight-bold" style="font-family:Arial" class="mt-lg-0 mt-sm-4">Contacts</h6>
+                        <p>Bulgaria, Sofia</p>
+                        <p class="mb-0"><i class="fa fa-phone mr-3"></i>(123) 456-78910</p>
+                        <p><i class="fa fa-envelope-o mr-3"></i>info@BloodDonationApp.com</p>
+                    </div>
+                </div>
+                <div class="row mt-0">
+                    <div class="col copyright">
+                        <p class=""><small class="text-white">© @Html.DisplayFor(x => DateTime.UtcNow) - @GlobalConstants.SystemName</small></p>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
+        </footer>
 
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/plugins/grid-gallery/js/grid-gallery.min.js"></script>
-    <script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
-    <script src="assets/js/script.js"></script>
+        <script src="assets/js/jquery-3.2.1.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/plugins/grid-gallery/js/grid-gallery.min.js"></script>
+        <script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+        <script src="assets/js/script.js"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-    <script src="assets/js/bootstrap.min.js" asp-append-version="true"></script>
-    <script src="~/js/site.min.js" asp-append-version="true"></script>
-    // @this.RenderSection("Scripts", required: false)
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="assets/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
 
+        @this.RenderSection("Scripts", required: false)
 </body>
 </html>
 
