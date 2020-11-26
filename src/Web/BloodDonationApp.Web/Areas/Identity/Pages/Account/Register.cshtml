@@ -38,10 +38,9 @@
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
-        <div class="text-center">Already have an account? <a href="#">Login here</a></div>
+        <div class="text-center">Already have an account? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Login here</a></div>
     </div>
 </body>
-
 
 
 @section Scripts {

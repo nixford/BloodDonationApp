@@ -35,6 +35,11 @@
 
         public RhesusFactor RhesusFactor { get; set; }
 
+        [ForeignKey(nameof(Location))]
+        public string LocationId { get; set; }
+
+        public Location Location { get; set; }
+
         public double NeededQuantity { get; set; }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201121181504_AlteringHospitalData")]
-    partial class AlteringHospitalData
+    [Migration("20201126193045_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -552,6 +552,9 @@ namespace BloodDonationApp.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RecipientCount")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
@@ -823,6 +826,9 @@ namespace BloodDonationApp.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("LocationId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -843,6 +849,8 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasIndex("HospitalId");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("LocationId");
 
                     b.HasIndex("RecipientId");
 
@@ -1055,7 +1063,7 @@ namespace BloodDonationApp.Data.Migrations
                         .HasForeignKey("ExaminationId");
 
                     b.HasOne("BloodDonationApp.Data.Models.Location", "Location")
-                        .WithMany("DonorsLocations")
+                        .WithMany()
                         .HasForeignKey("LocationId");
                 });
 
@@ -1092,7 +1100,7 @@ namespace BloodDonationApp.Data.Migrations
                         .HasForeignKey("ContactId");
 
                     b.HasOne("BloodDonationApp.Data.Models.Location", "Location")
-                        .WithMany("HospitalsAdresses")
+                        .WithMany()
                         .HasForeignKey("LocationId");
                 });
 
@@ -1156,6 +1164,10 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.HospitalData", "HospitalData")
                         .WithMany()
                         .HasForeignKey("HospitalId");
+
+                    b.HasOne("BloodDonationApp.Data.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
 
                     b.HasOne("BloodDonationApp.Data.Models.Recipient", "Recipient")
                         .WithMany()

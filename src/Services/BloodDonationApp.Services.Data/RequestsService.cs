@@ -16,17 +16,20 @@
         private readonly IDeletableEntityRepository<HospitalDataRequest> requestsHospitalDataRepository;
         private readonly IDeletableEntityRepository<HospitalData> hospitalDataRepository;
         private readonly IDeletableEntityRepository<RecipientRequest> recipientRequesDataRepository;
+        private readonly IDeletableEntityRepository<Location> locationDataRepository;
 
         public RequestsService(
             IDeletableEntityRepository<Request> requestsRepository,
             IDeletableEntityRepository<HospitalDataRequest> requestsHospitalDataRepository,
             IDeletableEntityRepository<HospitalData> hospitalDataRepository,
-            IDeletableEntityRepository<RecipientRequest> recipientRequesDataRepository)
+            IDeletableEntityRepository<RecipientRequest> recipientRequesDataRepository, 
+            IDeletableEntityRepository<Location> locationDataRepository)
         {
             this.requestsRepository = requestsRepository;
             this.requestsHospitalDataRepository = requestsHospitalDataRepository;
             this.hospitalDataRepository = hospitalDataRepository;
             this.recipientRequesDataRepository = recipientRequesDataRepository;
+            this.locationDataRepository = locationDataRepository;
         }
 
         public async Task<string> CreateRequestAsync(string userId, RequestInputViewModel input)
@@ -34,6 +37,9 @@
             var hospitalData = this.hospitalDataRepository.All()
                 .Where(hd => hd.ApplicationUserId == userId)
                 .FirstOrDefault();
+
+            var location = this.locationDataRepository.All()
+                .FirstOrDefault(l => l.Id == hospitalData.LocationId);
 
             var request = new Request
             {
@@ -44,6 +50,7 @@
                 BloodGroup = input.BloodGroup,
                 RhesusFactor = input.RhesusFactor,
                 NeededQuantity = input.NeededQuantity,
+                Location = location,
             };
 
             request.HospitalId = hospitalData.Id;
@@ -81,9 +88,11 @@
         public IEnumerable<T> AllRequests<T>()
         {
             var requests = this.requestsRepository.All()
-                .Where(r => r.IsDeleted == false);
+                .Where(r => r.IsDeleted == false)
+                .To<T>()
+                .ToList();
 
-            return requests.To<T>().ToList();
+            return requests;
         }
 
         public T GetById<T>(string id)

@@ -23,5 +23,7 @@
         public RhesusFactor RhesusFactor { get; set; }
 
         public double NeededQuantity { get; set; }
+
+        public Location Location { get; set; }
     }
 }

@@ -11,21 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\css\**" />
-    <Compile Remove="wwwroot\js\**" />
-    <Compile Remove="wwwroot\lib\**" />
-    <Content Remove="wwwroot\css\**" />
-    <Content Remove="wwwroot\js\**" />
-    <Content Remove="wwwroot\lib\**" />
-    <EmbeddedResource Remove="wwwroot\css\**" />
-    <EmbeddedResource Remove="wwwroot\js\**" />
-    <EmbeddedResource Remove="wwwroot\lib\**" />
-    <None Remove="wwwroot\css\**" />
-    <None Remove="wwwroot\js\**" />
-    <None Remove="wwwroot\lib\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.bundle.js" />
     <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.bundle.js.map" />
     <Content Remove="C:\Users\Dimitar Uzunov\.nuget\packages\bootstrap.sass\4.5.3\contentFiles\any\any\wwwroot\js\bootstrap.bundle.min.js" />
@@ -148,6 +133,10 @@
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\lib\.vs\ProjectSettings.json" />
+    <Content Include="wwwroot\lib\.vs\VSWorkspaceState.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.5.3" />
@@ -187,6 +176,21 @@
   <ItemGroup>
     <None Include="wwwroot\assets\scss\.sass-cache\87f88134b2e274406d696eddf2817a21a5f37943\style.scssc" />
     <None Include="wwwroot\assets\scss\.sass-cache\87f88134b2e274406d696eddf2817a21a5f37943\_variable.scssc" />
+    <None Include="wwwroot\lib\.vs\slnx.sqlite" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\jquery-3.2.1.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\popper.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\popper.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\popper.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\script.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -424,5 +428,9 @@
     <Content Update="wwwroot\assets\webfonts\themify.woff">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\.vs\lib\v16\" />
   </ItemGroup>
 </Project>

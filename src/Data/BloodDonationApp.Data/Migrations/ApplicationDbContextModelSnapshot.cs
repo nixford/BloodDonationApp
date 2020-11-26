@@ -824,6 +824,9 @@ namespace BloodDonationApp.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("LocationId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -844,6 +847,8 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasIndex("HospitalId");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("LocationId");
 
                     b.HasIndex("RecipientId");
 
@@ -1157,6 +1162,10 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.HospitalData", "HospitalData")
                         .WithMany()
                         .HasForeignKey("HospitalId");
+
+                    b.HasOne("BloodDonationApp.Data.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
 
                     b.HasOne("BloodDonationApp.Data.Models.Recipient", "Recipient")
                         .WithMany()

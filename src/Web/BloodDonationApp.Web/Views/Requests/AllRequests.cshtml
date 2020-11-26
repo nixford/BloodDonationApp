@@ -1,6 +1,6 @@
 ﻿@model BloodDonationApp.Web.ViewModels.Request.AllRequestsViewModel
 @{
-    ViewData["Title"] = "AllRequests";
+    ViewData["Title"] = "Donation requests by hospitals:";
 }
 
 <section class="py-5">
@@ -12,9 +12,9 @@
                     <tr>
                         <th scope="col">EmergencyStatus</th>
                         <th scope="col">HospitalName</th>
+                        <th scope="col">Address</th>
                         <th scope="col">BloodGroup</th>
                         <th scope="col">RhesusFactor</th>
-                        <th scope="col">Content</th>
                         @if (this.User.IsInRole("Donor"))
                         {
                             <th scope="col">Apply for donation</th>
@@ -28,33 +28,33 @@
                 <tbody>
                     @foreach (var request in @Model.Requests)
                     {
-                        <tr>
-                            <th scope="row">@request.EmergencyStatus</th>
-                            <td>@request.HospitalName</td>
-                            <td>@request.BloodGroup</td>
-                            <td>@request.RhesusFactor</td>
-                            <td>@request.Content</td>
-                            @if (this.User.IsInRole("Donor"))
-                            {
-                                <td>
-                                    <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
-                                        <button class="btn btn-primary">Donattion</button>
-                                        <input type="hidden" name="requestOrHospitalId" value="@request.Id" />
-                                        <span asp-validation-for="@request.Id"></span>
-                                    </form>
-                                </td>
-                            }
-                            else if (this.User.IsInRole("Hospital"))
-                            {
-                                <td>
-                                    <form asp-area="" asp-controller="Requests" asp-action="Delete">
-                                        <button class="btn btn-danger">Delete</button>
-                                        <input type="hidden" name="requestId" value="@request.Id" />
-                                        <span asp-validation-for="@request.Id"></span>
-                                    </form>
-                                </td>
-                            }
-                        </tr>
+                    <tr>
+                        <th scope="row">@request.EmergencyStatus</th>
+                        <td>@request.HospitalName</td>
+                        <td>@Html.DisplayFor(x => request.Location)</td>
+                        <td>@request.BloodGroup</td>
+                        <td>@request.RhesusFactor</td>
+                        @if (this.User.IsInRole("Donor"))
+                        {
+                            <td>
+                                <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
+                                    <button class="btn btn-primary">Donattion</button>
+                                    <input type="hidden" name="requestOrHospitalId" value="@request.Id" />
+                                    <span asp-validation-for="@request.Id"></span>
+                                </form>
+                            </td>
+                        }
+                        else if (this.User.IsInRole("Hospital"))
+                        {
+                            <td>
+                                <form asp-area="" asp-controller="Requests" asp-action="Delete">
+                                    <button class="btn btn-danger">Delete</button>
+                                    <input type="hidden" name="requestId" value="@request.Id" />
+                                    <span asp-validation-for="@request.Id"></span>
+                                </form>
+                            </td>
+                        }
+                    </tr>
                     }
                 </tbody>
             </table>

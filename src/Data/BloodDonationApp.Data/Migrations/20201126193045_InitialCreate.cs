@@ -425,6 +425,7 @@ namespace BloodDonationApp.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
+                    RecipientCount = table.Column<int>(nullable: false),
                     ApplicationUserId = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     ContactId = table.Column<string>(nullable: true),
@@ -632,6 +633,7 @@ namespace BloodDonationApp.Data.Migrations
                     RecipientId = table.Column<string>(nullable: true),
                     BloodGroup = table.Column<int>(nullable: false),
                     RhesusFactor = table.Column<int>(nullable: false),
+                    LocationId = table.Column<string>(nullable: true),
                     NeededQuantity = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
@@ -641,6 +643,12 @@ namespace BloodDonationApp.Data.Migrations
                         name: "FK_Requests_HospitalData_HospitalId",
                         column: x => x.HospitalId,
                         principalTable: "HospitalData",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Requests_Locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Locations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -980,6 +988,11 @@ namespace BloodDonationApp.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Requests_LocationId",
+                table: "Requests",
+                column: "LocationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Requests_RecipientId",
                 table: "Requests",
                 column: "RecipientId");
@@ -1130,10 +1143,10 @@ namespace BloodDonationApp.Data.Migrations
                 name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "Locations");
+                name: "Requests");
 
             migrationBuilder.DropTable(
-                name: "Requests");
+                name: "Locations");
 
             migrationBuilder.DropTable(
                 name: "Recipients");
