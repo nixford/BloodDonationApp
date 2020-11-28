@@ -1,7 +1,7 @@
 ﻿namespace BloodDonationApp.Web.ViewModels.Request
 {
     using System;
-
+    using System.ComponentModel.DataAnnotations;
     using BloodDonationApp.Data.Models.Enums;
 
     public class RequestInputViewModel

@@ -1,20 +1,20 @@
 ﻿@model BloodDonationApp.Web.ViewModels.Request.RequestInputViewModel
 @{
-    ViewData["Title"] = "AddRequest";
+    ViewData["Title"] = "Set official request for registered recipient";
 }
 
-<div class="container">
-    <h1>@ViewData["Title"]</h1>
-</div>
 
-<div class="container-fluid">
-    <div class="col-md-2">
+<div class="container-fluid" style="background-color:#f2fcfa">
+    <div class="container">
+        <h1 class="text-center">@ViewData["Title"]</h1>
+    </div>
+    <div class="signup-form">
         <form asp-action="AddRequest" asp-controller="Requests" method="post">
-            <h4>Insert the necessery donor data.</h4>
+            <h4>Insert the necessery request data.</h4>
             <hr />
             <div class="col-md-offset-2">
                 <div class="form-group">
-                    <label asp-for="@Model.EmergencyStatus" class="control-label"></label>
+                    <label asp-for="@Model.EmergencyStatus" class="control-label">Emergency Status</label>
                     <select asp-for="@Model.EmergencyStatus"
                             class="form-Content"
                             asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.EmergencyStatus>()">
@@ -24,13 +24,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.NeededQuantity"></label>
+                <label asp-for="@Model.NeededQuantity">Needed quantity in ml</label>
                 <input asp-for="@Model.NeededQuantity" class="form-control" />
                 <span asp-validation-for="@Model.NeededQuantity" class="text-danger"></span>
             </div>
             <div class="col-md-offset-2">
                 <div class="form-group">
-                    <label asp-for="@Model.BloodGroup" class="control-label"></label>
+                    <label asp-for="@Model.BloodGroup" class="control-label">Blood Group</label>
                     <select asp-for="@Model.BloodGroup"
                             class="form-Content"
                             asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.BloodGroup>()">
@@ -41,7 +41,7 @@
             </div>
             <div class="col-md-offset-2">
                 <div class="form-group">
-                    <label asp-for="@Model.RhesusFactor" class="control-label"></label>
+                    <label asp-for="@Model.RhesusFactor" class="control-label">Rhesus Factor</label>
                     <select asp-for="@Model.RhesusFactor"
                             class="form-Content"
                             asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.RhesusFactor>()">
@@ -51,11 +51,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.PublishedOn"></label>
+                <label asp-for="@Model.PublishedOn">Published on</label>
                 <input asp-for="@Model.PublishedOn" class="form-control" />
                 <span asp-validation-for="@Model.PublishedOn" class="text-danger"></span>
-                @*@Html.TextBoxFor(x => x, new { type = "date" })*@
-            </div>            
+            </div>
             <button type="submit" class="btn btn-primary">Publish Request</button>
         </form>
     </div>
