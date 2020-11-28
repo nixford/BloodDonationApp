@@ -67,9 +67,10 @@
             await this.appUsersHospitalRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetAllHospitals<T>()
+        public IEnumerable<T> GetAllHospitals<T>(int? take = null, int skip = 0)
         {
             var hospitalDatas = this.hospitalsRepository.All()
+                .OrderByDescending(hd => hd.CreatedOn)
                 .Select(hd => new HospitalData
                 {
                     Name = hd.Name,
@@ -89,10 +90,21 @@
                         Email = hd.Contact.Email,
                     },
                 })
-                .To<T>()
-                .ToList();
+                .Skip(skip);
 
-            return hospitalDatas;
+            if (take.HasValue)
+            {
+                hospitalDatas = hospitalDatas.Take(take.Value);
+            }
+
+            return hospitalDatas.To<T>().ToList();
+        }
+
+        public IEnumerable<T> GetAllHospitalsCount<T>()
+        {
+            var hospitalDatas = this.hospitalsRepository.All();
+
+            return hospitalDatas.To<T>().ToList();
         }
 
         public T GetHospitalDataById<T>(string userHospitalOrHospitalDataId)

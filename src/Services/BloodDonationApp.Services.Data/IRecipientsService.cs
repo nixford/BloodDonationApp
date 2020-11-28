@@ -11,7 +11,7 @@
 
         T GetById<T>(string recipientId);
 
-        IEnumerable<T> AllHospitalRecipients<T>(string userHospitalId);
+        IEnumerable<T> AllHospitalRecipients<T>(string userHospitalId, int? take = null, int skip = 0);
 
         IEnumerable<T> TotalRecipients<T>();
 

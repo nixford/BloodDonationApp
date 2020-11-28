@@ -3,102 +3,103 @@
     ViewData["Title"] = "Registered Hospitals";
 }
 
-<body>
-    <div class="container">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <h2>Customer <b>Details</b></h2>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="search-box">
-                                <div class="input-group">
-                                    <input type="text" id="search" class="form-control" placeholder="Search by Name">
-                                    <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-striped">
-                    <thead>
+<body style="background-color:#d6f5f5">
+    <div class="py-5">
+        <div class="container">
+            <h1 style="margin: 2%; text-align: center;">@ViewData["Title"]</h1>
+            <div style="padding: 5%;">
+                <table class="table table-striped table-responsive-md btn-table">
+                    <thead class="thead" style="background-color:limegreen">
                         <tr>
-                            <th>#</th>
-                            <th style="width: 22%;">Name</th>
-                            <th style="width: 22%;">Address</th>
-                            <th>City</th>
-                            <th>Pin Code</th>
-                            <th>Country</th>
-                            <th>Actions</th>
+                            <th scope="col">Hospital name:</th>
+                            <th scope="col">Adress:</th>
+                            <th scope="col">Contacts:</th>
+                            <th scope="col">Recipients count:</th>
+                            <th scope="col">Donate Directly to Hospital:</th>
+                            <th scope="col">Blood Reservs:</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Thomas Hardy</td>
-                            <td>89 Chiaroscuro Rd.</td>
-                            <td>Portland</td>
-                            <td>97219</td>
-                            <td>USA</td>
-                            <td>
-                                <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Maria Anders</td>
-                            <td>Obere Str. 57</td>
-                            <td>Berlin</td>
-                            <td>12209</td>
-                            <td>Germany</td>
-                            <td>
-                                <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Fran Wilson</td>
-                            <td>C/ Araquil, 67</td>
-                            <td>Madrid</td>
-                            <td>28023</td>
-                            <td>Spain</td>
-                            <td>
-                                <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Dominique Perrier</td>
-                            <td>25, rue Lauriston</td>
-                            <td>Paris</td>
-                            <td>75016</td>
-                            <td>France</td>
-                            <td>
-                                <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Martin Blank</td>
-                            <td>Via Monte Bianco 34</td>
-                            <td>Turin</td>
-                            <td>10100</td>
-                            <td>Italy</td>
-                            <td>
-                                <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                            </td>
-                        </tr>
+                        @foreach (var hospital in @Model.Hospitals)
+                        {
+                            <tr>
+                                <th>@hospital.Name</th>
+                                <td>@Html.DisplayFor(x => hospital.Location)</td>
+                                <td>
+                                    <form asp-area="" asp-controller="Hospitals" asp-action="Contacts" method="get">
+                                        <button class="btn btn-link">Contacts</button>
+                                        <input type="hidden" name="hospitalDataId" value="@hospital.Id" />
+                                    </form>
+                                </td>
+                                <td>@hospital.RecipientCount</td>
+                                <td>
+                                    <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
+                                        <button class="btn btn-outline-danger"> Donate Whitout Request</button>
+                                        <input type="hidden" name="requestOrHospitalId" value="@hospital.Id" />
+                                    </form>
+                                </td>
+                                <td>
+                                    <form asp-area="" asp-controller="Hospitals" asp-action="DetailsHospital" method="get">
+                                        <button class="btn btn-warning">Blood Reservs</button>
+                                        <input type="hidden" name="hospitalDataId" value="@hospital.Id" />
+                                    </form>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            @if (this.Model.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Previous</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="Hospitals"
+                       asp-action="AllHospitals"
+                       asp-route-page="@(this.Model.CurrentPage - 1)">Previous</a>
+                </li>
+            }
+
+
+            @for (int i = 1; i <= this.Model.PagesCount; i++)
+            {
+                var active = i == this.Model.CurrentPage ? "active" : string.Empty;
+
+                <li class="page-item @active">
+                    <a class="page-link"
+                       asp-controller="Hospitals"
+                       asp-action="AllHospitals"
+                       asp-route-page="@i">@i</a>
+                </li>
+            }
+
+            @if (this.Model.CurrentPage == this.Model.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="Hospitals"
+                       asp-action="AllHospitals"
+                       asp-route-page="@(this.Model.CurrentPage + 1)">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
 </body>
+
 

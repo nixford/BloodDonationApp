@@ -13,25 +13,25 @@
     public class RecipientsService : IRecipientsService
     {
         private readonly IDeletableEntityRepository<Recipient> recipientsRepository;
-        private readonly IDeletableEntityRepository<ApplicationUserHospitalData> hospitalDataUserRepository;
+        private readonly IDeletableEntityRepository<HospitalData> hospitalDataRepository;
         private readonly IDeletableEntityRepository<RecipientRequest> recipientRequestDataRepository;
         private readonly IDeletableEntityRepository<RecipientHospitalData> recipientHospitalDataRepository;
 
         public RecipientsService(
             IDeletableEntityRepository<Recipient> recipientsRepository,
-            IDeletableEntityRepository<ApplicationUserHospitalData> hospitalDataRepository,
+            IDeletableEntityRepository<HospitalData> hospitalDataRepository,
             IDeletableEntityRepository<RecipientRequest> recipientRequestDataRepository,
             IDeletableEntityRepository<RecipientHospitalData> recipientHospitalDataRepository)
         {
             this.recipientsRepository = recipientsRepository;
-            this.hospitalDataUserRepository = hospitalDataRepository;
+            this.hospitalDataRepository = hospitalDataRepository;
             this.recipientRequestDataRepository = recipientRequestDataRepository;
             this.recipientHospitalDataRepository = recipientHospitalDataRepository;
         }
 
         public async Task AddRecipientAsync(string userHospitalId, RecipientInputModel input)
         {
-            var hospitalData = this.hospitalDataUserRepository.All()
+            var hospitalData = this.hospitalDataRepository.All()
                 .FirstOrDefault(uhd => uhd.ApplicationUserId == userHospitalId);
 
             var recipient = new Recipient
@@ -48,7 +48,7 @@
 
             var recipientHospitalData = new RecipientHospitalData
             {
-                HospitalDataId = hospitalData.HospitalDataId,
+                HospitalDataId = hospitalData.Id,
                 RecipientId = recipient.Id,
             };
 
@@ -61,13 +61,17 @@
             await this.recipientHospitalDataRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> AllHospitalRecipients<T>(string userHospitalId)
+        public IEnumerable<T> AllHospitalRecipients<T>(string userHospitalId, int? take = null, int skip = 0)
         {
-            var recipientsCurrHospital = this.recipientsRepository.All()
-                .Where(r => r.IsDeleted == false
-                && r.HospitalData.ApplicationUserId == userHospitalId);
+            var recipientsCurrHospital = this.recipientsRepository
+                .All()
+                .Where(r => r.IsDeleted == false && r.HospitalData.ApplicationUserId == userHospitalId)
+                .OrderByDescending(rh => rh.CreatedOn)
+                .Skip(skip)
+                .To<T>()
+                .ToList();
 
-            return recipientsCurrHospital.To<T>().ToList();
+            return recipientsCurrHospital;
         }
 
         public IEnumerable<T> TotalRecipients<T>()

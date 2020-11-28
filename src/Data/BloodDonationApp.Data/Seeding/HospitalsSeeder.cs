@@ -27,9 +27,8 @@
                 .Where(u => u.IsDeleted == true)
                 .ToList();
 
-
             // Seeding hospitals and hospitalsData
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 var user = await userManager.FindByEmailAsync($"Hospital{i}@hospital.bg");
                 if (user != null)

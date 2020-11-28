@@ -1,11 +1,12 @@
 ﻿namespace BloodDonationApp.Web.Controllers
 {
+    using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Web.ViewModels.Recipient;
-    using BloodDonationApp.Web.ViewModels.Request;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IRecipientsService recipientsService;
         private readonly IRequestsService requestsService;
+        private const int take = 5;
 
         public RecipientsController(
             UserManager<ApplicationUser> userManager,
@@ -43,13 +45,23 @@
             return this.RedirectToAction("AllHospRecip", "Recipients");
         }
 
-        public IActionResult AllHospRecip(AllRecipientsViewMode viewModel)
-
+        public IActionResult AllHospRecip(AllRecipientsViewMode viewModel, int page = 1)
         {
             var hospitalUserId = this.userManager.GetUserId(this.User);
 
-            viewModel.Recipients = this.recipientsService
-                .AllHospitalRecipients<RecipientInfoViewModel>(hospitalUserId);
+            viewModel.Recipients =
+                this.recipientsService
+                .AllHospitalRecipients<RecipientInfoViewModel>(hospitalUserId, take, (int)(page - 1) * take);
+
+            var count = this.recipientsService.AllHospitalRecipients<RecipientInfoViewModel>(hospitalUserId, take, (int)(page - 1) * take).Count();
+
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / take);
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }

@@ -9,7 +9,9 @@
     {
         Task CreateHospitalProfileAsync(HospitalProfileInputModel input, string userId);
 
-        IEnumerable<T> GetAllHospitals<T>();
+        IEnumerable<T> GetAllHospitals<T>(int? take = null, int skip = 0);
+
+        IEnumerable<T> GetAllHospitalsCount<T>();
 
         T GetHospitalDataById<T>(string id);
 
