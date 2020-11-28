@@ -11,8 +11,6 @@
 
         IEnumerable<T> GetAllHospitals<T>(int? take = null, int skip = 0);
 
-        IEnumerable<T> GetAllHospitalsCount<T>();
-
         T GetHospitalDataById<T>(string id);
 
         T GetHospitalDataByName<T>(string hospitalName);

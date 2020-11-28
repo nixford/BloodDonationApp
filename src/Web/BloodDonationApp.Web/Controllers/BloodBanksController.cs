@@ -5,6 +5,7 @@
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Web.ViewModels.BloodBank;
+    using BloodDonationApp.Web.ViewModels.Hospital;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -78,16 +79,9 @@
                 }
             }
 
-            var hospitalData = this.hospitalsService
-                .GetAllHospitals<HospitalData>()
-                .FirstOrDefault(hd => hd.ApplicationUserId == userHospitalId);
-
-            viewModel.HospitalInfo.Location = new Location
-            {
-                Country = hospitalData.Location.Country,
-                City = hospitalData.Location.City,
-                AdressDescription = hospitalData.Location.AdressDescription,
-            };
+            viewModel.HospitalInfo =
+                this.hospitalsService
+                .GetHospitalDataById<HospitalInfoViewModel>(hospitalDataId);
 
             return this.View(viewModel);
         }

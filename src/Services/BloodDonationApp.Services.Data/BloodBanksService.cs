@@ -24,7 +24,8 @@
 
         public IEnumerable<BloodBag> GetHospitalBloodBagsById(params string[] id)
         {
-            var hospitalData = this.hospitalDataRepository.All()
+            var hospitalData = this.hospitalDataRepository
+                .All()
                 .FirstOrDefault(hd => hd.ApplicationUserId == id[0]);
 
             var bloodBank = this.bloodBankRepository
@@ -38,6 +39,6 @@
                 .ToList();
 
             return bloodBags;
-        }        
+        }
     }
 }

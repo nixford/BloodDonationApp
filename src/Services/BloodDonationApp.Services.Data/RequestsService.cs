@@ -85,14 +85,14 @@
             await this.requestsRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> AllRequests<T>()
+        public IEnumerable<T> AllRequests<T>(int? take = null, int skip = 0)
         {
             var requests = this.requestsRepository.All()
+                .OrderByDescending(r => r.CreatedOn)
                 .Where(r => r.IsDeleted == false)
-                .To<T>()
-                .ToList();
+                .Skip(skip);
 
-            return requests;
+            return requests.To<T>().ToList();
         }
 
         public T GetById<T>(string id)

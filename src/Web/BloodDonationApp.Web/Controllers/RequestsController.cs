@@ -1,5 +1,7 @@
 ﻿namespace BloodDonationApp.Web.Controllers
 {
+    using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BloodDonationApp.Data.Models;
@@ -14,6 +16,7 @@
         private readonly IRequestsService requestsService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IRecipientsService recipientsService;
+        private const int take = 5;
 
         public RequestsController(
             IRequestsService requestsService,
@@ -48,9 +51,19 @@
             return this.RedirectToAction("AllRequests", "Requests");
         }
 
-        public IActionResult AllRequests(AllRequestsViewModel viewModel)
+        public IActionResult AllRequests(AllRequestsViewModel viewModel, int page = 1)
         {
-            viewModel.Requests = this.requestsService.AllRequests<RequestInfoViewModel>();
+            viewModel.Requests = this.requestsService.AllRequests<RequestInfoViewModel>(take, (int)(page - 1) * take);
+
+            var count = this.requestsService.AllRequests<RequestInfoViewModel>(take, (int)(page - 1) * take).Count();
+
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / take);
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }

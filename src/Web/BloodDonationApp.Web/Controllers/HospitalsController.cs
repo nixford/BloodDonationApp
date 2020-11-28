@@ -61,7 +61,7 @@
         {
             viewModel.Hospitals = this.hospitalsService.GetAllHospitals<HospitalInfoViewModel>(take, (int)(page - 1) * take);
 
-            var count = this.hospitalsService.GetAllHospitalsCount<HospitalInfoViewModel>().Count();
+            var count = this.hospitalsService.GetAllHospitals<HospitalInfoViewModel>(take, (int)(page - 1) * take).Count();
 
             viewModel.PagesCount = (int)Math.Ceiling((double)count / take);
             if (viewModel.PagesCount == 0)

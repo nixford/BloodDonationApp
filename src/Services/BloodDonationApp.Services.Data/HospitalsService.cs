@@ -73,8 +73,8 @@
                 .OrderByDescending(hd => hd.CreatedOn)
                 .Select(hd => new HospitalData
                 {
-                    Name = hd.Name,
                     Id = hd.Id,
+                    Name = hd.Name,
                     RecipientCount = this.recipientRepository.All()
                                     .Where(r => r.HospitalDataId == hd.Id)
                                     .Count(),
@@ -96,13 +96,6 @@
             {
                 hospitalDatas = hospitalDatas.Take(take.Value);
             }
-
-            return hospitalDatas.To<T>().ToList();
-        }
-
-        public IEnumerable<T> GetAllHospitalsCount<T>()
-        {
-            var hospitalDatas = this.hospitalsRepository.All();
 
             return hospitalDatas.To<T>().ToList();
         }

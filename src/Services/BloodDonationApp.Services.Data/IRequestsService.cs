@@ -11,7 +11,7 @@
 
         T GetById<T>(string id);
 
-        IEnumerable<T> AllRequests<T>();
+        IEnumerable<T> AllRequests<T>(int? take = null, int skip = 0);
 
         Task DeleteAsync(string hospitalId);
     }

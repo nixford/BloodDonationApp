@@ -65,8 +65,8 @@
         {
             var recipientsCurrHospital = this.recipientsRepository
                 .All()
-                .Where(r => r.IsDeleted == false && r.HospitalData.ApplicationUserId == userHospitalId)
                 .OrderByDescending(rh => rh.CreatedOn)
+                .Where(r => r.IsDeleted == false && r.HospitalData.ApplicationUserId == userHospitalId)
                 .Skip(skip)
                 .To<T>()
                 .ToList();

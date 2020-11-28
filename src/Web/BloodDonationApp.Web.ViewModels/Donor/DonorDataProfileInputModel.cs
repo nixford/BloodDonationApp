@@ -34,8 +34,11 @@
 
         public string DiseaseName { get; set; }
 
-        public string DiseaseDescription { get; set; }
+        public string DiseaseDescription => this.DiseaseName;
 
-        public DiseaseStatus DiseaseStatus { get; set; }
+        public DiseaseStatus DiseaseStatus
+            => this.DiseaseName != "None"
+            ? DiseaseStatus.Positive
+            : DiseaseStatus.Negative;
     }
 }

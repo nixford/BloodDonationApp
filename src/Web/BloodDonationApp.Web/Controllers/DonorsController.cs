@@ -17,13 +17,15 @@
 
         public DonorsController(
             UserManager<ApplicationUser> userManager,
-            IDonorsService donorsService)
+            IDonorsService donorsService,
+            IUsersService usersService)
         {
             this.userManager = userManager;
             this.donorsService = donorsService;
+            this.usersService = usersService;
         }
 
-        [Authorize]
+        [HttpGet]
         public IActionResult AddDonor()
         {
             var userId = this.userManager.GetUserId(this.User);

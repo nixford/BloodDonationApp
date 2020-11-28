@@ -53,6 +53,15 @@
                     City = input.City,
                     AdressDescription = input.AdressDescription,
                 },
+                Examination = new Examination
+                {
+                    Disease = new Disease
+                    {
+                        DiseaseStatus = input.DiseaseStatus,
+                        DiseaseName = input.DiseaseName,
+                        DiseaseDescription = input.DiseaseDescription,
+                    },
+                },
                 DonorAveilableStatus = input.DonorAveilableStatus,
                 BloodGroup = input.BloodGroup,
                 RhesusFactor = input.RhesusFactor,
@@ -85,7 +94,7 @@
         public IEnumerable<T> GetTopDonors<T>()
         {
             var topDonors = this.appUserDonorRepository.All()
-                .OrderByDescending(u => u.DonorData.DonorsDonationEvents.Count)
+                .OrderByDescending(u => u.DonorData.DonorAveilableStatus)
                 .Take(GlobalConstants.TopDonorsNumber);
 
             return topDonors.To<T>().ToList();

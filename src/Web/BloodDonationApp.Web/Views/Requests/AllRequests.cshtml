@@ -3,67 +3,121 @@
     ViewData["Title"] = "Donation requests by hospitals:";
 }
 
-<section class="py-5">
-    <div class="container">
-        <h1 style="margin: 2%; text-align: center;">@ViewData["Title"]</h1>
-        <div style="padding: 5%;">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">EmergencyStatus</th>
-                        <th scope="col">HospitalName</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">BloodGroup</th>
-                        <th scope="col">RhesusFactor</th>
-                        @if (this.User.IsInRole("Donor"))
+<body style="background-color:#f2fcfa">
+    <section class="py-5">
+        <div class="container">
+            <h1 class="text-center">@ViewData["Title"]</h1>
+            <div style="padding: 5%;">
+                <table class="table">
+                    <thead class="thead" style="background-color:limegreen">
+                        <tr>
+                            <th scope="col">EmergencyStatus</th>
+                            <th scope="col">HospitalName</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">BloodGroup</th>
+                            <th scope="col">RhesusFactor</th>
+                            @if (this.User.IsInRole("Donor"))
+                            {
+                                <th scope="col">Apply for donation</th>
+                            }
+                            else if (this.User.IsInRole("Hospital"))
+                            {
+                                <th scope="col">Delete</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var request in @Model.Requests)
                         {
-                            <th scope="col">Apply for donation</th>
+                            <tr>
+                                <th scope="row">@request.EmergencyStatus</th>
+                                <td>@request.HospitalName</td>
+                                <td>@Html.DisplayFor(x => request.Location)</td>
+                                <td>@request.BloodGroup</td>
+                                <td>@request.RhesusFactor</td>
+                                @if (this.User.IsInRole("Donor"))
+                                {
+                                    <td>
+                                        <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
+                                            <button class="btn btn-primary">Donattion</button>
+                                            <input type="hidden" name="requestOrHospitalId" value="@request.Id" />
+                                            <span asp-validation-for="@request.Id"></span>
+                                        </form>
+                                    </td>
+                                }
+                                else if (this.User.IsInRole("Hospital"))
+                                {
+                                    <td>
+                                        <form asp-area="" asp-controller="Requests" asp-action="Delete">
+                                            <button class="btn btn-danger">Delete</button>
+                                            <input type="hidden" name="requestId" value="@request.Id" />
+                                            <span asp-validation-for="@request.Id"></span>
+                                        </form>
+                                    </td>
+                                }
+                            </tr>
                         }
-                        else if (this.User.IsInRole("Hospital"))
-                        {
-                            <th scope="col">Delete</th>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var request in @Model.Requests)
-                    {
-                    <tr>
-                        <th scope="row">@request.EmergencyStatus</th>
-                        <td>@request.HospitalName</td>
-                        <td>@Html.DisplayFor(x => request.Location)</td>
-                        <td>@request.BloodGroup</td>
-                        <td>@request.RhesusFactor</td>
-                        @if (this.User.IsInRole("Donor"))
-                        {
-                            <td>
-                                <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
-                                    <button class="btn btn-primary">Donattion</button>
-                                    <input type="hidden" name="requestOrHospitalId" value="@request.Id" />
-                                    <span asp-validation-for="@request.Id"></span>
-                                </form>
-                            </td>
-                        }
-                        else if (this.User.IsInRole("Hospital"))
-                        {
-                            <td>
-                                <form asp-area="" asp-controller="Requests" asp-action="Delete">
-                                    <button class="btn btn-danger">Delete</button>
-                                    <input type="hidden" name="requestId" value="@request.Id" />
-                                    <span asp-validation-for="@request.Id"></span>
-                                </form>
-                            </td>
-                        }
-                    </tr>
-                    }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <hr class="bg-success" style="height: 2px" />
+            </div>
+            @if (this.User.IsInRole("Donor"))
+            {
+                <div>
+                    <a class="btn btn-outline-success" href="/Hospitals/AllHospitals">All Hospitals</a>
+                </div>
+            }
         </div>
-        <div>
-            <hr class="bg-success" style="height: 2px" />
-        </div>
-        <div>
-            <a class="btn btn-outline-success" href="/Hospitals/AllHospitals">All Hospitals</a>
-        </div>
-    </div>
-</section>
+    </section>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            @if (this.Model.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Previous</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="Requests"
+                       asp-action="AllRequests"
+                       asp-route-page="@(this.Model.CurrentPage - 1)">Previous</a>
+                </li>
+            }
+
+            @for (int i = 1; i <= this.Model.PagesCount; i++)
+            {
+                var active = i == this.Model.CurrentPage ? "active" : string.Empty;
+
+                <li class="page-item @active">
+                    <a class="page-link"
+                       asp-controller="Requests"
+                       asp-action="AllRequests"
+                       asp-route-page="@i">@i</a>
+                </li>
+            }
+
+            @if (this.Model.CurrentPage == this.Model.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="Requests"
+                       asp-action="AllRequests"
+                       asp-route-page="@(this.Model.CurrentPage + 1)">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</body>
+

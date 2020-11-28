@@ -109,11 +109,11 @@
                         await this.signInManager.SignInAsync(user, isPersistent: false);
                         if (roleCurrUser == "Donor")
                         {
-                            returnUrl = "/Users/AddDonor";
+                            returnUrl = "/Donors/AddDonor";
                         }
                         else if (roleCurrUser == "Hospital")
                         {
-                            returnUrl = "/Users/AddHospital";
+                            returnUrl = "/Hospitals/AddHospital";
                         }
 
                         return this.LocalRedirect(returnUrl);

@@ -3,13 +3,13 @@
     ViewData["Title"] = "Recipients in the hospital";
 }
 
-<body>
+<body style="background-color:#f2fcfa">
     <section class="py-5">
         <div class="container">
             <h1 class="text-center">@ViewData["Title"]</h1>
             <div style="padding: 5%;">
-                <table class="table">
-                    <thead class="thead-dark">
+                <table class="table table-striped table-responsive-md btn-table">
+                    <thead class="thead" style="background-color:limegreen">
                         <tr>
                             <th>Full Name</th>
                             <th>Age</th>
@@ -63,7 +63,7 @@
                     </table>
                 </div>
                 <div>
-                    <a class="btn btn-outline-dark" asp-area="" asp-controller="BloodBanks" asp-action="HospitalBlBags">
+                    <a class="btn btn-outline-success" asp-area="" asp-controller="BloodBanks" asp-action="HospitalBlBags">
                         Blood Bank
                     </a>
                 </div>
@@ -88,7 +88,6 @@
                        asp-route-page="@(this.Model.CurrentPage - 1)">Previous</a>
                 </li>
             }
-
 
             @for (int i = 1; i <= this.Model.PagesCount; i++)
             {

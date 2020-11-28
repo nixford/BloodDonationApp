@@ -3,27 +3,27 @@
     ViewData["Title"] = "AddDonor";
 }
 
-<div class="container">
-    <h1>@ViewData["Title"]</h1>
-</div>
 
-<div class="container-fluid">
-    <div class="col-md-2">
+<div class="container-fluid" style="background-color:#f2fcfa">
+    <div class="text-center">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+    <div class="signup-form">
         <form asp-controller="Donors" asp-action="AddDonor" method="post">
             <h4>Insert the necessery donor data.</h4>
             <hr />
             <div class="form-group">
-                <label asp-for="@Model.FirstName"></label>
+                <label asp-for="@Model.FirstName">First name</label>
                 <input asp-for="@Model.FirstName" class="form-control" />
                 <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.MiddleName"></label>
+                <label asp-for="@Model.MiddleName">Middle name</label>
                 <input asp-for="@Model.MiddleName" class="form-control" />
                 <span asp-validation-for="@Model.MiddleName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.LastName"></label>
+                <label asp-for="@Model.LastName">Last name</label>
                 <input asp-for="@Model.LastName" class="form-control" />
                 <span asp-validation-for="@Model.LastName" class="text-danger"></span>
             </div>
@@ -33,14 +33,14 @@
                 <span asp-validation-for="@Model.Age" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.PhoneNumber"></label>
-                <input asp-for="@Model.PhoneNumber" class="form-control" />
+                <label asp-for="@Model.PhoneNumber">Phone number</label>
+                <input asp-for="@Model.PhoneNumber" class="form-control"/>
                 <span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>
-            </div>            
+            </div>
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="col-md-offset-2">
                 <div class="form-group">
-                    <label asp-for="@Model.BloodGroup" class="control-label"></label>
+                    <label asp-for="@Model.BloodGroup" class="control-label">Blood group</label>
                     <select asp-for="@Model.BloodGroup"
                             class="form-control"
                             asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.BloodGroup>()">
@@ -52,7 +52,7 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="col-md-offset-2">
                 <div class="form-group">
-                    <label asp-for="@Model.RhesusFactor" class="control-label"></label>
+                    <label asp-for="@Model.RhesusFactor" class="control-label">Rhesus factor</label>
                     <select asp-for="@Model.RhesusFactor"
                             class="form-control"
                             asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.RhesusFactor>()">
@@ -72,48 +72,29 @@
                 <span asp-validation-for="@Model.City" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.AdressDescription"></label>
+                <label asp-for="@Model.AdressDescription"> Adress description</label>
                 <input asp-for="@Model.AdressDescription" class="form-control" />
                 <span asp-validation-for="@Model.AdressDescription" class="text-danger"></span>
             </div>
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="col-md-offset-2">
-                <div class="form-group">
-                    <label asp-for="@Model.DonorAveilableStatus" class="control-label"></label>
-                    <select asp-for="@Model.DonorAveilableStatus"
-                            class="form-control"
-                            asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.EmergencyStatus>()">
-                        <option>Select type ...</option>
-                    </select>
-                    <span asp-validation-for="@Model.DonorAveilableStatus" class="text-danger"></span>
-                </div>
-            </div>
-            <<div class="form-group">
-                <label asp-for="@Model.ExaminationDate"></label>
-                <input asp-for="@Model.ExaminationDate" class="form-control" />
-                <span asp-validation-for="@Model.ExaminationDate" class="text-danger"></span>
-            </div>
-            <<div class="form-group">
-                <label asp-for="@Model.DiseaseName"></label>
-                <input asp-for="@Model.DiseaseName" class="form-control" />
+            <div class="form-group">
+                <label asp-for="@Model.DonorAveilableStatus" class="control-label">Donor aveilable status</label>
+                <select asp-for="@Model.DonorAveilableStatus"
+                        class="form-control"
+                        asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.EmergencyStatus>()">
+                    <option>Select type ...</option>
+                </select>
+                <span asp-validation-for="@Model.DonorAveilableStatus" class="text-danger"></span>
+            </div>            
+            <div class="form-group">
+                <label asp-for="@Model.DiseaseName">Are you aware of any diseases?</label>                
+                <select asp-for="@Model.DiseaseName">
+                    <option>None</option>
+                    <option>Tuberculosis</option>
+                    <option>Syphilis</option>
+                    <option>Hepatitis</option>
+                    <option>AIDS</option>
+                </select>
                 <span asp-validation-for="@Model.DiseaseName" class="text-danger"></span>
-            </div>
-            <<div class="form-group">
-                <label asp-for="@Model.DiseaseDescription"></label>
-                <input asp-for="@Model.DiseaseDescription" class="form-control" />
-                <span asp-validation-for="@Model.DiseaseDescription" class="text-danger"></span>
-            </div>
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="col-md-offset-2">
-                <div class="form-group">
-                    <label asp-for="@Model.DiseaseStatus" class="control-label"></label>
-                    <select asp-for="@Model.DiseaseStatus"
-                            class="form-control"
-                            asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.DiseaseStatus>()">
-                        <option>Select type ...</option>
-                    </select>
-                    <span asp-validation-for="@Model.DiseaseStatus" class="text-danger"></span>
-                </div>
             </div>
 
             <button type="submit" class="btn btn-primary">Insert Data</button>

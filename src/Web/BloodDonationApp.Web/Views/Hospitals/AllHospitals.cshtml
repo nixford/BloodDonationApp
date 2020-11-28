@@ -3,10 +3,10 @@
     ViewData["Title"] = "Registered Hospitals";
 }
 
-<body style="background-color:#d6f5f5">
+<body style="background-color:#f2fcfa">
     <div class="py-5">
         <div class="container">
-            <h1 style="margin: 2%; text-align: center;">@ViewData["Title"]</h1>
+            <h1 class="text-center">@ViewData["Title"]</h1>
             <div style="padding: 5%;">
                 <table class="table table-striped table-responsive-md btn-table">
                     <thead class="thead" style="background-color:limegreen">
@@ -69,7 +69,6 @@
                        asp-route-page="@(this.Model.CurrentPage - 1)">Previous</a>
                 </li>
             }
-
 
             @for (int i = 1; i <= this.Model.PagesCount; i++)
             {

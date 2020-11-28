@@ -6,10 +6,9 @@
 
     public class AllRequestsViewModel
     {
-        public AllRequestsViewModel()
-        {
-            this.Requests = new HashSet<RequestInfoViewModel>();
-        }
+        public int PagesCount { get; set; }
+
+        public int CurrentPage { get; set; }
 
         public IEnumerable<RequestInfoViewModel> Requests { get; set; }
     }
