@@ -85,16 +85,21 @@
             var roleObj = this.roleRepository.All()
                 .FirstOrDefault(r => r.Name == "Donor");
 
-            var donors = this.userRepository.All()
-                .Where(u => u.Roles.All(r => r.RoleId == roleObj.Id));
+            var donors = this.userRepository
+                .All()
+                .Where(u => u.IsDeleted == false && u.Roles.All(r => r.RoleId == roleObj.Id))
+                .To<T>()
+                .ToList();
 
-            return donors.To<T>().ToList();
+            return donors;
         }
 
         public IEnumerable<T> GetTopDonors<T>()
         {
-            var topDonors = this.appUserDonorRepository.All()
+            var topDonors = this.appUserDonorRepository
+                .All()
                 .OrderByDescending(u => u.DonorData.DonorAveilableStatus)
+                .Where(u => u.IsDeleted == false)
                 .Take(GlobalConstants.TopDonorsNumber);
 
             return topDonors.To<T>().ToList();

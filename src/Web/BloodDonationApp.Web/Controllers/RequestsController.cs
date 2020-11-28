@@ -55,7 +55,7 @@
         {
             viewModel.Requests = this.requestsService.AllRequests<RequestInfoViewModel>(take, (int)(page - 1) * take);
 
-            var count = this.requestsService.AllRequests<RequestInfoViewModel>(take, (int)(page - 1) * take).Count();
+            var count = this.requestsService.AllRequestsCount().Count();
 
             viewModel.PagesCount = (int)Math.Ceiling((double)count / take);
             if (viewModel.PagesCount == 0)

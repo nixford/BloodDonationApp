@@ -53,7 +53,9 @@
                 this.recipientsService
                 .AllHospitalRecipients<RecipientInfoViewModel>(hospitalUserId, take, (int)(page - 1) * take);
 
-            var count = this.recipientsService.AllHospitalRecipients<RecipientInfoViewModel>(hospitalUserId, take, (int)(page - 1) * take).Count();
+            var count = this.recipientsService
+                .TotalRecipients(hospitalUserId)
+                .Count();
 
             viewModel.PagesCount = (int)Math.Ceiling((double)count / take);
             if (viewModel.PagesCount == 0)

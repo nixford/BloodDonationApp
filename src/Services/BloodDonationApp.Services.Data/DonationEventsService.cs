@@ -48,6 +48,9 @@
             var bloodBank = this.bloodBankRepository.All()
                 .FirstOrDefault(bbk => bbk.HospitalDataId == hospitalData.Id);
 
+            var bag = this.bloodBagRepository.All()
+                .FirstOrDefault(bg => bg.BloodBankId == bloodBank.Id);
+
             var donationEvent = new DonationEvent
             {
                 DateOfDonation = DateTime.UtcNow,
@@ -58,26 +61,17 @@
             await this.donationEventRepository.AddAsync(donationEvent);
             await this.donationEventRepository.SaveChangesAsync();
 
-            var currBloodBank = new BloodBank { };
-            if (bloodBank == null)
-            {
-                currBloodBank.HospitalDataId = hospitalData.Id;
-
-                await this.bloodBankRepository.AddAsync(currBloodBank);
-                await this.bloodBankRepository.SaveChangesAsync();
-            }
-
-            var bloodBag = new BloodBag
+            bag = new BloodBag
             {
                 Quantity = request != null ? request.NeededQuantity : 500,
                 CollectionDate = donationEvent.DateOfDonation,
                 DonorDataId = donorData.Id,
                 BloodGroup = request != null ? request.BloodGroup : donorData.BloodGroup,
                 RhesusFactor = request != null ? request.RhesusFactor : donorData.RhesusFactor,
-                BloodBankId = bloodBank == null ? currBloodBank.Id : bloodBank.Id,
+                BloodBankId = bloodBank.Id,
             };
 
-            await this.bloodBagRepository.AddAsync(bloodBag);
+            await this.bloodBagRepository.AddAsync(bag);
             await this.bloodBagRepository.SaveChangesAsync();
         }
     }

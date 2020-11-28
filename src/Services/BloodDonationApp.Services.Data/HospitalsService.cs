@@ -8,6 +8,7 @@
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Mapping;
     using BloodDonationApp.Web.ViewModels.Hospital;
+    using Microsoft.AspNetCore.Mvc;
 
     public class HospitalsService : IHospitalsService
     {
@@ -16,19 +17,28 @@
         private readonly IDeletableEntityRepository<ApplicationUserHospitalData> appUsersHospitalRepository;
         private readonly IDeletableEntityRepository<ApplicationRole> rolesRepository;
         private readonly IDeletableEntityRepository<Recipient> recipientRepository;
+        private readonly IDeletableEntityRepository<BloodBank> bloodBankRepository;
+        private readonly IDeletableEntityRepository<BloodBag> bagRepository;
+        private readonly IDeletableEntityRepository<HospitalDataBloodBank> hospitalBloodBankRepository;
 
         public HospitalsService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<HospitalData> hospitalsRepository,
             IDeletableEntityRepository<ApplicationUserHospitalData> appUsersHospitalRepository,
             IDeletableEntityRepository<ApplicationRole> rolesRepository,
-            IDeletableEntityRepository<Recipient> recipientRepository)
+            IDeletableEntityRepository<Recipient> recipientRepository,
+            IDeletableEntityRepository<BloodBank> bloodBankRepository,
+            IDeletableEntityRepository<HospitalDataBloodBank> hospitalBloodBankRepository, 
+            IDeletableEntityRepository<BloodBag> bagRepository)
         {
             this.usersRepository = usersRepository;
             this.hospitalsRepository = hospitalsRepository;
             this.appUsersHospitalRepository = appUsersHospitalRepository;
             this.rolesRepository = rolesRepository;
             this.recipientRepository = recipientRepository;
+            this.bloodBankRepository = bloodBankRepository;
+            this.hospitalBloodBankRepository = hospitalBloodBankRepository;
+            this.bagRepository = bagRepository;
         }
 
         public async Task CreateHospitalProfileAsync(HospitalProfileInputModel input, string userId)
@@ -53,7 +63,6 @@
                     AdressDescription = input.AdressDescription,
                 },
             };
-
             await this.hospitalsRepository.AddAsync(hospitalData);
             await this.hospitalsRepository.SaveChangesAsync();
 
@@ -62,15 +71,29 @@
                 ApplicationUserId = userId,
                 HospitalDataId = hospitalData.Id,
             };
-
             await this.appUsersHospitalRepository.AddAsync(appUserHospitalData);
             await this.appUsersHospitalRepository.SaveChangesAsync();
+
+            var bloodBank = new BloodBank
+            {
+                HospitalDataId = hospitalData.Id,
+            };
+            await this.bloodBankRepository.AddAsync(bloodBank);
+            await this.bloodBankRepository.SaveChangesAsync();
+
+            var bag = new BloodBag
+            {
+                BloodBankId = bloodBank.Id,
+            };
+            await this.bagRepository.AddAsync(bag);
+            await this.bagRepository.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAllHospitals<T>(int? take = null, int skip = 0)
         {
             var hospitalDatas = this.hospitalsRepository.All()
                 .OrderByDescending(hd => hd.CreatedOn)
+                .Where(hd => hd.IsDeleted == false)
                 .Select(hd => new HospitalData
                 {
                     Id = hd.Id,
@@ -98,6 +121,15 @@
             }
 
             return hospitalDatas.To<T>().ToList();
+        }
+
+        public IEnumerable<HospitalData> GetAllHospitalsCount()
+        {
+            var hospitalDatas = this.hospitalsRepository
+                .All()
+                .Where(hd => hd.IsDeleted == false)
+                .ToList();
+            return hospitalDatas;
         }
 
         public T GetHospitalDataById<T>(string userHospitalOrHospitalDataId)

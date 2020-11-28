@@ -359,9 +359,6 @@ namespace BloodDonationApp.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DonorDataId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -375,8 +372,6 @@ namespace BloodDonationApp.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DonorDataId");
 
                     b.HasIndex("IsDeleted");
 
@@ -1033,10 +1028,6 @@ namespace BloodDonationApp.Data.Migrations
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.DonationEvent", b =>
                 {
-                    b.HasOne("BloodDonationApp.Data.Models.DonorData", null)
-                        .WithMany("DonorsDonationEvents")
-                        .HasForeignKey("DonorDataId");
-
                     b.HasOne("BloodDonationApp.Data.Models.Request", "Request")
                         .WithMany()
                         .HasForeignKey("RequestId");

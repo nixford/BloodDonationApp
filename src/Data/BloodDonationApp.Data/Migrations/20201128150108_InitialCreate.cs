@@ -396,18 +396,11 @@ namespace BloodDonationApp.Data.Migrations
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     DateOfDonation = table.Column<DateTime>(nullable: false),
                     RequestId = table.Column<string>(nullable: true),
-                    UserDonorId = table.Column<string>(nullable: true),
-                    DonorDataId = table.Column<string>(nullable: true)
+                    UserDonorId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DonationEvents", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DonationEvents_DonorData_DonorDataId",
-                        column: x => x.DonorDataId,
-                        principalTable: "DonorData",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_DonationEvents_AspNetUsers_UserDonorId",
                         column: x => x.UserDonorId,
@@ -801,11 +794,6 @@ namespace BloodDonationApp.Data.Migrations
                 name: "IX_Diseases_IsDeleted",
                 table: "Diseases",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DonationEvents_DonorDataId",
-                table: "DonationEvents",
-                column: "DonorDataId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DonationEvents_IsDeleted",

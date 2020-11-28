@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using BloodDonationApp.Data.Models;
     using BloodDonationApp.Web.ViewModels.Recipient;
 
     public interface IRecipientsService
@@ -13,7 +13,7 @@
 
         IEnumerable<T> AllHospitalRecipients<T>(string userHospitalId, int? take = null, int skip = 0);
 
-        IEnumerable<T> TotalRecipients<T>();
+        IEnumerable<Recipient> TotalRecipients(string userHospitalId);
 
         Task DeleteAsync(string hospitalId, string recipientId);
 

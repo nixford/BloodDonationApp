@@ -18,25 +18,28 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IRecipientsService recipientsService;
         private readonly IBloodBanksService bloodBanksService;
+        private readonly IUsersService usersService;
         private const int take = 5;
 
         public HospitalsController(
             IHospitalsService hospitalsService,
             UserManager<ApplicationUser> userManager,
-            IRecipientsService recipientsService, 
-            IBloodBanksService bloodBanksService)
+            IRecipientsService recipientsService,
+            IBloodBanksService bloodBanksService,
+            IUsersService usersService)
         {
             this.hospitalsService = hospitalsService;
             this.userManager = userManager;
             this.recipientsService = recipientsService;
             this.bloodBanksService = bloodBanksService;
+            this.usersService = usersService;
         }
 
-        [Authorize]
+        [HttpGet]
         public IActionResult AddHospital()
         {
             var userId = this.userManager.GetUserId(this.User);
-            var viewModel = this.hospitalsService.GetHospitalDataById<HospitalProfileInputModel>(userId);
+            var viewModel = this.usersService.GetUserById<HospitalProfileInputModel>(userId);
 
             if (viewModel == null)
             {
@@ -54,14 +57,14 @@
 
             await this.hospitalsService.CreateHospitalProfileAsync(inputModel, userId);
 
-            return this.RedirectToAction("AllRequests", "Requests");
+            return this.RedirectToAction("AllHospRecip", "Recipients");
         }
 
         public IActionResult AllHospitals(AllHospitalsViewModel viewModel, int page = 1)
         {
             viewModel.Hospitals = this.hospitalsService.GetAllHospitals<HospitalInfoViewModel>(take, (int)(page - 1) * take);
 
-            var count = this.hospitalsService.GetAllHospitals<HospitalInfoViewModel>(take, (int)(page - 1) * take).Count();
+            var count = this.hospitalsService.GetAllHospitalsCount().Count();
 
             viewModel.PagesCount = (int)Math.Ceiling((double)count / take);
             if (viewModel.PagesCount == 0)

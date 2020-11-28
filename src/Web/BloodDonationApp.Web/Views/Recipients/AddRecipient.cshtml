@@ -3,12 +3,12 @@
     ViewData["Title"] = "AddRecipient";
 }
 
-<div class="container">
-    <h1>@ViewData["Title"]</h1>
-</div>
 
-<div class="container-fluid">
-    <div class="col-md-2">
+<div class="container-fluid" style="background-color:#f2fcfa">
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+    <div class="signup-form">
         <form asp-action="AddRecipient" asp-controller="Recipients" method="post">
             <h4>Insert the necessery donor data.</h4>
             <hr />

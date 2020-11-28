@@ -74,12 +74,14 @@
             return recipientsCurrHospital;
         }
 
-        public IEnumerable<T> TotalRecipients<T>()
+        public IEnumerable<Recipient> TotalRecipients(string userHospitalId)
         {
-            var recipients = this.recipientsRepository.All()
-                .Where(r => r.IsDeleted == false);
+            var recipients = this.recipientsRepository
+                .All()
+                .Where(r => r.IsDeleted == false && r.HospitalData.ApplicationUserId == userHospitalId)
+                .ToList();
 
-            return recipients.To<T>().ToList();
+            return recipients;
         }
 
         public async Task DeleteAsync(string userHospitalId, string recipientId)

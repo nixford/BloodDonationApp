@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using BloodDonationApp.Data.Models;
     using BloodDonationApp.Web.ViewModels.Request;
 
     public interface IRequestsService
@@ -12,6 +12,8 @@
         T GetById<T>(string id);
 
         IEnumerable<T> AllRequests<T>(int? take = null, int skip = 0);
+
+        IEnumerable<Request> AllRequestsCount();
 
         Task DeleteAsync(string hospitalId);
     }

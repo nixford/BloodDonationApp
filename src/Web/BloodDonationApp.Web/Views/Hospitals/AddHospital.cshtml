@@ -1,14 +1,14 @@
 ﻿@model BloodDonationApp.Web.ViewModels.Hospital.HospitalProfileInputModel
 @{
-    ViewData["Title"] = "AddHospital";
+    ViewData["Title"] = "Hospital data";
 }
 
-<div class="container">
-    <h1>@ViewData["Title"]</h1>
-</div>
 
-<div class="container-fluid">
-    <div class="col-md-2">
+<div class="container-fluid" style="background-color:#f2fcfa">
+    <div class="container">
+        <h1 class="text-center">@ViewData["Title"]</h1>
+    </div>
+    <div class="signup-form">
         <form asp-controller="Hospitals" asp-action="AddHospital" method="post">
             <h4>Insert the necessery donor data.</h4>
             <hr />
@@ -36,7 +36,7 @@
                 <label asp-for="@Model.AdressDescription"></label>
                 <input asp-for="@Model.AdressDescription" class="form-control" />
                 <span asp-validation-for="@Model.AdressDescription" class="text-danger"></span>
-            </div>            
+            </div>
 
             <button type="submit" class="btn btn-primary">Insert Data</button>
         </form>

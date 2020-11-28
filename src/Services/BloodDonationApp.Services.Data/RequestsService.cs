@@ -95,6 +95,16 @@
             return requests.To<T>().ToList();
         }
 
+        public IEnumerable<Request> AllRequestsCount()
+        {
+            var requests = this.requestsRepository
+                .All()
+                .Where(r => r.IsDeleted == false)
+                .ToList();
+
+            return requests;
+        }
+
         public T GetById<T>(string id)
         {
             var request = this.requestsRepository.All()
