@@ -3,15 +3,29 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="container">
-    <form asp-are asp-controller="DonationEvents" asp-action="Create" method="post">
-        <h4>Donate blood save live!</h4>
-        <button type="submit" class="btn btn-primary">DONATE</button>
-    </form>
-</div>
+<section style="padding: 5%;">
+    <div class="container-fluid">
+        <h3 class="text-center">Your donation to the selected request:</h3>
+
+        <ul class="list-group list-group-flush text-center">
+            <li class="list-group-item">Blood Group: @Model.BloodGroup</li>
+            <li class="list-group-item">Rhesus Factor: @Model.RhesusFactor</li>
+            <li class="list-group-item">Quantity: @Model.NeededQuantity</li>
+            <li class="list-group-item">Recipient Emergency Status: @Model.EmergencyStatus</li>
+        </ul>
+        <div>
+            <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="post">
+                <button class="btn btn-outline-danger">Donate blood and save live!</button>
+                <input type="hidden" name="requestOrHospitalId" value="@Model.Id" />
+                <span asp-validation-for="@Model.Id"></span>
+            </form>
+        </div>        
+    </div>
+</section>
 
 @section Links {
-    <li class="nav-item">
-        <a class="nav-link text-dark" href="https://ncth.bg/kak-da-pomogna/izsledvaniya">Examinations for donated blood</a>
-    </li>
+    <div style="padding: 1%;">
+        <h6 class="text-center">For more information reagrading the medical examination for your blood, please see:</h6>
+        <a class="nav-link text-center" href="https://ncth.bg/kak-da-pomogna/izsledvaniya">Examinations for donated blood</a>
+    </div>
 }

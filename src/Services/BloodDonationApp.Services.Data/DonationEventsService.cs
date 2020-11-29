@@ -6,6 +6,7 @@
 
     using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
+    using BloodDonationApp.Web.ViewModels.DonationEvents;
 
     public class DonationEventsService : IDonationEventsService
     {
@@ -32,7 +33,7 @@
             this.bloodBagRepository = bloodBagRepository;
         }
 
-        public async Task CreateDonation(string requestOrHospitalId, string userDonorId)
+        public async Task CreateDonation(string requestOrHospitalId, string userDonorId, DonationEventInputModel viewModel)
         {
             var donorData = this.donorDataUserRepository.All()
                 .FirstOrDefault(ddu => ddu.ApplicationUserId == userDonorId);
@@ -63,11 +64,11 @@
 
             bag = new BloodBag
             {
-                Quantity = request != null ? request.NeededQuantity : 500,
-                CollectionDate = donationEvent.DateOfDonation,
+                Quantity = viewModel.Quantity,
+                CollectionDate = DateTime.UtcNow,
                 DonorDataId = donorData.Id,
-                BloodGroup = request != null ? request.BloodGroup : donorData.BloodGroup,
-                RhesusFactor = request != null ? request.RhesusFactor : donorData.RhesusFactor,
+                BloodGroup = viewModel.BloodGroup,
+                RhesusFactor = viewModel.RhesusFactor,
                 BloodBankId = bloodBank.Id,
             };
 

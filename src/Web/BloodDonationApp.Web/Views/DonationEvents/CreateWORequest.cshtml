@@ -1,0 +1,63 @@
+﻿@model BloodDonationApp.Web.ViewModels.DonationEvents.DonationEventInputModel
+@{
+    ViewData["Title"] = "CreateWORequest ";
+}
+
+<section style="padding: 5%;">
+    <div class="container-fluid">
+        <h3 class="text-center">Your direct donation to the selected hospital:</h3>
+
+        <div class="signup-form">
+            <form asp-controller="DonationEvents" asp-action="Create" method="post">
+                <h4>Insert the necessery direct donation data.</h4>
+                <hr />
+                <div class="form-group">
+                    <label asp-for="@Model.Quantity">Needed quantity in ml</label>
+                    <input asp-for="@Model.Quantity" class="form-control" />
+                    <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
+                </div>
+                <div class="col-md-offset-2">
+                    <div class="form-group">
+                        <label asp-for="@Model.BloodGroup" class="control-label">Blood Group</label>
+                        <select asp-for="@Model.BloodGroup"
+                                class="form-Content"
+                                asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.BloodGroup>()">
+                            <option>Select type ...</option>
+                        </select>
+                        <span asp-validation-for="@Model.BloodGroup" class="text-danger"></span>
+                    </div>
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="col-md-offset-2">
+                    <div class="form-group">
+                        <label asp-for="@Model.RhesusFactor" class="control-label">Rhesus Factor</label>
+                        <select asp-for="@Model.RhesusFactor"
+                                class="form-Content"
+                                asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.RhesusFactor>()">
+                            <option>Select type ...</option>
+                        </select>
+                        <span asp-validation-for="@Model.RhesusFactor" class="text-danger"></span>
+                    </div>
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">                   
+                    <input type="hidden" name="userId" value="@Model.HospitalId" />
+                    <span asp-validation-for="@Model.HospitalId" class="text-danger"></span>
+                </div>                
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-danger">Donate and save live!</button>
+                </div>
+
+            </form>
+        </div>        
+    </div>
+</section>
+
+@section Links {
+    <div style="padding: 1%;">
+        <h6 class="text-center">For more information reagrading the medical examination for your blood, please see:</h6>
+        <a class="nav-link text-center" href="https://ncth.bg/kak-da-pomogna/izsledvaniya">Examinations for donated blood</a>
+    </div>
+}

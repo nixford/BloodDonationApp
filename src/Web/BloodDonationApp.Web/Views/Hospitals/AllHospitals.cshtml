@@ -33,9 +33,9 @@
                                 </td>
                                 <td>@hospital.RecipientCount</td>
                                 <td>
-                                    <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
+                                    <form asp-area="" asp-controller="DonationEvents" asp-action="CreateWORequest" method="get">
                                         <button class="btn btn-outline-danger"> Donate Whitout Request</button>
-                                        <input type="hidden" name="requestOrHospitalId" value="@hospital.Id" />
+                                        <input type="hidden" name="hospitalId" value="@hospital.Id" />
                                     </form>
                                 </td>
                                 <td>
