@@ -30,37 +30,46 @@
                     <tbody>
                         @foreach (var request in @Model.Requests)
                         {
-                        <tr>
-                            <th scope="row">@request.EmergencyStatus</th>
-                            <td>@request.HospitalName</td>
-                            <td>@Html.DisplayFor(x => request.Location)</td>
-                            <td>@request.BloodGroup</td>
-                            <td>@request.RhesusFactor</td>
-                            <td>@request.NeededQuantity</td>
-                            @if (this.User.IsInRole("Donor"))
-                            {
-                                <td>
-                                    <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
-                                        <button class="btn btn-outline-danger">Donattion</button>
-                                        <input type="hidden" name="requestId" value="@request.Id" />
-                                        <span asp-validation-for="@request.Id"></span>
-                                    </form>
-                                </td>
-                            }
-                            else if (this.User.IsInRole("Hospital"))
-                            {
-                                <td>
-                                    <form asp-area="" asp-controller="Requests" asp-action="Delete">
-                                        <button class="btn btn-danger">Delete</button>
-                                        <input type="hidden" name="requestId" value="@request.Id" />
-                                        <span asp-validation-for="@request.Id"></span>
-                                    </form>
-                                </td>
-                            }
-                        </tr>
+                            <tr>
+                                <th scope="row">@request.EmergencyStatus</th>
+                                <td>@request.HospitalName</td>
+                                <td>@Html.DisplayFor(x => request.Location)</td>
+                                <td>@request.BloodGroup</td>
+                                <td>@request.RhesusFactor</td>
+                                <td>@request.NeededQuantity</td>
+                                @if (this.User.IsInRole("Donor"))
+                                {
+                                    <td>
+                                        <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
+                                            <button class="btn btn-outline-danger">Donattion</button>
+                                            <input type="hidden" name="requestId" value="@request.Id" />
+                                            <span asp-validation-for="@request.Id"></span>
+                                        </form>
+                                    </td>
+                                }
+                                else if (this.User.IsInRole("Hospital"))
+                                {
+                                    <td>
+                                        <form asp-area="" asp-controller="Requests" asp-action="Delete">
+                                            <button class="btn btn-danger">Delete</button>
+                                            <input type="hidden" name="requestId" value="@request.Id" />
+                                            <span asp-validation-for="@request.Id"></span>
+                                        </form>
+                                    </td>
+                                }
+                            </tr>
                         }
                     </tbody>
                 </table>
+                <form asp-controller="Requests" asp-action="AllRequests">
+                    <div class="input-group">
+                        <input asp-for="@Model.SearchTerm" class="form-control" placeholder="Enter search terms here..." />
+                        <span asp-validation-for="@Model.SearchTerm" class="text-danger"></span>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div>
                 <hr class="bg-success" style="height: 2px" />

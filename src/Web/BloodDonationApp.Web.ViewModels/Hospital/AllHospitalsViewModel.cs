@@ -11,6 +11,8 @@
 
         public int CurrentPage { get; set; }
 
+        public string SearchTerm { get; set; }
+
         public IEnumerable<HospitalInfoViewModel> Hospitals { get; set; }
     }
 }

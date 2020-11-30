@@ -123,12 +123,14 @@
             return hospitalDatas.To<T>().ToList();
         }
 
-        public IEnumerable<HospitalData> GetAllHospitalsCount()
+        public IEnumerable<T> GetAllHospitalsCount<T>()
         {
             var hospitalDatas = this.hospitalsRepository
                 .All()
                 .Where(hd => hd.IsDeleted == false)
+                .To<T>()
                 .ToList();
+
             return hospitalDatas;
         }
 

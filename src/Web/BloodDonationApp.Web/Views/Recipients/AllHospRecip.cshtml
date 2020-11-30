@@ -4,7 +4,7 @@
 }
 
 <body style="background-color:#f2fcfa">
-    <section class="py-5">
+    <div class="py-5">
         <div class="container">
             <h1 class="text-center">@ViewData["Title"]</h1>
             <div style="padding: 5%;">
@@ -52,6 +52,16 @@
                         }
                     </tbody>
                 </table>
+                <form asp-controller="Recipients" asp-action="AllHospRecip">
+                    <div class="input-group">
+                        <input asp-for="@Model.SearchTerm" class="form-control" placeholder="Enter search terms here..." />
+                        <span asp-validation-for="@Model.SearchTerm" class="text-danger"></span>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
+                <table><tr><td>&nbsp;</td> </tr></table>
                 <div>
                     <a class="btn btn-success" asp-area="" asp-controller="Recipients" asp-action="AddRecipient">
                         Register Recipient
@@ -69,8 +79,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
+    </div>
     <nav>
         <ul class="pagination justify-content-center">
             @if (this.Model.CurrentPage == 1)

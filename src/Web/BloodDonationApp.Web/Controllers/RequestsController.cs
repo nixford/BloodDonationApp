@@ -57,6 +57,21 @@
 
             var count = this.requestsService.AllRequestsCount().Count();
 
+            if (!string.IsNullOrEmpty(viewModel.SearchTerm))
+            {
+                viewModel.Requests = this.requestsService
+                    .AllRequests<RequestInfoViewModel>(take, (int)(page - 1) * take)
+                    .Where(r => r.EmergencyStatus.ToString().Contains(viewModel.SearchTerm)
+                    || r.BloodGroup.ToString().Contains(viewModel.SearchTerm)
+                    || r.RhesusFactor.ToString().Contains(viewModel.SearchTerm)
+                    || r.HospitalName.Contains(viewModel.SearchTerm)
+                    || r.Location.Country.Contains(viewModel.SearchTerm)
+                    || r.Location.City.Contains(viewModel.SearchTerm)
+                    || r.Location.AdressDescription.Contains(viewModel.SearchTerm));
+
+                count = viewModel.Requests.Count();
+            }
+
             viewModel.PagesCount = (int)Math.Ceiling((double)count / take);
             if (viewModel.PagesCount == 0)
             {

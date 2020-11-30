@@ -64,7 +64,18 @@
         {
             viewModel.Hospitals = this.hospitalsService.GetAllHospitals<HospitalInfoViewModel>(take, (int)(page - 1) * take);
 
-            var count = this.hospitalsService.GetAllHospitalsCount().Count();
+            var count = this.hospitalsService.GetAllHospitalsCount<HospitalInfoViewModel>().Count();
+
+            if (!string.IsNullOrEmpty(viewModel.SearchTerm))
+            {
+                viewModel.Hospitals = this.hospitalsService
+                    .GetAllHospitals<HospitalInfoViewModel>(take, (int)(page - 1) * take)
+                    .Where(h => h.Name.Contains(viewModel.SearchTerm)
+                    || h.Location.Country.Contains(viewModel.SearchTerm)
+                    || h.Location.AdressDescription.Contains(viewModel.SearchTerm));
+
+                count = viewModel.Hospitals.Count();
+            }
 
             viewModel.PagesCount = (int)Math.Ceiling((double)count / take);
             if (viewModel.PagesCount == 0)
@@ -73,7 +84,6 @@
             }
 
             viewModel.CurrentPage = page;
-
             return this.View(viewModel);
         }
 

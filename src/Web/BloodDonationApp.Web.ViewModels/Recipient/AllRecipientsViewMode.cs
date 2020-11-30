@@ -10,6 +10,8 @@
 
         public int CurrentPage { get; set; }
 
+        public string SearchTerm { get; set; }
+
         public IEnumerable<RecipientInfoViewModel> Recipients { get; set; }
     }
 }

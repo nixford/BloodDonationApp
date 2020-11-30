@@ -48,6 +48,15 @@
                         }
                     </tbody>
                 </table>
+                <form asp-controller="Hospitals" asp-action="AllHospitals">
+                    <div class="input-group">
+                        <input asp-for="@Model.SearchTerm" class="form-control" placeholder="Enter name, country or adres..." />
+                        <span asp-validation-for="@Model.SearchTerm" class="text-danger"></span>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -99,6 +108,7 @@
             }
         </ul>
     </nav>
+
 </body>
 
 
