@@ -1,5 +1,6 @@
 ﻿namespace BloodDonationApp.Web.Areas.Administration.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -86,6 +87,60 @@
             catch
             {
                 this.TempData["Msg"] = string.Format(RemoveErrorMessage, GlobalConstants.HospitaltRoleName, inputModel.Email);
+            }
+
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        [HttpGet]
+        public IActionResult RegisterAdmin()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterAdmin(RegisterAdminInputModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
+            try
+            {
+                if (!await this.usersService.AddAdmin(inputModel.UserName, inputModel.Email, inputModel.Password))
+                {
+                    this.TempData["Error"] = RegisterAdminErrorMessage;
+                    return this.View(inputModel);
+                }
+
+                this.TempData["Success"] = string.Format(RegisterAdminSeccessMessage, inputModel.UserName);
+            }
+            catch (ArgumentException ex)
+            {
+                this.TempData["Error"] = ex.Message;
+            }
+
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        [HttpGet]
+        public IActionResult RemoveAdmin()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveAdmin(RemoveUserInputModel inputModel)
+        {
+            try
+            {
+                string adminName = await this.usersService.RemoveAdminAsync(inputModel.Email, GlobalConstants.AdministratorRoleName);
+                this.TempData["Success"] = string.Format(RemoveSuccessMessage, GlobalConstants.AdministratorRoleName, adminName);
+            }
+            catch
+            {
+                this.TempData["Error"] = string.Format(RemoveErrorMessage, GlobalConstants.AdministratorRoleName, inputModel.Email);
             }
 
             return this.RedirectToAction(nameof(this.Index));

@@ -1,14 +1,23 @@
 ﻿@model BloodDonationApp.Web.ViewModels.Administration.Users.RemoveUserInputModel
-@{
-    this.ViewData["Title"] = "Remove Administrator";
-}
+@{ this.ViewData["Title"] = "Remove Administrator"; }
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <form asp-action="RemoveAdmin" method="post">
-                    @Html.DisplayFor(x => Model)
+<body style="background-color:#cfdeff">
+    <div class="py-5">
+        <div class="container">
+            <h1 class="text-center">@ViewData["Title"]</h1>
+            <div style="padding: 5%;">
+                <form asp-area="Administration" asp-controller="Dashboard" asp-action="RemoveAdmin" method="post">
+                    <h4 class="text-center">Insert admin's email.</h4>
+                    <hr />
+                    <div class="form-group">
+                        <label asp-for="@Model.Email"></label>
+                        <input asp-for="@Model.Email" class="form-control" />
+                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </div>
         </div>
     </div>
+</body>
+
