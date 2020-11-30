@@ -28,14 +28,14 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>                    
-                </ul>
-            </div>
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <partial name="_LoginPartial" />
                     </li>
                 </ul>
+            </div>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <partial name="_LoginPartial" />
+                </li>
+            </ul>
             <div>
 
             </div>
@@ -62,11 +62,11 @@
                     <div class="col-lg-3 col-xs-12">
                         <h6 class="font-weight-bold" style="font-family:Arial" class="mt-lg-0 mt-sm-3">Links</h6>
                         <ul class="m-0 p-0">
-                            <li >
+                            <li>
                                 <a class="text-white" href="https://ncth.bg/">
                                     Nationalt Blood Donation Center
                                 </a>
-                            </li>                                                 
+                            </li>
                         </ul>
                     </div>
                     <div class="col-lg-4 col-xs-12 location">
@@ -83,21 +83,21 @@
                 </div>
             </div>
         </div>
-        </footer>
+    </footer>
 
-        <script src="assets/js/jquery-3.2.1.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/plugins/grid-gallery/js/grid-gallery.min.js"></script>
-        <script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
-        <script src="assets/js/script.js"></script>
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/plugins/grid-gallery/js/grid-gallery.min.js"></script>
+    <script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+    <script src="assets/js/script.js"></script>
 
-        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="assets/js/bootstrap.min.js" asp-append-version="true"></script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+    <script src="assets/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
 
-        @this.RenderSection("Scripts", required: false)
+    @this.RenderSection("Scripts", required: false)
 </body>
 </html>
 

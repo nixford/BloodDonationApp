@@ -17,16 +17,21 @@
         private readonly IDeletableEntityRepository<ApplicationRole> roleRepository;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
-        private readonly IDeletableEntityRepository<Location> locationRepository;
+        private readonly IDeletableEntityRepository<HospitalData> hospitalDataRepository;
+        private readonly IDeletableEntityRepository<DonorData> donorDataRepository;
 
         public UsersService(
             IDeletableEntityRepository<ApplicationRole> roleRepository,
             UserManager<ApplicationUser> userManager,
-            IDeletableEntityRepository<ApplicationUser> userRepository)
+            IDeletableEntityRepository<ApplicationUser> userRepository,
+            IDeletableEntityRepository<HospitalData> hospitalDataRepository,
+            IDeletableEntityRepository<DonorData> donorDataRepository)
         {
             this.roleRepository = roleRepository;
             this.userManager = userManager;
             this.userRepository = userRepository;
+            this.hospitalDataRepository = hospitalDataRepository;
+            this.donorDataRepository = donorDataRepository;
         }
 
         public T GetById<T>(string id)
@@ -38,6 +43,21 @@
                  .FirstOrDefault();
 
             return user;
+        }
+
+        public IEnumerable<ApplicationUser> GetAllUsers()
+        {
+            var adminRole = this.roleRepository
+                .All()
+                .FirstOrDefault(r => r.Name == GlobalConstants.AdministratorRoleName);
+
+            var users = this.userRepository
+                .All()
+                .Where(u => u.IsDeleted == false
+                && u.Roles.Any(r => r.RoleId == adminRole.Id))
+                .ToList();
+
+            return users;
         }
 
         public T GetUserById<T>(string id)
@@ -102,6 +122,14 @@
 
             var users = await this.userManager.GetUsersInRoleAsync(role);
 
+            var hospitalData = this.hospitalDataRepository
+                .All()
+                .FirstOrDefault(hd => hd.ApplicationUserId == user.Id);
+
+            var donorData = this.donorDataRepository
+                .All()
+                .FirstOrDefault(dd => dd.ApplicationUserId == user.Id);
+
             if (user == null || users.All(u => u.Email != user?.Email))
             {
                 throw new ArgumentNullException();
@@ -109,6 +137,17 @@
 
             user.IsDeleted = true;
             await this.userRepository.SaveChangesAsync();
+
+            if (hospitalData != null)
+            {
+                hospitalData.IsDeleted = true;
+                await this.hospitalDataRepository.SaveChangesAsync();
+            }
+            else if (donorData != null)
+            {
+                donorData.IsDeleted = true;
+                await this.donorDataRepository.SaveChangesAsync();
+            }
 
             return user.UserName;
         }

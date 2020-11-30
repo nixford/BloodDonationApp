@@ -1,29 +1,50 @@
 ﻿namespace BloodDonationApp.Web.Areas.Administration.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BloodDonationApp.Common;
     using BloodDonationApp.Services.Data;
+    using BloodDonationApp.Web.ViewModels.Administration.Dashboard;
     using BloodDonationApp.Web.ViewModels.Administration.Users;
+    using BloodDonationApp.Web.ViewModels.Donor;
+    using BloodDonationApp.Web.ViewModels.Hospital;
     using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {
         private const string RegisterAdminSeccessMessage = "Successfull registration of a new administrator: {0}!";
-        private const string RegisterAdminErrorMessage = "The registration failed!";
+        private const string RegisterAdminErrorMessage = "Error: The registration failed!";
         private const string RemoveSuccessMessage = "Successfully removed the {0} {1}!";
-        private const string RemoveErrorMessage = "Missing {0} with email {1}!";
+        private const string RemoveErrorMessage = "Error: Missing {0} with email {1}!";
 
         private readonly IUsersService usersService;
+        private readonly IDonorsService donorsService;
+        private readonly IHospitalsService hospitalsService;
 
-        public DashboardController(IUsersService usersService)
+        public DashboardController(
+            IUsersService usersService,
+            IDonorsService donorsService, 
+            IHospitalsService hospitalsService)
         {
             this.usersService = usersService;
+            this.donorsService = donorsService;
+            this.hospitalsService = hospitalsService;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(IndexViewModel viewModel)
         {
-            return this.View();
+            viewModel.DonorsCount = this.donorsService
+                .GetAllDonors<DonorsInfoViewModel>().Count();
+
+            viewModel.HospitalsCount = this.hospitalsService
+                .GetAllHospitals<HospitalInfoViewModel>().Count();
+
+            viewModel.AdminsCount = this.usersService.GetAllUsers()
+                .Count();
+
+            return this.View(viewModel);
         }
 
         [HttpGet]
@@ -38,11 +59,11 @@
             try
             {
                 string donorName = await this.usersService.RemoveAdminAsync(inputModel.Email, GlobalConstants.DonorRoleName);
-                // TODO: this.TempData["Success"] = string.Format(RemoveSuccessMessage, GlobalConstants.DonorRoleName, donorName);
+                this.TempData["Msg"] = string.Format(RemoveSuccessMessage, GlobalConstants.DonorRoleName, donorName);
             }
             catch
             {
-                // TODO: this.TempData["Error"] = string.Format(RemoveSuccessMessage, GlobalConstants.DonorRoleName, inputModel.Email);
+                this.TempData["Msg"] = string.Format(RemoveErrorMessage, GlobalConstants.DonorRoleName, inputModel.Email);
             }
 
             return this.RedirectToAction(nameof(this.Index));
@@ -60,11 +81,11 @@
             try
             {
                 string hospitalName = await this.usersService.RemoveAdminAsync(inputModel.Email, GlobalConstants.HospitaltRoleName);
-                // TODO: this.TempData["Success"] = string.Format(RemoveSuccessMessage, GlobalConstants.DonorRoleName, hospitalName);
+                this.TempData["Msg"] = string.Format(RemoveSuccessMessage, GlobalConstants.HospitaltRoleName, hospitalName);
             }
             catch
             {
-                // TODO: this.TempData["Error"] = string.Format(RemoveSuccessMessage, GlobalConstants.DonorRoleName, inputModel.Email);
+                this.TempData["Msg"] = string.Format(RemoveErrorMessage, GlobalConstants.HospitaltRoleName, inputModel.Email);
             }
 
             return this.RedirectToAction(nameof(this.Index));
