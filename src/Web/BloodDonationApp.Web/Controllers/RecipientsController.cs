@@ -60,7 +60,7 @@
             if (!string.IsNullOrEmpty(viewModel.SearchTerm))
             {
                 viewModel.Recipients = this.recipientsService
-                    .AllHospitalRecipients<RecipientInfoViewModel>(hospitalUserId, take, (int)(page - 1) * take)
+                    .AllHospitalRecipients<RecipientInfoViewModel>(hospitalUserId)
                     .Where(r => r.FirstName.Contains(viewModel.SearchTerm)
                     || r.LastName.Contains(viewModel.SearchTerm)
                     || r.BloodGroup.ToString().Contains(viewModel.SearchTerm)

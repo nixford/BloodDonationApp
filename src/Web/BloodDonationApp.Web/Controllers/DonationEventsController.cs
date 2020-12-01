@@ -46,13 +46,13 @@
 
         [HttpPost]
         [Authorize(Roles = "Donor")]
-        public async Task<IActionResult> Create(string userId, DonationEventInputModel viewModel)
+        public async Task<IActionResult> Create(DonationEventInputModel viewModel, RequestInfoViewModel model)
         {
             var userDonorId = this.userManager.GetUserId(this.User);
 
-            var id = userId != null ? userId : viewModel.HospitalId;
+            var id = model.UserId != null ? model.UserId : viewModel.HospitalId;
 
-            await this.donationEventsService.CreateDonation(id, userDonorId, viewModel);
+            await this.donationEventsService.CreateDonation(id, userDonorId, model, viewModel);
 
             return this.RedirectToAction("QAndA", "Home");
         }

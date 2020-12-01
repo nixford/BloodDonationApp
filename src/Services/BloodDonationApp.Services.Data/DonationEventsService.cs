@@ -7,6 +7,7 @@
     using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Web.ViewModels.DonationEvents;
+    using BloodDonationApp.Web.ViewModels.Request;
 
     public class DonationEventsService : IDonationEventsService
     {
@@ -33,7 +34,11 @@
             this.bloodBagRepository = bloodBagRepository;
         }
 
-        public async Task CreateDonation(string requestOrHospitalId, string userDonorId, DonationEventInputModel viewModel)
+        public async Task CreateDonation(
+            string requestOrHospitalId,
+            string userDonorId,
+            RequestInfoViewModel model,
+            DonationEventInputModel viewModel)
         {
             var donorData = this.donorDataUserRepository.All()
                 .FirstOrDefault(ddu => ddu.ApplicationUserId == userDonorId);
@@ -64,7 +69,7 @@
 
             bag = new BloodBag
             {
-                Quantity = viewModel.Quantity,
+                Quantity = viewModel.Quantity != 0 ? viewModel.Quantity : model.NeededQuantity,
                 CollectionDate = DateTime.UtcNow,
                 DonorDataId = donorData.Id,
                 BloodGroup = viewModel.BloodGroup,

@@ -19,19 +19,25 @@
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
         private readonly IDeletableEntityRepository<HospitalData> hospitalDataRepository;
         private readonly IDeletableEntityRepository<DonorData> donorDataRepository;
+        private readonly IDeletableEntityRepository<Recipient> recipientsRepository;
+        private readonly IDeletableEntityRepository<Request> requestsRepository;
 
         public UsersService(
             IDeletableEntityRepository<ApplicationRole> roleRepository,
             UserManager<ApplicationUser> userManager,
             IDeletableEntityRepository<ApplicationUser> userRepository,
             IDeletableEntityRepository<HospitalData> hospitalDataRepository,
-            IDeletableEntityRepository<DonorData> donorDataRepository)
+            IDeletableEntityRepository<DonorData> donorDataRepository,
+            IDeletableEntityRepository<Recipient> recipientsRepository,
+            IDeletableEntityRepository<Request> requestsRepository)
         {
             this.roleRepository = roleRepository;
             this.userManager = userManager;
             this.userRepository = userRepository;
             this.hospitalDataRepository = hospitalDataRepository;
             this.donorDataRepository = donorDataRepository;
+            this.recipientsRepository = recipientsRepository;
+            this.requestsRepository = requestsRepository;
         }
 
         public T GetById<T>(string id)
@@ -45,7 +51,7 @@
             return user;
         }
 
-        public IEnumerable<ApplicationUser> GetAllUsers()
+        public IEnumerable<ApplicationUser> GetAllAdmins()
         {
             var adminRole = this.roleRepository
                 .All()
@@ -58,6 +64,22 @@
                 .ToList();
 
             return users;
+        }
+
+        public IEnumerable<ApplicationUser> GetAllDeletedUsers(int? take = null, int skip = 0)
+        {
+            var users = this.userRepository
+                .AllWithDeleted()
+                .OrderByDescending(u => u.CreatedOn)
+                .Where(u => u.IsDeleted == true)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                users = users.Take(take.Value);
+            }
+
+            return users.ToList();
         }
 
         public T GetUserById<T>(string id)
@@ -114,7 +136,7 @@
             return result.Succeeded;
         }
 
-        public async Task<string> RemoveAdminAsync(string email, string role)
+        public async Task<string> RemoveUserAsync(string email, string role)
         {
             var user = this.userRepository.All()
                 .Where(u => u.Email == email)
@@ -122,50 +144,63 @@
 
             var users = await this.userManager.GetUsersInRoleAsync(role);
 
+            var donorData = this.donorDataRepository
+                .All()
+                .FirstOrDefault(dd => dd.ApplicationUserId == user.Id);
+
             var hospitalData = this.hospitalDataRepository
                 .All()
                 .FirstOrDefault(hd => hd.ApplicationUserId == user.Id);
 
-            var donorData = this.donorDataRepository
+            var hospitalRecipients = this.recipientsRepository
                 .All()
-                .FirstOrDefault(dd => dd.ApplicationUserId == user.Id);
+                .Where(hr => hr.HospitalDataId == hospitalData.Id);
+
+            var hospitalRequests = this.requestsRepository
+                .All()
+                .Where(hq => hq.HospitalId == hospitalData.Id);
 
             if (user == null || users.All(u => u.Email != user?.Email))
             {
                 throw new ArgumentNullException();
             }
 
+            // Deleting user
             user.IsDeleted = true;
+            user.DeletedOn = DateTime.UtcNow;
             await this.userRepository.SaveChangesAsync();
 
+            // If the User is hospital - deleting hospitalData, recipients and requests
             if (hospitalData != null)
             {
                 hospitalData.IsDeleted = true;
+                hospitalData.DeletedOn = DateTime.UtcNow;
                 await this.hospitalDataRepository.SaveChangesAsync();
+
+                foreach (var recipient in hospitalRecipients)
+                {
+                    recipient.IsDeleted = true;
+                    recipient.DeletedOn = DateTime.UtcNow;
+                }
+
+                await this.recipientsRepository.SaveChangesAsync();
+
+                foreach (var request in hospitalRequests)
+                {
+                    request.IsDeleted = true;
+                    request.DeletedOn = DateTime.UtcNow;
+                }
+
+                await this.requestsRepository.SaveChangesAsync();
             }
-            else if (donorData != null)
+
+            // If the User is donor - deleting donorData
+            if (donorData != null)
             {
                 donorData.IsDeleted = true;
+                donorData.DeletedOn = DateTime.UtcNow;
                 await this.donorDataRepository.SaveChangesAsync();
             }
-
-            return user.UserName;
-        }
-
-        public async Task<string> RemoveUserAsync(string email)
-        {
-            var user = this.userRepository.All()
-                .Where(u => u.Email == email && u.IsDeleted == false)
-                .FirstOrDefault();
-
-            if (user == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            user.IsDeleted = true;
-
-            await this.userRepository.SaveChangesAsync();
 
             return user.UserName;
         }

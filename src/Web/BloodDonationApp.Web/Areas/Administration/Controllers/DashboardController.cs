@@ -22,6 +22,7 @@
         private readonly IUsersService usersService;
         private readonly IDonorsService donorsService;
         private readonly IHospitalsService hospitalsService;
+        private const int take = 3;
 
         public DashboardController(
             IUsersService usersService,
@@ -34,7 +35,7 @@
         }
 
         [HttpGet]
-        public IActionResult Index(IndexViewModel viewModel)
+        public IActionResult Index(IndexViewModel viewModel, int page = 1)
         {
             viewModel.DonorsCount = this.donorsService
                 .GetAllDonors<DonorsInfoViewModel>().Count();
@@ -42,8 +43,32 @@
             viewModel.HospitalsCount = this.hospitalsService
                 .GetAllHospitals<HospitalInfoViewModel>().Count();
 
-            viewModel.AdminsCount = this.usersService.GetAllUsers()
+            viewModel.AdminsCount = this.usersService.GetAllAdmins()
                 .Count();
+
+            // Impplementing search and pagination for deleted users
+            viewModel.DeletedUsers = this.usersService
+                .GetAllDeletedUsers(take, (int)(page - 1) * take);
+
+            var count = this.usersService.GetAllDeletedUsers().Count();
+
+            if (!string.IsNullOrEmpty(viewModel.SearchTerm))
+            {
+                viewModel.DeletedUsers = this.usersService
+                    .GetAllDeletedUsers()
+                    .Where(u => u.UserName.Contains(viewModel.SearchTerm)
+                    || u.Email.Contains(viewModel.SearchTerm));
+
+                count = viewModel.DeletedUsers.Count();
+            }
+
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / take);
+            if (viewModel.PagesCount == 0)
+            {
+                viewModel.PagesCount = 1;
+            }
+
+            viewModel.CurrentPage = page;
 
             return this.View(viewModel);
         }
@@ -59,7 +84,7 @@
         {
             try
             {
-                string donorName = await this.usersService.RemoveAdminAsync(inputModel.Email, GlobalConstants.DonorRoleName);
+                string donorName = await this.usersService.RemoveUserAsync(inputModel.Email, GlobalConstants.DonorRoleName);
                 this.TempData["Msg"] = string.Format(RemoveSuccessMessage, GlobalConstants.DonorRoleName, donorName);
             }
             catch
@@ -81,7 +106,7 @@
         {
             try
             {
-                string hospitalName = await this.usersService.RemoveAdminAsync(inputModel.Email, GlobalConstants.HospitaltRoleName);
+                string hospitalName = await this.usersService.RemoveUserAsync(inputModel.Email, GlobalConstants.HospitaltRoleName);
                 this.TempData["Msg"] = string.Format(RemoveSuccessMessage, GlobalConstants.HospitaltRoleName, hospitalName);
             }
             catch
@@ -135,7 +160,7 @@
         {
             try
             {
-                string adminName = await this.usersService.RemoveAdminAsync(inputModel.Email, GlobalConstants.AdministratorRoleName);
+                string adminName = await this.usersService.RemoveUserAsync(inputModel.Email, GlobalConstants.AdministratorRoleName);
                 this.TempData["Success"] = string.Format(RemoveSuccessMessage, GlobalConstants.AdministratorRoleName, adminName);
             }
             catch

@@ -69,7 +69,7 @@
             if (!string.IsNullOrEmpty(viewModel.SearchTerm))
             {
                 viewModel.Hospitals = this.hospitalsService
-                    .GetAllHospitals<HospitalInfoViewModel>(take, (int)(page - 1) * take)
+                    .GetAllHospitals<HospitalInfoViewModel>()
                     .Where(h => h.Name.Contains(viewModel.SearchTerm)
                     || h.Location.Country.Contains(viewModel.SearchTerm)
                     || h.Location.AdressDescription.Contains(viewModel.SearchTerm));

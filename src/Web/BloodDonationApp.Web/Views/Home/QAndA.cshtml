@@ -2,42 +2,70 @@
 @{ this.ViewData["Title"] = "Questions and Answers"; }
 
 
-<div>
-    <h1>@ViewData["Title"]</h1>
-</div>
-
-
 <!--*************** Rights & Benefits Starts Here ***************-->
-<section id="rights" class="contianer-fluid about-us">
-    <div class="container">
-        <div class="row session-title">
-            <h2>Rights & Benefits</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has</p>
-        </div>
-        <div class="row">
-            <div class="col-md-6 text">
-                <h2>About Rights & Benefits</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some formhumour, or randomised words which don't look even slightly believable. If you are going to use a passage. industry's standard dummy has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                <p>Industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-            </div>
-            <div class="col-md-6 image">
-                <img src="assets/images/about.jpg" alt="">
+<body style="background-color:#e8fcee">
+    <div class="py-5">
+        <div class="container">
+            <h1 class="text-center">@ViewData["Title"]</h1>
+            <div style="padding: 5%;">                
+                <div>
+                    <div>
+                        <h3>Who can donate blood?</h3>
+                        Any healthy person between the ages of 18 and 65 who weighs more than 50 kg
+                        has not taken any medication for at least 48 hours and for whom a doctor determines that
+                        <div id="dots">...</div>
+                        <div id="more" style="display:none">
+                            blood donation does not endanger his health and the blood donated by him is safe for patients in need.
+                            from it, he can become a donor. Men can donate blood 5 times in a calendar year, and women - 4 times,
+                            and the interval between two blood donations should be at least 2 months.
+
+                            <br />
+                            <p><h3>How to prepare for blood donation?</h3></p>
+                            Two or three days before the act of blood donation, a person should eat regularly and varied - this
+                            strengthens the body's strength and improves blood quality. Blood donation should not be performed on
+                            an empty stomach. The blood donor must be sure that he is healthy and rested. After blood donation, more
+                            caloric fluids and foods are consumed.
+
+                            <br />
+                            <p><h6>For more information see the link for National Center for blood donation (on the bottom of the page)</h6></p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-info" onclick="myFunction()" id="myBtn">Read more</button>
+                </div>
             </div>
         </div>
     </div>
-</section>
+
+    <script>
+        function myFunction() {
+            var dots = document.getElementById("dots");
+            var moreText = document.getElementById("more");
+            var btnText = document.getElementById("myBtn");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Read more";
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Read less";
+                moreText.style.display = "inline";
+            }
+        }
+    </script>
+</body>
 
 
-<div class="container">
+<div class="text-center">
     <form asp-area="" asp-controller="Requests" asp-action="AllRequests">
         <button class="btn btn-outline-primary">Back to All Requests</button>
     </form>
 </div>
 
+<br/>
+
 @section Links {
-    <li class="nav-item">
-        <a class="nav-link text-dark" href="https://ncth.bg/">National Center for blood donation</a>
-    </li>
+    <i class="nav-item">
+        <a class="nav-link text-center" href="https://ncth.bg/">National Center for blood donation</a>
+    </i>
 }

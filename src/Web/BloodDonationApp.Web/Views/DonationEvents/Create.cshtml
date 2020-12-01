@@ -13,11 +13,13 @@
             <li class="list-group-item">Quantity: @Model.NeededQuantity</li>
             <li class="list-group-item">Recipient Emergency Status: @Model.EmergencyStatus</li>
         </ul>
-        <div>
+        <div class="text-center">
             <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="post">
                 <button class="btn btn-outline-danger">Donate blood and save live!</button>
-                <input type="hidden" name="requestOrHospitalId" value="@Model.Id" />
+                <input type="hidden" asp-for="@Model.UserId" value="@Model.Id" />
+                <input type="hidden" asp-for="@Model.NeededQuantity" value="@Model.NeededQuantity" />
                 <span asp-validation-for="@Model.Id"></span>
+                <span asp-validation-for="@Model.NeededQuantity"></span>
             </form>
         </div>        
     </div>

@@ -1,14 +1,12 @@
 ﻿@model BloodDonationApp.Web.ViewModels.Administration.Dashboard.IndexViewModel
 @{ this.ViewData["Title"] = "Admin dashboard"; }
 
+<div>
+    @await Html.PartialAsync("_TempData");
+</div>
+
 <p style="text-align:center;"><img src="/admin.ico" alt="Admin" /></p>
 
-<script>
-    var msg = '@this.TempData["Msg"]';
-    if (msg.length) {
-        alert(msg);
-    }
-</script>
 
 <body style="background-color:#f2fcfa">
     <div class="py-5">
@@ -23,7 +21,6 @@
                             <th scope="col">Total Administrators:</th>
                         </tr>
                     </thead>
-
                     <tbody class="text-center">
                         <tr>
                             <td>@Model.DonorsCount</td>
@@ -55,8 +52,99 @@
                         </tr>
                     </tbody>
                 </table>
+
+<br />
+<br />
+<h3>Deleted users:</h3>
+                <table class="table table-responsive-md btn-table">
+                    <thead class="thead-light text-center">
+                        <tr>
+                            <th scope="col">Username:</th>
+                            <th scope="col">Email:</th>
+                            <th scope="col">Created On:</th>
+                            <th scope="col">Deleted On:</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach (var deletedUser in @Model.DeletedUsers)
+                        {
+                            <tr>
+                                <td>@deletedUser.UserName</td>
+                                <td>@deletedUser.Email</td>
+                                <td>@deletedUser.CreatedOn</td>
+                                <td>@deletedUser.DeletedOn</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <form asp-area="Administration" asp-controller="Dashboard" asp-action="Index" method="get">
+                    <div class="input-group">
+                        <input asp-for="@Model.SearchTerm" class="form-control" placeholder="Enter search parameters..." />
+                        <span asp-validation-for="@Model.SearchTerm" class="text-danger"></span>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            @if (this.Model.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Previous</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="Dashboard"
+                       asp-action="Index"
+                       asp-route-page="@(this.Model.CurrentPage - 1)">Previous</a>
+                </li>
+            }
+
+            @for (int i = 1; i <= this.Model.PagesCount; i++)
+            {
+                var active = i == this.Model.CurrentPage ? "active" : string.Empty;
+
+                <li class="page-item @active">
+                    <a class="page-link"
+                       asp-controller="Dashboard"
+                       asp-action="Index"
+                       asp-route-page="@i">@i</a>
+                </li>
+            }
+
+            @if (this.Model.CurrentPage == this.Model.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="Dashboard"
+                       asp-action="Index"
+                       asp-route-page="@(this.Model.CurrentPage + 1)">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
+
+    <script>
+        var msg = '@this.TempData["Msg"]';
+        if (msg.length) {
+            alert(msg);
+        }
+    </script>
 </body>
+
+
 

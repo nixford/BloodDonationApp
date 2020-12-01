@@ -67,11 +67,14 @@
                 .All()
                 .OrderByDescending(rh => rh.CreatedOn)
                 .Where(r => r.IsDeleted == false && r.HospitalData.ApplicationUserId == userHospitalId)
-                .Skip(skip)
-                .To<T>()
-                .ToList();
+                .Skip(skip);
 
-            return recipientsCurrHospital;
+            if (take.HasValue)
+            {
+                recipientsCurrHospital = recipientsCurrHospital.Take(take.Value);
+            }
+
+            return recipientsCurrHospital.To<T>().ToList();
         }
 
         public IEnumerable<Recipient> TotalRecipients(string userHospitalId)
