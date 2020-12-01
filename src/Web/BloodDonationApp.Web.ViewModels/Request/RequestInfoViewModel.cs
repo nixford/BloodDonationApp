@@ -6,7 +6,7 @@
     using BloodDonationApp.Data.Models.Enums;
     using BloodDonationApp.Services.Mapping;
 
-    public class RequestInfoViewModel : IMapFrom<Request>
+    public class RequestInfoViewModel : IMapTo<Request>
     {
         public string Id { get; set; }
 

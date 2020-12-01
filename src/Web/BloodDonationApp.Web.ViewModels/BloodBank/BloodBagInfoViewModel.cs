@@ -6,7 +6,7 @@
     using BloodDonationApp.Data.Models.Enums;
     using BloodDonationApp.Services.Mapping;
 
-    public class BloodBagInfoViewModel : IMapFrom<BloodBag>
+    public class BloodBagInfoViewModel : IMapTo<BloodBag>
     {
         public double QuantityCondition { get; set; }
 

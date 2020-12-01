@@ -6,7 +6,7 @@
     using BloodDonationApp.Data.Models.Enums;
     using BloodDonationApp.Services.Mapping;
 
-    public class DonationEventInputModel : IMapFrom<DonationEvent>
+    public class DonationEventInputModel : IMapTo<DonationEvent>
     {
         public string HospitalId { get; set; }
 

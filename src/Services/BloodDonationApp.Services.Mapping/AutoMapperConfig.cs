@@ -56,7 +56,7 @@
             var fromMaps = from t in types
                            from i in t.GetTypeInfo().GetInterfaces()
                            where i.GetTypeInfo().IsGenericType &&
-                                 i.GetGenericTypeDefinition() == typeof(IMapFrom<>) &&
+                                 i.GetGenericTypeDefinition() == typeof(IMapTo<>) &&
                                  !t.GetTypeInfo().IsAbstract &&
                                  !t.GetTypeInfo().IsInterface
                            select new TypesMap

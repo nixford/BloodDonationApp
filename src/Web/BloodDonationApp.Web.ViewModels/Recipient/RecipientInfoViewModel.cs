@@ -4,7 +4,7 @@
     using BloodDonationApp.Data.Models.Enums;
     using BloodDonationApp.Services.Mapping;
 
-    public class RecipientInfoViewModel : IMapFrom<Recipient>
+    public class RecipientInfoViewModel : IMapTo<Recipient>
     {
         public string Id { get; set; }
 

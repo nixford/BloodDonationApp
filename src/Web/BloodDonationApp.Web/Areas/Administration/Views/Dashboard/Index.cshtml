@@ -53,9 +53,9 @@
                     </tbody>
                 </table>
 
-<br />
-<br />
-<h3>Deleted users:</h3>
+                <br />
+                <br />
+                <h3>Deleted users:</h3>
                 <table class="table table-responsive-md btn-table">
                     <thead class="thead-light text-center">
                         <tr>
@@ -68,13 +68,12 @@
                     <tbody class="text-center">
                         @foreach (var deletedUser in @Model.DeletedUsers)
                         {
-                            <tr>
-                                <td>@deletedUser.UserName</td>
-                                <td>@deletedUser.Email</td>
-                                <td>@deletedUser.CreatedOn</td>
-                                <td>@deletedUser.DeletedOn</td>
-                            </tr>
-                        }
+            <tr>
+                <td>@deletedUser.UserName</td>
+                <td>@deletedUser.Email</td>
+                <td>@deletedUser.CreatedOn</td>
+                <td>@deletedUser.DeletedOn</td>
+            </tr>}
                     </tbody>
                 </table>
                 <form asp-area="Administration" asp-controller="Dashboard" asp-action="Index" method="get">
@@ -86,6 +85,11 @@
                         </div>
                     </div>
                 </form>
+                <br />
+                <br />
+                <div>
+                    <a class="btn btn-outline-success" href="/Messages/AllMessages">Received messages</a>
+                </div>
             </div>
         </div>
     </div>

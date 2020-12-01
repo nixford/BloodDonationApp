@@ -3,7 +3,7 @@
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Mapping;
 
-    public class DonorsInfoViewModel : IMapFrom<ApplicationUser>
+    public class DonorsInfoViewModel : IMapTo<ApplicationUser>
     {
         public string Id { get; set; }
 

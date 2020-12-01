@@ -3,7 +3,7 @@
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Mapping;
 
-    public class HospitalProfileInputModel : IMapFrom<ApplicationUser>
+    public class HospitalProfileInputModel : IMapTo<ApplicationUser>
     {
         public string Name { get; set; }
 

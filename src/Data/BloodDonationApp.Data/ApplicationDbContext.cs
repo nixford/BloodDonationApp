@@ -27,6 +27,8 @@
 
         public DbSet<BloodBank> BloodBanks { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
         public DbSet<Contact> Contacts { get; set; }
 
         public DbSet<Disease> Diseases { get; set; }

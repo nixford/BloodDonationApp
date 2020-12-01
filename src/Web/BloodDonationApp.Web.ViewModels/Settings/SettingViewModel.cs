@@ -4,7 +4,7 @@
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Mapping;
 
-    public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
+    public class SettingViewModel : IMapTo<Setting>, IHaveCustomMappings
     {
         public int Id { get; set; }
 

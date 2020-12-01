@@ -6,7 +6,7 @@
     using BloodDonationApp.Data.Models.Enums;
     using BloodDonationApp.Services.Mapping;
 
-    public class DonorDataProfileInputModel : IMapFrom<ApplicationUser>
+    public class DonorDataProfileInputModel : IMapTo<ApplicationUser>
     {
         public string FirstName { get; set; }
 
