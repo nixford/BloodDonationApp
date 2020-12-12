@@ -23,13 +23,13 @@
         private readonly IDeletableEntityRepository<Request> requestsRepository;
 
         public UsersService(
-            IDeletableEntityRepository<ApplicationRole> roleRepository,
-            UserManager<ApplicationUser> userManager,
-            IDeletableEntityRepository<ApplicationUser> userRepository,
-            IDeletableEntityRepository<HospitalData> hospitalDataRepository,
-            IDeletableEntityRepository<DonorData> donorDataRepository,
-            IDeletableEntityRepository<Recipient> recipientsRepository,
-            IDeletableEntityRepository<Request> requestsRepository)
+            IDeletableEntityRepository<ApplicationUser>? userRepository,
+            UserManager<ApplicationUser>? userManager,
+            IDeletableEntityRepository<ApplicationRole>? roleRepository,
+            IDeletableEntityRepository<HospitalData>? hospitalDataRepository,
+            IDeletableEntityRepository<DonorData>? donorDataRepository,
+            IDeletableEntityRepository<Recipient>? recipientsRepository,
+            IDeletableEntityRepository<Request>? requestsRepository)
         {
             this.roleRepository = roleRepository;
             this.userManager = userManager;
@@ -38,17 +38,6 @@
             this.donorDataRepository = donorDataRepository;
             this.recipientsRepository = recipientsRepository;
             this.requestsRepository = requestsRepository;
-        }
-
-        public T GetById<T>(string id)
-        {
-            var user = this.userRepository
-                 .All()
-                 .Where(x => x.Id == id)
-                 .To<T>()
-                 .FirstOrDefault();
-
-            return user;
         }
 
         public IEnumerable<ApplicationUser> GetAllAdmins()

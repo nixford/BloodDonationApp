@@ -27,8 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\BloodDonationApp.Data.Common\BloodDonationApp.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\BloodDonationApp.Data.Models\BloodDonationApp.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\BloodDonationApp.Data\BloodDonationApp.Data.csproj" />
     <ProjectReference Include="..\..\Services\BloodDonationApp.Services.Data\BloodDonationApp.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\BloodDonationApp.Services\BloodDonationApp.Services.csproj" />
+    <ProjectReference Include="..\..\Web\BloodDonationApp.Web\BloodDonationApp.Web.csproj" />
   </ItemGroup>
 
 </Project>
