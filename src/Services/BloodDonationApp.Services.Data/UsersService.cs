@@ -23,13 +23,13 @@
         private readonly IDeletableEntityRepository<Request> requestsRepository;
 
         public UsersService(
-            IDeletableEntityRepository<ApplicationUser>? userRepository,
-            UserManager<ApplicationUser>? userManager,
-            IDeletableEntityRepository<ApplicationRole>? roleRepository,
-            IDeletableEntityRepository<HospitalData>? hospitalDataRepository,
-            IDeletableEntityRepository<DonorData>? donorDataRepository,
-            IDeletableEntityRepository<Recipient>? recipientsRepository,
-            IDeletableEntityRepository<Request>? requestsRepository)
+            IDeletableEntityRepository<ApplicationUser> userRepository,
+            UserManager<ApplicationUser> userManager,
+            IDeletableEntityRepository<ApplicationRole> roleRepository,
+            IDeletableEntityRepository<HospitalData> hospitalDataRepository,
+            IDeletableEntityRepository<DonorData> donorDataRepository,
+            IDeletableEntityRepository<Recipient> recipientsRepository,
+            IDeletableEntityRepository<Request> requestsRepository)
         {
             this.roleRepository = roleRepository;
             this.userManager = userManager;

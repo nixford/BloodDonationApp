@@ -1,4 +1,4 @@
-﻿namespace BloodDonationApp.Services.Data.Tests.Common
+﻿namespace BloodDonationApp.Services.Data.Tests.InMemory
 {
     using System;
 
