@@ -64,7 +64,7 @@
         {
             viewModel.Hospitals = this.hospitalsService.GetAllHospitals<HospitalInfoViewModel>(take, (int)(page - 1) * take);
 
-            var count = this.hospitalsService.GetAllHospitalsCount<HospitalInfoViewModel>().Count();
+            var count = this.hospitalsService.GetAllHospitals<HospitalInfoViewModel>().Count();
 
             if (!string.IsNullOrEmpty(viewModel.SearchTerm))
             {

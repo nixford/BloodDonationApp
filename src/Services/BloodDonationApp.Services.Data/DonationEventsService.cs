@@ -3,9 +3,10 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BloodDonationApp.Common;
     using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
+    using BloodDonationApp.Data.Models.Enums;
     using BloodDonationApp.Web.ViewModels.DonationEvents;
     using BloodDonationApp.Web.ViewModels.Request;
 
@@ -37,11 +38,18 @@
         public async Task CreateDonation(
             string requestOrHospitalId,
             string userDonorId,
-            RequestInfoViewModel model,
-            DonationEventInputModel viewModel)
+            double neededQuantity,
+            double quantity,
+            BloodGroup bloodGroup,
+            RhesusFactor rhesusFactor)
         {
             var donorData = this.donorDataUserRepository.All()
                 .FirstOrDefault(ddu => ddu.ApplicationUserId == userDonorId);
+
+            if (donorData == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoDonorDataErrorMessage);
+            }
 
             var request = this.requestRepository.All()
                 .FirstOrDefault(r => r.Id == requestOrHospitalId);
@@ -69,11 +77,11 @@
 
             bag = new BloodBag
             {
-                Quantity = viewModel.Quantity != 0 ? viewModel.Quantity : model.NeededQuantity,
+                Quantity = quantity != 0 ? quantity : neededQuantity,
                 CollectionDate = DateTime.UtcNow,
                 DonorDataId = donorData.Id,
-                BloodGroup = viewModel.BloodGroup,
-                RhesusFactor = viewModel.RhesusFactor,
+                BloodGroup = bloodGroup,
+                RhesusFactor = rhesusFactor,
                 BloodBankId = bloodBank.Id,
             };
 

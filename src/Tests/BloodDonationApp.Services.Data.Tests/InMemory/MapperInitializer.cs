@@ -1,9 +1,10 @@
 ﻿namespace BloodDonationApp.Services.Data.Tests.InMemory
 {
     using System.Reflection;
-    using BloodDonationApp.Data.Models;
+
     using BloodDonationApp.Services.Mapping;
     using BloodDonationApp.Web.ViewModels.Donor;
+    using BloodDonationApp.Web.ViewModels.Hospital;
 
     public class MapperInitializer
     {
@@ -11,7 +12,7 @@
         {
             AutoMapperConfig.RegisterMappings(
                 typeof(DonorDataProfileInputModel).GetTypeInfo().Assembly,
-                typeof(DonorData).GetTypeInfo().Assembly);
+                typeof(HospitalProfileInputModel).GetTypeInfo().Assembly);
         }
     }
 }

@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
 
     using BloodDonationApp.Data.Models;
+    using BloodDonationApp.Data.Models.Enums;
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Web.ViewModels.DonationEvents;
     using BloodDonationApp.Web.ViewModels.Request;
@@ -52,7 +53,19 @@
 
             var id = model.UserId != null ? model.UserId : viewModel.HospitalId;
 
-            await this.donationEventsService.CreateDonation(id, userDonorId, model, viewModel);
+            double neededQuantity = model.NeededQuantity;
+            double quantity = viewModel.Quantity;
+            BloodGroup bloodGroup = viewModel.BloodGroup;
+            RhesusFactor rhesusFactor = viewModel.RhesusFactor;
+
+            await this.donationEventsService
+                .CreateDonation(
+                    id,
+                    userDonorId,
+                    neededQuantity,
+                    quantity,
+                    bloodGroup,
+                    rhesusFactor);
 
             return this.RedirectToAction("QAndA", "Home");
         }

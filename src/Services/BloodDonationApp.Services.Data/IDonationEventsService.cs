@@ -2,11 +2,10 @@
 {
     using System.Threading.Tasks;
 
-    using BloodDonationApp.Web.ViewModels.DonationEvents;
-    using BloodDonationApp.Web.ViewModels.Request;
+    using BloodDonationApp.Data.Models.Enums;
 
     public interface IDonationEventsService
     {
-        Task CreateDonation(string requestId, string recipientId, RequestInfoViewModel model, DonationEventInputModel viewModel);
+        Task CreateDonation(string requestId, string recipientId, double neededQuantity, double quantity, BloodGroup bloodGroup, RhesusFactor rhesusFactor);
     }
 }

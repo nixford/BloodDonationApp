@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using BloodDonationApp.Data.Models;
     using BloodDonationApp.Web.ViewModels.Hospital;
 
     public interface IHospitalsService
@@ -11,10 +10,6 @@
 
         IEnumerable<T> GetAllHospitals<T>(int? take = null, int skip = 0);
 
-        IEnumerable<T> GetAllHospitalsCount<T>();
-
-        T GetHospitalDataById<T>(string id);
-
-        T GetHospitalDataByName<T>(string hospitalName);
+        T GetHospitalDataById<T>(string userHospitalOrHospitalDataId);
     }
 }

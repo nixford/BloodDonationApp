@@ -1,9 +1,10 @@
 ﻿namespace BloodDonationApp.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BloodDonationApp.Common;
     using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Mapping;
@@ -24,11 +25,11 @@
         public HospitalsService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<HospitalData> hospitalsRepository,
-            IDeletableEntityRepository<ApplicationUserHospitalData> appUsersHospitalRepository,
             IDeletableEntityRepository<ApplicationRole> rolesRepository,
+            IDeletableEntityRepository<ApplicationUserHospitalData> appUsersHospitalRepository,
             IDeletableEntityRepository<Recipient> recipientRepository,
             IDeletableEntityRepository<BloodBank> bloodBankRepository,
-            IDeletableEntityRepository<HospitalDataBloodBank> hospitalBloodBankRepository, 
+            IDeletableEntityRepository<HospitalDataBloodBank> hospitalBloodBankRepository,
             IDeletableEntityRepository<BloodBag> bagRepository)
         {
             this.usersRepository = usersRepository;
@@ -46,6 +47,11 @@
             var user = this.usersRepository.All()
                             .Where(u => u.Id == userId)
                             .FirstOrDefault();
+
+            if (user == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoUserRegistrationErrorMessage);
+            }
 
             var hospitalData = new HospitalData
             {
@@ -123,17 +129,6 @@
             return hospitalDatas.To<T>().ToList();
         }
 
-        public IEnumerable<T> GetAllHospitalsCount<T>()
-        {
-            var hospitalDatas = this.hospitalsRepository
-                .All()
-                .Where(hd => hd.IsDeleted == false)
-                .To<T>()
-                .ToList();
-
-            return hospitalDatas;
-        }
-
         public T GetHospitalDataById<T>(string userHospitalOrHospitalDataId)
         {
             var userHospital = this.usersRepository
@@ -149,14 +144,6 @@
                 .FirstOrDefault();
 
             return hospitalData;
-        }
-
-        public T GetHospitalDataByName<T>(string hospitalName)
-        {
-            return this.hospitalsRepository.All()
-               .Where(h => h.Name == hospitalName)
-               .To<T>()
-               .FirstOrDefault();
         }
     }
 }
