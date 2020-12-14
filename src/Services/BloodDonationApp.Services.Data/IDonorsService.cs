@@ -10,7 +10,5 @@
         Task CreateDonorProfileAsync(DonorDataProfileInputModel input, string userId);
 
         IEnumerable<T> GetAllDonors<T>();
-
-        IEnumerable<T> GetTopDonors<T>();
     }
 }

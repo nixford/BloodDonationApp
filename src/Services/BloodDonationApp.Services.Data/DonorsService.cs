@@ -87,16 +87,5 @@
 
             return donors;
         }
-
-        public IEnumerable<T> GetTopDonors<T>()
-        {
-            var topDonors = this.donorRepository
-                .All()
-                .OrderByDescending(u => u.DonorAveilableStatus)
-                .Where(u => u.IsDeleted == false)
-                .Take(GlobalConstants.TopDonorsNumber);
-
-            return topDonors.To<T>().ToList();
-        }
     }
 }
