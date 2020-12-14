@@ -9,6 +9,7 @@
         public const string HospitaltRoleName = "Hospital";
 
         public const string NotAvailableUserNameErrorMessage = "The username is already in use! Please, try another one.";
+        public const string NoUserRegistrationErrorMessage = "You don't have registration as user!";
         public const string NotAvailableEmailErrorMessage = "The email is already in use! Please try another one.";
 
         public const int TopDonorsNumber = 10;

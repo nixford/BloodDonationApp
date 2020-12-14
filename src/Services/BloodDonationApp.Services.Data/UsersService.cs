@@ -125,13 +125,16 @@
             return result.Succeeded;
         }
 
-        public async Task<string> RemoveUserAsync(string email, string role)
+        public async Task<string> RemoveUserAsync(string email)
         {
             var user = this.userRepository.All()
-                .Where(u => u.Email == email)
+                .Where(u => u.Email == email && u.IsDeleted == false)
                 .FirstOrDefault();
 
-            var users = await this.userManager.GetUsersInRoleAsync(role);
+            if (user == null)
+            {
+                throw new ArgumentNullException();
+            }
 
             var donorData = this.donorDataRepository
                 .All()
@@ -148,11 +151,6 @@
             var hospitalRequests = this.requestsRepository
                 .All()
                 .Where(hq => hq.HospitalId == hospitalData.Id);
-
-            if (user == null || users.All(u => u.Email != user?.Email))
-            {
-                throw new ArgumentNullException();
-            }
 
             // Deleting user
             user.IsDeleted = true;

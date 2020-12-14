@@ -1,5 +1,6 @@
 ﻿namespace BloodDonationApp.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -13,18 +14,15 @@
     public class DonorsService : IDonorsService
     {
         private readonly IDeletableEntityRepository<DonorData> donorRepository;
-        private readonly IDeletableEntityRepository<ApplicationUserDonorData> appUserDonorRepository;
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
         private readonly IDeletableEntityRepository<ApplicationRole> roleRepository;
 
         public DonorsService(
             IDeletableEntityRepository<DonorData> donorRepository,
-            IDeletableEntityRepository<ApplicationUserDonorData> appUserDonorRepository,
             IDeletableEntityRepository<ApplicationUser> userRepository,
             IDeletableEntityRepository<ApplicationRole> roleRepository)
         {
             this.donorRepository = donorRepository;
-            this.appUserDonorRepository = appUserDonorRepository;
             this.userRepository = userRepository;
             this.roleRepository = roleRepository;
         }
@@ -34,6 +32,11 @@
             var user = this.userRepository.All()
                             .Where(u => u.Id == userId)
                             .FirstOrDefault();
+
+            if (user == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoUserRegistrationErrorMessage);
+            }
 
             var donorData = new DonorData
             {
@@ -69,15 +72,6 @@
 
             await this.donorRepository.AddAsync(donorData);
             await this.donorRepository.SaveChangesAsync();
-
-            var appUserDonorData = new ApplicationUserDonorData
-            {
-                ApplicationUserId = userId,
-                DonorDataId = donorData.Id,
-            };
-
-            await this.appUserDonorRepository.AddAsync(appUserDonorData);
-            await this.appUserDonorRepository.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAllDonors<T>()
@@ -96,9 +90,9 @@
 
         public IEnumerable<T> GetTopDonors<T>()
         {
-            var topDonors = this.appUserDonorRepository
+            var topDonors = this.donorRepository
                 .All()
-                .OrderByDescending(u => u.DonorData.DonorAveilableStatus)
+                .OrderByDescending(u => u.DonorAveilableStatus)
                 .Where(u => u.IsDeleted == false)
                 .Take(GlobalConstants.TopDonorsNumber);
 

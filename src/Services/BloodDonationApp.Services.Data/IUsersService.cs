@@ -19,6 +19,6 @@
 
         Task<bool> AddAdmin(string userName, string email, string password);
 
-        Task<string> RemoveUserAsync(string email, string role);
+        Task<string> RemoveUserAsync(string email);
     }
 }

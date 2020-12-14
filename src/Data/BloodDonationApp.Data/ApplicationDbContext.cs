@@ -59,8 +59,6 @@
 
         public DbSet<ApplicationUserHospitalData> ApplicationUserHospitalData { get; set; }
 
-        public DbSet<ApplicationUserDonorData> ApplicationUserDonorData { get; set; }
-
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);

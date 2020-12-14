@@ -84,7 +84,7 @@
         {
             try
             {
-                string donorName = await this.usersService.RemoveUserAsync(inputModel.Email, GlobalConstants.DonorRoleName);
+                string donorName = await this.usersService.RemoveUserAsync(inputModel.Email);
                 this.TempData["Msg"] = string.Format(RemoveSuccessMessage, GlobalConstants.DonorRoleName, donorName);
             }
             catch
@@ -106,7 +106,7 @@
         {
             try
             {
-                string hospitalName = await this.usersService.RemoveUserAsync(inputModel.Email, GlobalConstants.HospitaltRoleName);
+                string hospitalName = await this.usersService.RemoveUserAsync(inputModel.Email);
                 this.TempData["Msg"] = string.Format(RemoveSuccessMessage, GlobalConstants.HospitaltRoleName, hospitalName);
             }
             catch
@@ -160,7 +160,7 @@
         {
             try
             {
-                string adminName = await this.usersService.RemoveUserAsync(inputModel.Email, GlobalConstants.AdministratorRoleName);
+                string adminName = await this.usersService.RemoveUserAsync(inputModel.Email);
                 this.TempData["Success"] = string.Format(RemoveSuccessMessage, GlobalConstants.AdministratorRoleName, adminName);
             }
             catch

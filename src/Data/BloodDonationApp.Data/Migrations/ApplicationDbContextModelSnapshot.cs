@@ -139,40 +139,6 @@ namespace BloodDonationApp.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("BloodDonationApp.Data.Models.ApplicationUserDonorData", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DonorDataId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("DonorDataId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("ApplicationUserDonorData");
-                });
-
             modelBuilder.Entity("BloodDonationApp.Data.Models.ApplicationUserHospitalData", b =>
                 {
                     b.Property<string>("Id")
@@ -1025,17 +991,6 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("BloodDonationApp.Data.Models.ApplicationUserDonorData", b =>
-                {
-                    b.HasOne("BloodDonationApp.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("BloodDonationApp.Data.Models.DonorData", "DonorData")
-                        .WithMany()
-                        .HasForeignKey("DonorDataId");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.ApplicationUserHospitalData", b =>

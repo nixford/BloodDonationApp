@@ -73,7 +73,7 @@
         }
 
         [Fact]
-        public async Task GetUserByIdShouldReturnUserTest()
+        public async Task GetUserByIdShouldReturnSameUserTest()
         {
             MapperInitializer.InitializeMapper();
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
@@ -88,7 +88,202 @@
 
             var result = service.GetUserById<DonorDataProfileInputModel>(id);
 
-            Assert.Equal("123", result.Id);
+            Assert.Equal(id, result.Id);
+        }
+
+        [Fact]
+        public async Task GetUserByIdShouldReturnNullTest()
+        {
+            MapperInitializer.InitializeMapper();
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
+            string id = "1234";
+
+            await SeedDataAsync(dbContext);
+
+            var result = service.GetUserById<DonorDataProfileInputModel>(id);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task GetUserByNameShouldReturnSameUserTest()
+        {
+            MapperInitializer.InitializeMapper();
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
+            string username = "User2";
+
+            await SeedDataAsync(dbContext);
+
+            var result = service.GetUserByName<DonorDataProfileInputModel>(username);
+
+            Assert.Equal(username, result.UserName);
+        }
+
+        [Fact]
+        public async Task GetUserByNameShouldReturnZeroTest()
+        {
+            MapperInitializer.InitializeMapper();
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
+            string username = "User5";
+
+            await SeedDataAsync(dbContext);
+
+            var result = service.GetUserByName<DonorDataProfileInputModel>(username);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task GetUserEmailShouldReturnCorrectEmailTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
+            string id = "123";
+
+            await SeedDataAsync(dbContext);
+
+            var result = service.GetUserEmailById(id);
+
+            Assert.Equal("User2@user.bg", result);
+        }
+
+        [Fact]
+        public async Task GetUserEmailShouldReturnNullTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
+            string id = "1234";
+
+            await SeedDataAsync(dbContext);
+
+            var result = service.GetUserEmailById(id);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task AddAdminCorrectlyTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
+            string userName = "Admin1@admin.bg";
+            string email = "Admin1@admin.bg";
+            string password = "password";
+
+            var result = service.AddAdmin(userName, email, password);
+
+            var user = usersRepository.All().Where(u => u.UserName == "Admin1@admin.bg").FirstOrDefault();
+
+            var isInRole = await userManager.Object.IsInRoleAsync(user, GlobalConstants.AdministratorRoleName);
+
+            Assert.True(isInRole);
+        }
+
+        [Fact]
+        public async Task AddAdminThrowExceptionIfUsernameExistTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
+
+            await SeedDataAsync(dbContext);
+
+            string userName = "Admin";
+            string email = "admin1@admin1.bg";
+            string password = "password";
+
+            await Assert.ThrowsAsync<ArgumentException>(() => service.AddAdmin(userName, email, password));
+        }
+
+        [Fact]
+        public async Task AddAdminThrowExceptionIfEmailExistTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
+
+            await SeedDataAsync(dbContext);
+
+            string userName = "Admin123";
+            string email = "Admin@admin.bg";
+            string password = "password";
+
+            await Assert.ThrowsAsync<ArgumentException>(() => service.AddAdmin(userName, email, password));
+        }
+
+        [Fact]
+        public async Task RemoveUserCorrectlyTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var hospitalDataRepository = new EfDeletableEntityRepository<HospitalData>(dbContext);
+            var donorDataRepository = new EfDeletableEntityRepository<DonorData>(dbContext);
+            var recipientDataRepository = new EfDeletableEntityRepository<Recipient>(dbContext);
+            var requestDataRepository = new EfDeletableEntityRepository<Request>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, hospitalDataRepository, donorDataRepository, recipientDataRepository, requestDataRepository);
+
+            await SeedDataAsync(dbContext);
+
+            await service.RemoveUserAsync("Admin@admin.bg");
+
+            var result = usersRepository.All().Where(u => u.UserName == "Admin").FirstOrDefault();
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task RemoveUserThrowsEceptionIfUserIsMissingTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var hospitalDataRepository = new EfDeletableEntityRepository<HospitalData>(dbContext);
+            var donorDataRepository = new EfDeletableEntityRepository<DonorData>(dbContext);
+            var recipientDataRepository = new EfDeletableEntityRepository<Recipient>(dbContext);
+            var requestDataRepository = new EfDeletableEntityRepository<Request>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, hospitalDataRepository, donorDataRepository, recipientDataRepository, requestDataRepository);
+
+            await SeedDataAsync(dbContext);
+
+            await Assert.ThrowsAsync<ArgumentNullException>(() => service.RemoveUserAsync("Admin1@admin.bg"));
         }
 
         private static async Task SeedDataAsync(ApplicationDbContext dbContext)
