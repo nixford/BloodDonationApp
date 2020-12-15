@@ -100,7 +100,7 @@
 
         private static async Task SeedDataAsync(ApplicationDbContext dbContext)
         {
-            // Seeding user with id
+            // Seeding user
             dbContext.Users.Add(new ApplicationUser
             {
                 Id = "123",

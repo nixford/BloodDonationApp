@@ -15,6 +15,10 @@
         public const string NoBloodBankDataErrorMessage = "No blood bank data available!";
         public const string NotAvailableEmailErrorMessage = "The email is already in use! Please try another one.";
         public const string NotMessageErrorMessage = "There is no message with this id!";
+        public const string NotFullRecipientDataErrorMessage = "The recipient data is not full!";
+        public const string NotRecipientDataErrorMessage = "The recipient dont't exist!";
+        public const string RecipentIdConnotBeNullErrorMessage = "Recipent id can not be null!";
+        public const string ExistingRequestForThisRecipient = "Request for this recipient already exist!";
 
         public const string MissingMessageElementErrorMessage = "The message should have content, authorId, userName and email!";
 

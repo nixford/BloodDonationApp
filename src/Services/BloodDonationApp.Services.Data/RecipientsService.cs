@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BloodDonationApp.Common;
     using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
+    using BloodDonationApp.Data.Models.Enums;
     using BloodDonationApp.Services.Mapping;
-    using BloodDonationApp.Web.ViewModels.Recipient;
 
     public class RecipientsService : IRecipientsService
     {
@@ -29,21 +29,44 @@
             this.recipientHospitalDataRepository = recipientHospitalDataRepository;
         }
 
-        public async Task AddRecipientAsync(string userHospitalId, RecipientInputModel input)
+        public async Task AddRecipientAsync(
+            string userHospitalId,
+            string firstName,
+            string middleName,
+            string lastName,
+            int age,
+            double neededQuantity,
+            EmergencyStatus recipientEmergency,
+            BloodGroup bloodGroup,
+            RhesusFactor rhesusFactor)
         {
             var hospitalData = this.hospitalDataRepository.All()
                 .FirstOrDefault(uhd => uhd.ApplicationUserId == userHospitalId);
 
+            if (hospitalData == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoHospitalDataErrorMessage);
+            }
+
+            if (firstName == null ||
+                middleName == null ||
+                lastName == null ||
+                age == 0 ||
+                neededQuantity == 0)
+            {
+                throw new ArgumentException(GlobalConstants.NotFullRecipientDataErrorMessage);
+            }
+
             var recipient = new Recipient
             {
-                FirstName = input.FirstName,
-                MiddleName = input.MiddleName,
-                LastName = input.LastName,
-                Age = input.Age,
-                NeededQuantity = input.NeededQuantity,
-                RecipientEmergency = input.RecipientEmergency,
-                BloodGroup = input.BloodGroup,
-                RhesusFactor = input.RhesusFactor,
+                FirstName = firstName,
+                MiddleName = middleName,
+                LastName = lastName,
+                Age = age,
+                NeededQuantity = neededQuantity,
+                RecipientEmergency = recipientEmergency,
+                BloodGroup = bloodGroup,
+                RhesusFactor = rhesusFactor,
             };
 
             var recipientHospitalData = new RecipientHospitalData
@@ -77,11 +100,12 @@
             return recipientsCurrHospital.To<T>().ToList();
         }
 
-        public IEnumerable<Recipient> TotalRecipients(string userHospitalId)
+        public IEnumerable<T> TotalRecipients<T>(string userHospitalId)
         {
             var recipients = this.recipientsRepository
                 .All()
                 .Where(r => r.IsDeleted == false && r.HospitalData.ApplicationUserId == userHospitalId)
+                .To<T>()
                 .ToList();
 
             return recipients;
@@ -98,7 +122,7 @@
 
             if (recipient == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentException(GlobalConstants.NotRecipientDataErrorMessage);
             }
 
             recipient.IsDeleted = true;
@@ -107,6 +131,11 @@
 
         public T GetById<T>(string recipientId)
         {
+            if (recipientId == null)
+            {
+                throw new ArgumentException(GlobalConstants.RecipentIdConnotBeNullErrorMessage);
+            }
+
             var recipient = this.recipientsRepository.All()
                  .Where(r => r.Id == recipientId)
                  .To<T>()
@@ -119,7 +148,7 @@
         {
             if (this.recipientRequestDataRepository.All().Any(x => x.RequestId == requestId && x.RecipientId == recipientId))
             {
-                return;
+                throw new ArgumentException(GlobalConstants.ExistingRequestForThisRecipient);
             }
 
             var recipientRequest = new RecipientRequest

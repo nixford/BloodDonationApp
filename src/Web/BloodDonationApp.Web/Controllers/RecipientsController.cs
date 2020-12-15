@@ -40,7 +40,17 @@
         {
             var hospitalUserId = this.userManager.GetUserId(this.User);
 
-            await this.recipientsService.AddRecipientAsync(hospitalUserId, input);
+            await this.recipientsService
+                .AddRecipientAsync(
+                hospitalUserId,
+                input.FirstName,
+                input.MiddleName,
+                input.LastName,
+                input.Age,
+                input.NeededQuantity,
+                input.RecipientEmergency,
+                input.BloodGroup,
+                input.RhesusFactor);
 
             return this.RedirectToAction("AllHospRecip", "Recipients");
         }
@@ -54,7 +64,7 @@
                 .AllHospitalRecipients<RecipientInfoViewModel>(hospitalUserId, take, (int)(page - 1) * take);
 
             var count = this.recipientsService
-                .TotalRecipients(hospitalUserId)
+                .TotalRecipients<RecipientInfoViewModel>(hospitalUserId)
                 .Count();
 
             if (!string.IsNullOrEmpty(viewModel.SearchTerm))
