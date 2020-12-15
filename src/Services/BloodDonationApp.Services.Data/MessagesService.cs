@@ -1,9 +1,10 @@
 ﻿namespace BloodDonationApp.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BloodDonationApp.Common;
     using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Mapping;
@@ -20,6 +21,14 @@
 
         public async Task Create(string content, string authorId, string userName, string email)
         {
+            if (content == null ||
+                authorId == null ||
+                userName == null ||
+                email == null)
+            {
+                throw new ArgumentException(GlobalConstants.MissingMessageElementErrorMessage);
+            }
+
             var message = new Message
             {
                 UserName = userName,
@@ -50,7 +59,15 @@
 
         public async Task<string> Delete(string id)
         {
-            var messageToDelete = this.messagesRepository.All().Where(m => m.Id == id).FirstOrDefault();
+            var messageToDelete = this.messagesRepository
+                    .All()
+                    .Where(m => m.Id == id)
+                    .FirstOrDefault();
+
+            if (messageToDelete == null)
+            {
+                throw new ArgumentException(GlobalConstants.NotMessageErrorMessage);
+            }
 
             messageToDelete.IsDeleted = true;
 

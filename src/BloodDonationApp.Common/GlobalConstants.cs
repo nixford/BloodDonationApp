@@ -14,6 +14,9 @@
         public const string NoHospitalDataErrorMessage = "No hospital data available!";
         public const string NoBloodBankDataErrorMessage = "No blood bank data available!";
         public const string NotAvailableEmailErrorMessage = "The email is already in use! Please try another one.";
+        public const string NotMessageErrorMessage = "There is no message with this id!";
+
+        public const string MissingMessageElementErrorMessage = "The message should have content, authorId, userName and email!";
 
         public const int TopDonorsNumber = 10;
 
