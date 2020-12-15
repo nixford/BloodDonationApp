@@ -11,6 +11,8 @@
         public const string NotAvailableUserNameErrorMessage = "The username is already in use! Please, try another one.";
         public const string NoUserRegistrationErrorMessage = "You don't have registration as user!";
         public const string NoDonorDataErrorMessage = "No donor data available!";
+        public const string NoHospitalDataErrorMessage = "No hospital data available!";
+        public const string NoBloodBankDataErrorMessage = "No blood bank data available!";
         public const string NotAvailableEmailErrorMessage = "The email is already in use! Please try another one.";
 
         public const int TopDonorsNumber = 10;

@@ -59,6 +59,11 @@
                 request != null ?
                 hd.Id == request.HospitalId : hd.Id == requestOrHospitalId);
 
+            if (hospitalData == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoHospitalDataErrorMessage);
+            }
+
             var bloodBank = this.bloodBankRepository.All()
                 .FirstOrDefault(bbk => bbk.HospitalDataId == hospitalData.Id);
 

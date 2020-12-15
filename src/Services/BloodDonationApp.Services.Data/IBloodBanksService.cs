@@ -6,6 +6,6 @@
 
     public interface IBloodBanksService
     {
-        IEnumerable<BloodBag> GetHospitalBloodBagsById(params string[] id);
+        IEnumerable<BloodBag> GetHospitalBloodBagsById(string id);
     }
 }
