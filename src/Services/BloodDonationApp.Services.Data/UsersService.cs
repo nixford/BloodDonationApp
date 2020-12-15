@@ -73,6 +73,11 @@
 
         public T GetUserById<T>(string id)
         {
+            if (id == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoUserIdErrorMessage);
+            }
+
             var user = this.userRepository.All()
                  .Where(u => u.Id == id)
                  .To<T>()
@@ -83,6 +88,11 @@
 
         public T GetUserByName<T>(string userName)
         {
+            if (userName == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoUserNameErrorMessage);
+            }
+
             return this.userRepository.All()
                .Where(u => u.UserName == userName)
                .To<T>()
@@ -91,6 +101,11 @@
 
         public string GetUserEmailById(string userId)
         {
+            if (userId == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoUserIdErrorMessage);
+            }
+
             return this.userRepository.All()
                 .Where(u => u.Id == userId)
                 .Select(u => u.Email)
@@ -127,6 +142,11 @@
 
         public async Task<string> RemoveUserAsync(string email)
         {
+            if (email == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoUserEmailErrorMessage);
+            }
+
             var user = this.userRepository.All()
                 .Where(u => u.Email == email && u.IsDeleted == false)
                 .FirstOrDefault();
@@ -190,6 +210,11 @@
             }
 
             return user.UserName;
+        }
+
+        public object GetUserEmailById(object id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

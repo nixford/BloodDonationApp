@@ -4,9 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BloodDonationApp.Common;
     using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
+    using BloodDonationApp.Data.Models.Enums;
     using BloodDonationApp.Services.Mapping;
     using BloodDonationApp.Web.ViewModels.Request;
 
@@ -32,11 +33,28 @@
             this.locationDataRepository = locationDataRepository;
         }
 
-        public async Task<string> CreateRequestAsync(string userId, RequestInputViewModel input)
+        public async Task<string> CreateRequestAsync(
+            string userId,
+            string content,
+            DateTime publishedOn,
+            EmergencyStatus emergencyStatus,
+            BloodGroup bloodGroup,
+            RhesusFactor rhesusFactor,
+            double neededQuantity)
         {
+            if (neededQuantity == 0)
+            {
+                throw new ArgumentException(GlobalConstants.NoQuantityErrrorMessage);
+            }
+
             var hospitalData = this.hospitalDataRepository.All()
                 .Where(hd => hd.ApplicationUserId == userId)
                 .FirstOrDefault();
+
+            if (hospitalData == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoHospitalDataErrorMessage);
+            }
 
             var location = this.locationDataRepository.All()
                 .FirstOrDefault(l => l.Id == hospitalData.LocationId);
@@ -44,12 +62,12 @@
             var request = new Request
             {
                 HospitalName = hospitalData.Name,
-                Content = input.Content,
-                PublishedOn = input.PublishedOn,
-                EmergencyStatus = input.EmergencyStatus,
-                BloodGroup = input.BloodGroup,
-                RhesusFactor = input.RhesusFactor,
-                NeededQuantity = input.NeededQuantity,
+                Content = content,
+                PublishedOn = publishedOn,
+                EmergencyStatus = emergencyStatus,
+                BloodGroup = bloodGroup,
+                RhesusFactor = rhesusFactor,
+                NeededQuantity = neededQuantity,
                 Location = location,
             };
 
@@ -70,21 +88,6 @@
             return request.Id;
         }
 
-        public async Task DeleteAsync(string requestId)
-        {
-            var request = this.requestsRepository.All()
-                .Where(r => r.Id == requestId)
-                .FirstOrDefault();
-
-            if (request == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            request.IsDeleted = true;
-            await this.requestsRepository.SaveChangesAsync();
-        }
-
         public IEnumerable<T> AllRequests<T>(int? take = null, int skip = 0)
         {
             var requests = this.requestsRepository.All()
@@ -95,18 +98,28 @@
             return requests.To<T>().ToList();
         }
 
-        public IEnumerable<Request> AllRequestsCount()
+        public async Task DeleteAsync(string requestId)
         {
-            var requests = this.requestsRepository
-                .All()
-                .Where(r => r.IsDeleted == false)
-                .ToList();
+            var request = this.requestsRepository.All()
+                .Where(r => r.Id == requestId)
+                .FirstOrDefault();
 
-            return requests;
+            if (request == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoRequestErrorMessage);
+            }
+
+            request.IsDeleted = true;
+            await this.requestsRepository.SaveChangesAsync();
         }
 
         public T GetById<T>(string id)
         {
+            if (id == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoRequestErrorMessage);
+            }
+
             var request = this.requestsRepository.All()
                  .Where(x => x.Id == id)
                  .To<T>()

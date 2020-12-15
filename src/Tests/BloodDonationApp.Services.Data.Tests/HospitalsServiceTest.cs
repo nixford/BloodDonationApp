@@ -217,11 +217,43 @@
                 bagRepository);
 
             await SeedDataAsync(dbContext);
-            await service.CreateHospitalProfileAsync(this.SeedInputs(), this.SeedInputs().Id);
+            var user = usersRepository.All().FirstOrDefault();
+
+            await service.CreateHospitalProfileAsync(this.SeedInputs(), user.Id);
 
             var result = service.GetHospitalDataById<HospitalProfileInputModel>("111");
 
             Assert.Null(result);
+        }
+
+        [Fact]
+        public void GetHospitalByUserIdThrowsExceptionIfIdIsNullTestt()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            MapperInitializer.InitializeMapper();
+
+            var hospitalDataRepository = new EfDeletableEntityRepository<HospitalData>(dbContext);
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var appUsersHospitalRepository = new EfDeletableEntityRepository<ApplicationUserHospitalData>(dbContext);
+            var recipientRepository = new EfDeletableEntityRepository<Recipient>(dbContext);
+            var bloodBankRepository = new EfDeletableEntityRepository<BloodBank>(dbContext);
+            var hospitalBloodBankRepository = new EfDeletableEntityRepository<HospitalDataBloodBank>(dbContext);
+            var bagRepository = new EfDeletableEntityRepository<BloodBag>(dbContext);
+
+            var userManager = this.GetUserManagerMock();
+
+            var service = new HospitalsService(
+                usersRepository,
+                hospitalDataRepository,
+                rolesRepository,
+                appUsersHospitalRepository,
+                recipientRepository,
+                bloodBankRepository,
+                hospitalBloodBankRepository,
+                bagRepository);
+
+            Assert.Throws<ArgumentException>(() => service.GetHospitalDataById<HospitalProfileInputModel>(null));
         }
 
         private static async Task SeedDataAsync(ApplicationDbContext dbContext)

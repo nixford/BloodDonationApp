@@ -44,7 +44,14 @@
 
             var userId = this.userManager.GetUserId(this.User);
 
-            var requestId = await this.requestsService.CreateRequestAsync(userId, input);
+            var requestId = await this.requestsService.CreateRequestAsync(
+                userId,
+                input.Content,
+                input.PublishedOn,
+                input.EmergencyStatus,
+                input.BloodGroup,
+                input.RhesusFactor,
+                input.NeededQuantity);
 
             await this.recipientsService.AddRequestForRecipient(requestId, recipientId);
 
@@ -55,7 +62,7 @@
         {
             viewModel.Requests = this.requestsService.AllRequests<RequestInfoViewModel>(take, (int)(page - 1) * take);
 
-            var count = this.requestsService.AllRequestsCount().Count();
+            var count = this.requestsService.AllRequests<RequestInfoViewModel>().Count();
 
             if (!string.IsNullOrEmpty(viewModel.SearchTerm))
             {

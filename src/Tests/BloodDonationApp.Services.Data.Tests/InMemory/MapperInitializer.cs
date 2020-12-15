@@ -7,6 +7,7 @@
     using BloodDonationApp.Web.ViewModels.Hospital;
     using BloodDonationApp.Web.ViewModels.Message;
     using BloodDonationApp.Web.ViewModels.Recipient;
+    using BloodDonationApp.Web.ViewModels.Request;
 
     public class MapperInitializer
     {
@@ -16,7 +17,8 @@
                 typeof(DonorDataProfileInputModel).GetTypeInfo().Assembly,
                 typeof(HospitalProfileInputModel).GetTypeInfo().Assembly,
                 typeof(MessageViewModel).GetTypeInfo().Assembly,
-                typeof(RecipientInfoViewModel).GetTypeInfo().Assembly);
+                typeof(RecipientInfoViewModel).GetTypeInfo().Assembly,
+                typeof(RequestInfoViewModel).GetTypeInfo().Assembly);
         }
     }
 }

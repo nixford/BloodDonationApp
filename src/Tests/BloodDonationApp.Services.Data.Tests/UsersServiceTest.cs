@@ -22,20 +22,41 @@
     public class UsersServiceTest
     {
         [Fact]
-        public async Task GetNumberOfAdministratorsMustBeZeroTest()
+        public void GetNumberOfAdministratorsShouldBeZeroTest()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
 
-            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
             var userManager = this.GetUserManagerMock();
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
             var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
-            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
+            var hospitalDataRepository = new EfDeletableEntityRepository<HospitalData>(dbContext);
+            var donorDataRepository = new EfDeletableEntityRepository<DonorData>(dbContext);
+            var recipientRepository = new EfDeletableEntityRepository<Recipient>(dbContext);
+            var requestRepository = new EfDeletableEntityRepository<Request>(dbContext);
+
+            var result = usersRepository.All().Count();
+
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public async Task GetNumberOfAdministratorsShouldBeNotNullTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var userManager = this.GetUserManagerMock();
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var hospitalDataRepository = new EfDeletableEntityRepository<HospitalData>(dbContext);
+            var donorDataRepository = new EfDeletableEntityRepository<DonorData>(dbContext);
+            var recipientRepository = new EfDeletableEntityRepository<Recipient>(dbContext);
+            var requestRepository = new EfDeletableEntityRepository<Request>(dbContext);
 
             await SeedDataAsync(dbContext);
 
-            var result = service.GetAllAdmins().Count();
+            var result = usersRepository.All().FirstOrDefault();
 
-            Assert.Equal(0, result - 1);
+            Assert.NotNull(result);
         }
 
         [Fact]
@@ -82,13 +103,27 @@
             var userManager = this.GetUserManagerMock();
             var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
             var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
-            string id = "123";
 
             await SeedDataAsync(dbContext);
+            var user = usersRepository.All().FirstOrDefault();
 
-            var result = service.GetUserById<DonorDataProfileInputModel>(id);
+            var result = service.GetUserById<DonorDataProfileInputModel>(user.Id);
 
-            Assert.Equal(id, result.Id);
+            Assert.Equal(user.Id, result.Id);
+        }
+
+        [Fact]
+        public void GetUserByIdThrowsExceptionIfIdIsNullTest()
+        {
+            MapperInitializer.InitializeMapper();
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
+
+            Assert.Throws<ArgumentException>(() => service.GetUserById<DonorDataProfileInputModel>(null));
         }
 
         [Fact]
@@ -120,13 +155,13 @@
             var userManager = this.GetUserManagerMock();
             var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
             var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
-            string username = "User2";
 
             await SeedDataAsync(dbContext);
+            var user = usersRepository.All().FirstOrDefault();
 
-            var result = service.GetUserByName<DonorDataProfileInputModel>(username);
+            var result = service.GetUserByName<DonorDataProfileInputModel>(user.UserName);
 
-            Assert.Equal(username, result.UserName);
+            Assert.Equal(user.UserName, result.UserName);
         }
 
         [Fact]
@@ -146,6 +181,20 @@
             var result = service.GetUserByName<DonorDataProfileInputModel>(username);
 
             Assert.Null(result);
+        }
+
+        [Fact]
+        public void GetUserByNameThrowsExceptionIfNameIdNullTest()
+        {
+            MapperInitializer.InitializeMapper();
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
+
+            Assert.Throws<ArgumentException>(() => service.GetUserByName<DonorDataProfileInputModel>(null));
         }
 
         [Fact]
@@ -182,6 +231,19 @@
             var result = service.GetUserEmailById(id);
 
             Assert.Null(result);
+        }
+
+        [Fact]
+        public void GetUserEmailThrowsExceptionIfIdIsNullTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var service = new UsersService(usersRepository, userManager.Object, rolesRepository, null, null, null, null);
+
+            Assert.Throws<ArgumentException>(() => service.GetUserEmailById(null));
         }
 
         [Fact]
@@ -284,6 +346,33 @@
             await SeedDataAsync(dbContext);
 
             await Assert.ThrowsAsync<ArgumentNullException>(() => service.RemoveUserAsync("Admin1@admin.bg"));
+        }
+
+        [Fact]
+        public async Task RemoveUserThrowsEceptionIfEmailIsNullTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var hospitalDataRepository = new EfDeletableEntityRepository<HospitalData>(dbContext);
+            var donorDataRepository = new EfDeletableEntityRepository<DonorData>(dbContext);
+            var recipientDataRepository = new EfDeletableEntityRepository<Recipient>(dbContext);
+            var requestDataRepository = new EfDeletableEntityRepository<Request>(dbContext);
+            var userManager = this.GetUserManagerMock();
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+
+            var service = new UsersService(
+                usersRepository,
+                userManager.Object,
+                rolesRepository,
+                hospitalDataRepository,
+                donorDataRepository,
+                recipientDataRepository,
+                requestDataRepository);
+
+            await SeedDataAsync(dbContext);
+
+            await Assert.ThrowsAsync<ArgumentException>(() => service.RemoveUserAsync(null));
         }
 
         private static async Task SeedDataAsync(ApplicationDbContext dbContext)

@@ -38,6 +38,11 @@
                 throw new ArgumentException(GlobalConstants.NoUserRegistrationErrorMessage);
             }
 
+            if (input.Age == 0 || input.FirstName == null || input.LastName == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoDonorDataErrorMessage);
+            }
+
             var donorData = new DonorData
             {
                 ApplicationUserId = user.Id,

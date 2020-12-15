@@ -131,6 +131,11 @@
 
         public T GetHospitalDataById<T>(string userHospitalOrHospitalDataId)
         {
+            if (userHospitalOrHospitalDataId == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoUserIdErrorMessage);
+            }
+
             var userHospital = this.usersRepository
                 .All()
                 .Where(u => u.Id == userHospitalOrHospitalDataId)

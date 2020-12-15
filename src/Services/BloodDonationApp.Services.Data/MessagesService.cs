@@ -59,6 +59,11 @@
 
         public async Task<string> Delete(string id)
         {
+            if (id == null)
+            {
+                throw new ArgumentException(GlobalConstants.NoMessageIdErrorMessage);
+            }
+
             var messageToDelete = this.messagesRepository
                     .All()
                     .Where(m => m.Id == id)

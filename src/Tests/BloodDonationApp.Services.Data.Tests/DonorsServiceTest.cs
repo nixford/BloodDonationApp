@@ -19,6 +19,39 @@
     public class DonorsServiceTest
     {
         [Fact]
+        public async Task CreateDonorShouldBeOneTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var donorDataRepository = new EfDeletableEntityRepository<DonorData>(dbContext);
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+
+            await SeedDataAsync(dbContext);
+
+            var result = usersRepository.All().Count();
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public async Task CreateDonorShouldBeNotNullTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var donorDataRepository = new EfDeletableEntityRepository<DonorData>(dbContext);
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+
+            await SeedDataAsync(dbContext);
+
+            var result = usersRepository.All().FirstOrDefault();
+
+            Assert.NotNull(result);
+        }
+
+
+        [Fact]
         public async Task CreateDonorUserIsNotNullTest()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
@@ -75,6 +108,40 @@
             var service = new DonorsService(donorDataRepository, usersRepository, rolesRepository);
 
             await Assert.ThrowsAsync<ArgumentException>(() => service.CreateDonorProfileAsync(this.SeedInputs()[0], this.SeedInputs()[0].Id));
+        }
+
+        [Fact]
+        public async Task CreateDonorThrowsExceptionIfNoFullDonorDataTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            var donorDataRepository = new EfDeletableEntityRepository<DonorData>(dbContext);
+            var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
+            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
+            var userManager = this.GetUserManagerMock();
+
+            var service = new DonorsService(donorDataRepository, usersRepository, rolesRepository);
+
+            var input = new DonorDataProfileInputModel
+            {
+                Id = "123",
+                UserName = "User1",
+                FirstName = null,
+                MiddleName = "MiddleName",
+                LastName = null,
+                Age = 30,
+                PhoneNumber = "123456789",
+                BloodGroup = (BloodGroup)1,
+                RhesusFactor = (RhesusFactor)1,
+                Country = "Bulgaria",
+                City = "Sofia",
+                AdressDescription = "Sofia",
+                DonorAveilableStatus = EmergencyStatus.AsSoonAsPossible,
+                ExaminationDate = DateTime.UtcNow,
+                DiseaseName = "None",
+            };
+
+            await Assert.ThrowsAsync<ArgumentException>(() => service.CreateDonorProfileAsync(input, this.SeedInputs()[0].Id));
         }
 
         [Fact]

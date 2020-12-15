@@ -110,6 +110,19 @@
             await Assert.ThrowsAsync<ArgumentException>(() => service.Delete("111"));
         }
 
+        [Fact]
+        public async Task DeleteMesageThrowsExceptionIfIdIsNullTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            await this.SeedDataAsync(dbContext);
+
+            var repository = new EfDeletableEntityRepository<Message>(dbContext);
+            var service = new MessagesService(repository);
+
+            await Assert.ThrowsAsync<ArgumentException>(() => service.Delete(null));
+        }
+
         private async Task SeedDataAsync(ApplicationDbContext dbContext)
         {
             dbContext.Messages.Add(new Message

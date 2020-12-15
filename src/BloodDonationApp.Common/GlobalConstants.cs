@@ -19,6 +19,12 @@
         public const string NotRecipientDataErrorMessage = "The recipient dont't exist!";
         public const string RecipentIdConnotBeNullErrorMessage = "Recipent id can not be null!";
         public const string ExistingRequestForThisRecipient = "Request for this recipient already exist!";
+        public const string NoQuantityErrrorMessage = "No blood quantity for the request!";
+        public const string NoRequestErrorMessage = "No such request with this id!";
+        public const string NoUserIdErrorMessage = "User id can not be null!";
+        public const string NoUserNameErrorMessage = "User name can not be null!";
+        public const string NoUserEmailErrorMessage = "User email can not be null!";
+        public const string NoMessageIdErrorMessage = "Message id can not be null!";
 
         public const string MissingMessageElementErrorMessage = "The message should have content, authorId, userName and email!";
 
