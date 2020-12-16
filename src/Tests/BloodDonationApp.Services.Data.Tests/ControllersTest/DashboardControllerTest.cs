@@ -1,4 +1,4 @@
-﻿namespace BloodDonationApp.Services.Data.Tests.ControllersTes
+﻿namespace BloodDonationApp.Services.Data.Tests.ControllersTest
 {
     using System.Collections.Generic;
     using System.Linq;

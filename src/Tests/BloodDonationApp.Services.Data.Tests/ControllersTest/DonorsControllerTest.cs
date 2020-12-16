@@ -1,8 +1,8 @@
-﻿namespace BloodDonationApp.Services.Data.Tests.ControllersTes
+﻿namespace BloodDonationApp.Services.Data.Tests.ControllersTest
 {
     using System;
     using System.Security.Claims;
-    using System.Threading.Tasks;
+
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Data.Models.Enums;
     using BloodDonationApp.Web.Controllers;
@@ -39,11 +39,11 @@
             var mockUsersService = new Mock<IUsersService>();
             mockUsersService.Setup(x => x.GetUserById<DonorDataProfileInputModel>("123"))
                 .Returns(new DonorDataProfileInputModel()
-            {
-                Id = "123",
-                FirstName = "Donor1",
-                LastName = "Donor1",
-            });
+                {
+                    Id = "123",
+                    FirstName = "Donor1",
+                    LastName = "Donor1",
+                });
 
             var controller = new DonorsController(
                 mockUserManagerService.Object,
