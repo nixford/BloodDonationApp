@@ -5,14 +5,38 @@
         <hr class="bg-success" style="height: 2px" />
     </div>
     <div class="container-fluid">
-        <h4 class="text-md-left">AB-Positive: @((Model.ABPositiveQuantity / 10000) * 100) % from 10L of total Capacity</h4>
-        <h4 class="text-md-left">AB-Negative: @((Model.ABNegativeQuantity / 10000) * 100) % from 10L of total Capacity</h4>
-        <h4 class="text-md-left">A-Positive: @((Model.APositiveQuantity / 10000) * 100) % from 10L of total Capacity</h4>
-        <h4 class="text-md-left">A-Negative: @((Model.ANegativeQuantity / 10000) * 100) % from 10L of total Capacity</h4>
-        <h4 class="text-md-left">B-Positive: @((Model.BPositiveQuantity / 10000) * 100) % from 10L of total Capacity</h4>
-        <h4 class="text-md-left">B-Negative: @((Model.BNegativeQuantity / 10000) * 100) % from 10L of total Capacity</h4>
-        <h4 class="text-md-left">Zero-Positive: @((Model.ZeroPositiveQuantity / 10000) * 100) % from 10L of total Capacity</h4>
-        <h4 class="text-md-left">Zero-Negative: @((Model.ZeroNegativeQuantity / 10000) * 100) % from 10L of total Capacity</h4>
+        <h4 class="text-md-left">AB-Positive: % from 10L of total Capacity</h4>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: @Math.Round(((Model.ABPositiveQuantity / 10000) * 100), 2)%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@Math.Round(((Model.ABPositiveQuantity / 10000) * 100), 2)%</div>
+        </div>
+        <h4 class="text-md-left">AB-Negative: % from 10L of total Capacity</h4>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: @Math.Round(((Model.ABNegativeQuantity / 10000) * 100), 2)%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@Math.Round(((Model.ABNegativeQuantity / 10000) * 100), 2)%</div>
+        </div>
+        <h4 class="text-md-left">A-Positive: % from 10L of total Capacity</h4>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: @Math.Round(((Model.APositiveQuantity / 10000) * 100), 2)%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@Math.Round(((Model.APositiveQuantity / 10000) * 100), 2)%</div>
+        </div>
+        <h4 class="text-md-left">A-Negative: % from 10L of total Capacity</h4>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: @Math.Round(((Model.ANegativeQuantity / 10000) * 100), 2)%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@Math.Round(((Model.ANegativeQuantity / 10000) * 100), 2)%</div>
+        </div>
+        <h4 class="text-md-left">B-Positive: % from 10L of total Capacity</h4>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: @Math.Round(((Model.BPositiveQuantity / 10000) * 100), 2)%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@Math.Round(((Model.BPositiveQuantity / 10000) * 100), 2)%</div>
+        </div>
+        <h4 class="text-md-left">B-Negative: % from 10L of total Capacity</h4>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: @Math.Round(((Model.BNegativeQuantity / 10000) * 100), 2)%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@Math.Round(((Model.BNegativeQuantity / 10000) * 100), 2)%</div>
+        </div>
+        <h4 class="text-md-left">Zero-Positive: % from 10L of total Capacity</h4>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: @Math.Round(((Model.ZeroPositiveQuantity / 10000) * 100), 2)%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@Math.Round(((Model.ZeroPositiveQuantity / 10000) * 100), 2)%</div>
+        </div>
+        <h4 class="text-md-left">Zero-Negative: % from 10L of total Capacity</h4>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: @Math.Round(((Model.ZeroNegativeQuantity / 10000) * 100), 2)%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@Math.Round(((Model.ZeroNegativeQuantity / 10000) * 100), 2)%</div>
+        </div>
     </div>
     <div>
         <hr class="bg-success" style="height: 2px" />

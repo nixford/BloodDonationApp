@@ -17,6 +17,21 @@
     public class MessagesServiceTests
     {
         [Fact]
+        public async Task CreateMessageInMemoryDbTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            await this.SeedDataAsync(dbContext);
+
+            var repository = new EfDeletableEntityRepository<Message>(dbContext);
+            var service = new MessagesService(repository);
+
+            await service.Create("Hello5", "5", "user5", "user5@gmail.com");
+
+            Assert.Equal(2, repository.All().Count());
+        }
+
+        [Fact]
         public async Task CreateMessageShoidReturnFiveTest()
         {
             var list = new List<Message>();
@@ -36,21 +51,6 @@
         }
 
         [Fact]
-        public async Task CreateMessageInMemoryDbTest()
-        {
-            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-
-            await this.SeedDataAsync(dbContext);
-
-            var repository = new EfDeletableEntityRepository<Message>(dbContext);
-            var service = new MessagesService(repository);
-
-            await service.Create("Hello5", "5", "user5", "user5@gmail.com");
-
-            Assert.Equal(2, repository.All().Count());
-        }
-
-        [Fact]
         public async Task CreateMessageThrowExceptionTest()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
@@ -61,22 +61,6 @@
             var service = new MessagesService(repository);
 
             await Assert.ThrowsAsync<ArgumentException>(() => service.Create(null, "5", "user5", "user5@gmail.com"));
-        }
-
-        [Fact]
-        public async Task GetAllMessagesShouldReturnOneTest()
-        {
-            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-            MapperInitializer.InitializeMapper();
-
-            await this.SeedDataAsync(dbContext);
-
-            var repository = new EfDeletableEntityRepository<Message>(dbContext);
-            var service = new MessagesService(repository);
-
-            var result = service.GetAllMessages<MessageViewModel>().Count();
-
-            Assert.Equal(1, result);
         }
 
         [Fact]
@@ -98,6 +82,19 @@
         }
 
         [Fact]
+        public async Task DeleteMesageThrowsExceptionIfIdIsNullTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            await this.SeedDataAsync(dbContext);
+
+            var repository = new EfDeletableEntityRepository<Message>(dbContext);
+            var service = new MessagesService(repository);
+
+            await Assert.ThrowsAsync<ArgumentException>(() => service.Delete(null));
+        }
+
+        [Fact]
         public async Task DeleteMesageThrowsExceptionIfMessageIsNullTest()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
@@ -111,16 +108,20 @@
         }
 
         [Fact]
-        public async Task DeleteMesageThrowsExceptionIfIdIsNullTest()
+        public async Task GetAllMessagesShouldReturnOneTest()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
 
+            var repository = new EfDeletableEntityRepository<Message>(dbContext);
+            MapperInitializer.InitializeMapper();
+
             await this.SeedDataAsync(dbContext);
 
-            var repository = new EfDeletableEntityRepository<Message>(dbContext);
             var service = new MessagesService(repository);
 
-            await Assert.ThrowsAsync<ArgumentException>(() => service.Delete(null));
+            var result = service.GetAllMessages<MessageViewModel>().Count();
+
+            Assert.Equal(1, result);
         }
 
         private async Task SeedDataAsync(ApplicationDbContext dbContext)

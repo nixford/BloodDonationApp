@@ -15,6 +15,56 @@
     public class RequestsServiceTests
     {
         [Fact]
+        public void AllRequestsShouldReturnNullTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            MapperInitializer.InitializeMapper();
+
+            var requestRepository = new EfDeletableEntityRepository<Request>(dbContext);
+            var hospitalDataRequestRepository = new EfDeletableEntityRepository<HospitalDataRequest>(dbContext);
+            var hospitalDataRepository = new EfDeletableEntityRepository<HospitalData>(dbContext);
+            var recipientReques = new EfDeletableEntityRepository<RecipientRequest>(dbContext);
+            var locationRepository = new EfDeletableEntityRepository<Location>(dbContext);
+
+            var service = new RequestsService(
+                requestRepository,
+                hospitalDataRequestRepository,
+                hospitalDataRepository,
+                recipientReques,
+                locationRepository);
+
+            var result = service.AllRequests<RequestInfoViewModel>().Count();
+
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        public async Task AllRequestsShouldReturnNotNullTest()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            MapperInitializer.InitializeMapper();
+
+            var requestRepository = new EfDeletableEntityRepository<Request>(dbContext);
+            var hospitalDataRequestRepository = new EfDeletableEntityRepository<HospitalDataRequest>(dbContext);
+            var hospitalDataRepository = new EfDeletableEntityRepository<HospitalData>(dbContext);
+            var recipientReques = new EfDeletableEntityRepository<RecipientRequest>(dbContext);
+            var locationRepository = new EfDeletableEntityRepository<Location>(dbContext);
+
+            var service = new RequestsService(
+                requestRepository,
+                hospitalDataRequestRepository,
+                hospitalDataRepository,
+                recipientReques,
+                locationRepository);
+
+            await SeedDataAsync(dbContext);
+
+            var result = service.AllRequests<RequestInfoViewModel>().Count();
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
         public async Task CreateRequestNotNullTest()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
@@ -223,31 +273,7 @@
         }
 
         [Fact]
-        public void AllRequestsShouldReturnNullTest()
-        {
-            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-            MapperInitializer.InitializeMapper();
-
-            var requestRepository = new EfDeletableEntityRepository<Request>(dbContext);
-            var hospitalDataRequestRepository = new EfDeletableEntityRepository<HospitalDataRequest>(dbContext);
-            var hospitalDataRepository = new EfDeletableEntityRepository<HospitalData>(dbContext);
-            var recipientReques = new EfDeletableEntityRepository<RecipientRequest>(dbContext);
-            var locationRepository = new EfDeletableEntityRepository<Location>(dbContext);
-
-            var service = new RequestsService(
-                requestRepository,
-                hospitalDataRequestRepository,
-                hospitalDataRepository,
-                recipientReques,
-                locationRepository);
-
-            var result = service.AllRequests<RequestInfoViewModel>().Count();
-
-            Assert.Equal(0, result);
-        }
-
-        [Fact]
-        public async Task AllRequestsShouldReturnNotNullTest()
+        public async Task DeleteAsyncRequestThrowsExceptionTest()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
             MapperInitializer.InitializeMapper();
@@ -267,9 +293,11 @@
 
             await SeedDataAsync(dbContext);
 
-            var result = service.AllRequests<RequestInfoViewModel>().Count();
+            var request = requestRepository.All().FirstOrDefault();
 
-            Assert.Equal(1, result);
+            await service.DeleteAsync(request.Id);
+
+            await Assert.ThrowsAsync<ArgumentException>(() => service.DeleteAsync(request.Id));
         }
 
         [Fact]
@@ -300,34 +328,6 @@
             var result = service.AllRequests<RequestInfoViewModel>().Count();
 
             Assert.Equal(0, result);
-        }
-
-        [Fact]
-        public async Task DeleteAsyncRequestThrowsExceptionTest()
-        {
-            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-            MapperInitializer.InitializeMapper();
-
-            var requestRepository = new EfDeletableEntityRepository<Request>(dbContext);
-            var hospitalDataRequestRepository = new EfDeletableEntityRepository<HospitalDataRequest>(dbContext);
-            var hospitalDataRepository = new EfDeletableEntityRepository<HospitalData>(dbContext);
-            var recipientReques = new EfDeletableEntityRepository<RecipientRequest>(dbContext);
-            var locationRepository = new EfDeletableEntityRepository<Location>(dbContext);
-
-            var service = new RequestsService(
-                requestRepository,
-                hospitalDataRequestRepository,
-                hospitalDataRepository,
-                recipientReques,
-                locationRepository);
-
-            await SeedDataAsync(dbContext);
-
-            var request = requestRepository.All().FirstOrDefault();
-
-            await service.DeleteAsync(request.Id);
-
-            await Assert.ThrowsAsync<ArgumentException>(() => service.DeleteAsync(request.Id));
         }
 
         [Fact]

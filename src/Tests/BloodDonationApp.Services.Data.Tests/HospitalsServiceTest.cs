@@ -18,7 +18,7 @@
     public class HospitalsServiceTest
     {
         [Fact]
-        public async Task CreateHospitalUserIsNotNullTest()
+        public async Task CreateHospitalThrowsExceptionUserShouldBeRegisteredFirstTest()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
             MapperInitializer.InitializeMapper();
@@ -32,8 +32,6 @@
             var hospitalBloodBankRepository = new EfDeletableEntityRepository<HospitalDataBloodBank>(dbContext);
             var bagRepository = new EfDeletableEntityRepository<BloodBag>(dbContext);
 
-            var userManager = this.GetUserManagerMock();
-
             var service = new HospitalsService(
                 usersRepository,
                 hospitalDataRepository,
@@ -44,13 +42,7 @@
                 hospitalBloodBankRepository,
                 bagRepository);
 
-            await SeedDataAsync(dbContext);
-
-            await service.CreateHospitalProfileAsync(this.SeedInputs(), this.SeedInputs().Id);
-
-            var user = usersRepository.All().Where(u => u.UserName == "User1").FirstOrDefault();
-
-            Assert.NotNull(user);
+            await Assert.ThrowsAsync<ArgumentException>(() => service.CreateHospitalProfileAsync(this.SeedInputs(), this.SeedInputs().Id));
         }
 
         [Fact]
@@ -92,7 +84,7 @@
         }
 
         [Fact]
-        public async Task CreateHospitalThrowsExceptionUserShouldBeRegisteredFirstTest()
+        public async Task CreateHospitalUserIsNotNullTest()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
             MapperInitializer.InitializeMapper();
@@ -106,6 +98,8 @@
             var hospitalBloodBankRepository = new EfDeletableEntityRepository<HospitalDataBloodBank>(dbContext);
             var bagRepository = new EfDeletableEntityRepository<BloodBag>(dbContext);
 
+            var userManager = this.GetUserManagerMock();
+
             var service = new HospitalsService(
                 usersRepository,
                 hospitalDataRepository,
@@ -116,7 +110,13 @@
                 hospitalBloodBankRepository,
                 bagRepository);
 
-            await Assert.ThrowsAsync<ArgumentException>(() => service.CreateHospitalProfileAsync(this.SeedInputs(), this.SeedInputs().Id));
+            await SeedDataAsync(dbContext);
+
+            await service.CreateHospitalProfileAsync(this.SeedInputs(), this.SeedInputs().Id);
+
+            var user = usersRepository.All().Where(u => u.UserName == "User1").FirstOrDefault();
+
+            Assert.NotNull(user);
         }
 
         [Fact]
@@ -147,7 +147,8 @@
                 bagRepository);
 
             await SeedDataAsync(dbContext);
-            await service.CreateHospitalProfileAsync(this.SeedInputs(), this.SeedInputs().Id);
+            var user = usersRepository.All().FirstOrDefault(u => u.UserName == "User1");
+            await service.CreateHospitalProfileAsync(this.SeedInputs(), user.Id);
 
             var result = service.GetAllHospitals<HospitalProfileInputModel>().Count();
 
