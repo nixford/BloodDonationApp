@@ -38,10 +38,12 @@
         public IActionResult Index(IndexViewModel viewModel, int page = 1)
         {
             viewModel.DonorsCount = this.donorsService
-                .GetAllDonors<DonorsInfoViewModel>().Count();
+                .GetAllDonors<DonorsInfoViewModel>()
+                .Count();
 
             viewModel.HospitalsCount = this.hospitalsService
-                .GetAllHospitals<HospitalInfoViewModel>().Count();
+                .GetAllHospitals<HospitalInfoViewModel>(0, 0)
+                .Count();
 
             viewModel.AdminsCount = this.usersService.GetAllAdmins()
                 .Count();
