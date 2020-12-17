@@ -26,6 +26,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult AddDonor()
         {
             var userId = this.userManager.GetUserId(this.User);
@@ -48,13 +49,6 @@
             await this.donorsService.CreateDonorProfileAsync(input, userId);
 
             return this.RedirectToAction("AllRequests", "Requests");
-        }
-
-        public IActionResult AllDonors(AllDonorsViewModel viewModel)
-        {
-            viewModel.Donors = this.donorsService.GetAllDonors<DonorsInfoViewModel>();
-
-            return this.View(viewModel);
         }
     }
 }

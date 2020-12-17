@@ -7,6 +7,7 @@
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Web.ViewModels.Settings;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController
@@ -21,6 +22,7 @@
             this.repository = repository;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             var settings = this.settingsService.GetAll<SettingViewModel>();
@@ -28,6 +30,7 @@
             return this.View(model);
         }
 
+        [Authorize]
         public async Task<IActionResult> InsertSetting()
         {
             var random = new Random();

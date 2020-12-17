@@ -28,7 +28,7 @@
             this.recipientsService = recipientsService;
         }
 
-        [HttpGet]
+        [Authorize]
         public IActionResult AddRequest()
         {
             return this.View();
@@ -55,6 +55,7 @@
             return this.RedirectToAction("AllRequests", "Requests");
         }
 
+        [Authorize]
         public IActionResult AllRequests(AllRequestsViewModel viewModel, int page = 1)
         {
             var userId = this.userManager.GetUserId(this.User);

@@ -26,6 +26,7 @@
             this.hospitalsService = hospitalsService;
         }
 
+        [Authorize]
         public IActionResult HospitalBlBags(string hospitalDataId, AllHospitalBloodBagsViewModel viewModel)
         {
             var userHospitalId = this.userManager.GetUserId(this.User);

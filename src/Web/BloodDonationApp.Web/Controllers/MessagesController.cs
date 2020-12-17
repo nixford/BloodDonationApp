@@ -26,7 +26,6 @@
             this.messagesService = messagesService;
         }
 
-        [HttpGet]
         [Authorize]
         public IActionResult CreateMessage()
         {

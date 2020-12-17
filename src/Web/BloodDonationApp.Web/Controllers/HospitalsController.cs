@@ -35,7 +35,7 @@
             this.usersService = usersService;
         }
 
-        [HttpGet]
+        [Authorize]
         public IActionResult AddHospital()
         {
             var userId = this.userManager.GetUserId(this.User);
@@ -60,6 +60,7 @@
             return this.RedirectToAction("AllHospRecip", "Recipients");
         }
 
+        [Authorize]
         public IActionResult AllHospitals(AllHospitalsViewModel viewModel, int page = 1)
         {
             viewModel.Hospitals = this.hospitalsService.GetAllHospitals<HospitalInfoViewModel>(take, (int)(page - 1) * take);
@@ -87,6 +88,7 @@
             return this.View(viewModel);
         }
 
+        [Authorize]
         [Route("Hospitals/DetailsHospital/{id:guid}")]
         public IActionResult DetailsHospital(string id, AllHospitalBloodBagsViewModel viewModel)
         {
@@ -169,6 +171,7 @@
             return this.View(viewModel);
         }
 
+        [Authorize]
         [Route("Hospitals/Contacts/{id:guid}")]
         public IActionResult Contacts(Guid id)
         {

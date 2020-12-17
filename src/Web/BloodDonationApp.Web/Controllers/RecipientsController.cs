@@ -28,7 +28,7 @@
             this.requestsService = requestsService;
         }
 
-        [HttpGet]
+        [Authorize]
         public IActionResult AddRecipient()
         {
             return this.View();
@@ -55,6 +55,7 @@
             return this.RedirectToAction("AllHospRecip", "Recipients");
         }
 
+        [Authorize]
         public IActionResult AllHospRecip(AllRecipientsViewMode viewModel, int page = 1)
         {
             var hospitalUserId = this.userManager.GetUserId(this.User);
