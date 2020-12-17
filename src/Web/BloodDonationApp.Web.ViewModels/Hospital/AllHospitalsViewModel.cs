@@ -1,11 +1,13 @@
 ﻿namespace BloodDonationApp.Web.ViewModels.Hospital
 {
+    using System;
     using System.Collections.Generic;
 
     using BloodDonationApp.Web.ViewModels.Recipient;
 
     public class AllHospitalsViewModel
     {
+        public Guid Id { get; set; }
 
         public int PagesCount { get; set; }
 

@@ -26,23 +26,35 @@
                                 <th>@hospital.Name</th>
                                 <td>@Html.DisplayFor(x => hospital.Location)</td>
                                 <td>
-                                    <form asp-area="" asp-controller="Hospitals" asp-action="Contacts" method="get">
-                                        <button class="btn btn-link">Contacts</button>
-                                        <input type="hidden" name="hospitalDataId" value="@hospital.Id" />
-                                    </form>
+                                    <a class="btn btn-link"
+                                       asp-area=""
+                                       asp-controller="Hospitals"
+                                       asp-action="Contacts"
+                                       asp-route-id="@hospital.Id">
+                                        Contacts
+                                    </a>
+                                    <span asp-validation-for="@hospital.Id"></span>
                                 </td>
                                 <td>@hospital.RecipientCount</td>
                                 <td>
-                                    <form asp-area="" asp-controller="DonationEvents" asp-action="CreateWORequest" method="get">
-                                        <button class="btn btn-outline-danger"> Donate Whitout Request</button>
-                                        <input type="hidden" name="hospitalId" value="@hospital.Id" />
-                                    </form>
+                                    <a class="btn btn-outline-danger"
+                                       asp-area=""
+                                       asp-controller="DonationEvents"
+                                       asp-action="CreateWORequest"
+                                       asp-route-id="@hospital.Id">
+                                        Donate Whitout Request
+                                    </a>
+                                    <span asp-validation-for="@hospital.Id"></span>
                                 </td>
                                 <td>
-                                    <form asp-area="" asp-controller="Hospitals" asp-action="DetailsHospital" method="get">
-                                        <button class="btn btn-warning">Blood Reservs</button>
-                                        <input type="hidden" name="hospitalDataId" value="@hospital.Id" />
-                                    </form>
+                                    <a class="btn btn-warning"
+                                       asp-area=""
+                                       asp-controller="Hospitals"
+                                       asp-action="DetailsHospital"
+                                       asp-route-id="@hospital.Id">
+                                        Blood Reservs
+                                    </a>
+                                    <span asp-validation-for="@hospital.Id"></span>
                                 </td>
                             </tr>
                         }
@@ -110,5 +122,7 @@
     </nav>
 
 </body>
+
+
 
 

@@ -76,8 +76,8 @@
             return this.View(viewModel);
         }
 
-        [HttpPost]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [Route("Messages/Delete/{id:guid}")]
         public async Task<IActionResult> Delete(string id)
         {
             var projectId = await this.messagesService.Delete(id);

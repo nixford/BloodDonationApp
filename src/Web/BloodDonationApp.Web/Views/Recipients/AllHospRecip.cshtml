@@ -31,22 +31,34 @@
                                 <td>@recipient.RhesusFactor</td>
                                 <td>@recipient.NeededQuantity</td>
                                 <td>
-                                    <form asp-controller="Requests" asp-action="AddRequest" method="get">
-                                        <button class="btn btn-primary"> Set Request</button>
-                                        <input type="hidden" name="recipientId" value="@recipient.Id" />
-                                    </form>
+                                    <a class="btn btn-primary"
+                                       asp-area=""
+                                       asp-controller="Requests"
+                                       asp-action="AddRequest"
+                                       asp-route-recipientId="@recipient.Id">
+                                       Set Request
+                                    </a>
+                                    <span asp-validation-for="@recipient.Id"></span>
                                 </td>
                                 <td>
-                                    <form asp-controller="Recipients" asp-action="Delete" method="post">
-                                        <button class="btn btn-danger">Delete</button>
-                                        <input type="hidden" name="recipientId" value="@recipient.Id" />
-                                    </form>
+                                    <a class="btn btn-danger"
+                                       asp-area=""
+                                       asp-controller="Recipients"
+                                       asp-action="Delete"
+                                       asp-route-recipientId="@recipient.Id">
+                                        Delete
+                                    </a>
+                                    <span asp-validation-for="@recipient.Id"></span>
                                 </td>
                                 <td>
-                                    <form asp-controller="Recipients" asp-action="DetailsRecipient" method="post">
-                                        <button class="btn btn-warning">Info</button>
-                                        <input type="hidden" name="recipientId" value="@recipient.Id" />
-                                    </form>
+                                    <a class="btn btn-warning"
+                                       asp-area=""
+                                       asp-controller="Recipients"
+                                       asp-action="DetailsRecipient"
+                                       asp-route-recipientId="@recipient.Id">
+                                        Info
+                                    </a>
+                                    <span asp-validation-for="@recipient.Id"></span>
                                 </td>
                             </tr>
                         }
@@ -77,7 +89,7 @@
                        asp-area="" 
                        asp-controller="BloodBanks" 
                        asp-action="HospitalBlBags">
-                        Blood Bank
+                       Blood Bank
                     </a>
                 </div>
             </div>

@@ -10,7 +10,7 @@
 
         public string Content { get; set; }
 
-        public DateTime PublishedOn { get; set; }
+        public DateTime PublishedOn => DateTime.UtcNow;
 
         public EmergencyStatus EmergencyStatus { get; set; }
 

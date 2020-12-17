@@ -29,19 +29,16 @@
         }
 
         [HttpGet]
-        public IActionResult AddRequest(string recipientId)
+        public IActionResult AddRequest()
         {
-            this.TempData.Remove("Id");
-            this.TempData.Add("Id", recipientId);
             return this.View();
         }
 
         // [Authorize(Roles = "Hospital")]
         [HttpPost]
-        public async Task<IActionResult> AddRequest(RequestInputViewModel input)
+        [Route("Requests/AddRequest/{recipientId:guid}")]
+        public async Task<IActionResult> AddRequest(string recipientId, RequestInputViewModel input)
         {
-            var recipientId = this.TempData["Id"].ToString();
-
             var userId = this.userManager.GetUserId(this.User);
 
             var requestId = await this.requestsService.CreateRequestAsync(
@@ -91,6 +88,7 @@
         }
 
         [Authorize(Roles = "Hospital")]
+        [Route("Requests/Delete/{requestId:guid}")]
         public async Task<IActionResult> Delete(string requestId)
         {
             // var hospitalId = this.userManager.GetUserId(this.User);

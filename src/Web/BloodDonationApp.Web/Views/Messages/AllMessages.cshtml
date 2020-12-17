@@ -25,10 +25,14 @@
                                 <td>@message.Email</td>
                                 <td>@message.Content</td>
                                 <td>
-                                    <form asp-controller="Messages" asp-action="Delete" method="post">
-                                        <button class="btn btn-danger">Delete</button>
-                                        <input type="hidden" name="id" value="@message.Id" />
-                                    </form>
+                                    <a class="btn btn-danger"
+                                       asp-area=""
+                                       asp-controller="Messages"
+                                       asp-action="Delete"
+                                       asp-route-id="@message.Id">
+                                        Delete
+                                    </a>
+                                    <span asp-validation-for="@message.Id"></span>
                                 </td>                                
                             </tr>
                         }

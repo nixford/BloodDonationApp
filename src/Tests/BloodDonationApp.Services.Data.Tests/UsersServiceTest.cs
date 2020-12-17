@@ -86,13 +86,7 @@
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
 
-            var userManager = this.GetUserManagerMock();
             var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
-            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
-            var hospitalDataRepository = new EfDeletableEntityRepository<HospitalData>(dbContext);
-            var donorDataRepository = new EfDeletableEntityRepository<DonorData>(dbContext);
-            var recipientRepository = new EfDeletableEntityRepository<Recipient>(dbContext);
-            var requestRepository = new EfDeletableEntityRepository<Request>(dbContext);
 
             var result = usersRepository.All().Count();
 
@@ -104,13 +98,7 @@
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
 
-            var userManager = this.GetUserManagerMock();
             var usersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
-            var rolesRepository = new EfDeletableEntityRepository<ApplicationRole>(dbContext);
-            var hospitalDataRepository = new EfDeletableEntityRepository<HospitalData>(dbContext);
-            var donorDataRepository = new EfDeletableEntityRepository<DonorData>(dbContext);
-            var recipientRepository = new EfDeletableEntityRepository<Recipient>(dbContext);
-            var requestRepository = new EfDeletableEntityRepository<Request>(dbContext);
 
             await SeedDataAsync(dbContext);
 

@@ -87,11 +87,12 @@
             return this.View(viewModel);
         }
 
-        public IActionResult DetailsHospital(string hospitalDataId, AllHospitalBloodBagsViewModel viewModel)
+        [Route("Hospitals/DetailsHospital/{id:guid}")]
+        public IActionResult DetailsHospital(string id, AllHospitalBloodBagsViewModel viewModel)
         {
-            viewModel.HospitalInfo = this.hospitalsService.GetHospitalDataById<HospitalInfoViewModel>(null, hospitalDataId);
+            viewModel.HospitalInfo = this.hospitalsService.GetHospitalDataById<HospitalInfoViewModel>(null, id);
 
-            var allBags = this.bloodBanksService.GetHospitalBloodBagsById(hospitalDataId);
+            var allBags = this.bloodBanksService.GetHospitalBloodBagsById(id);
 
             foreach (var bag in allBags)
             {
@@ -168,9 +169,12 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Contacts(string hospitalDataId, HospitalInfoViewModel viewModel)
+        [Route("Hospitals/Contacts/{id:guid}")]
+        public IActionResult Contacts(Guid id)
         {
-            var hospital = this.hospitalsService.GetHospitalDataById<HospitalInfoViewModel>(null, hospitalDataId);
+            var viewModel = new HospitalInfoViewModel();
+
+            var hospital = this.hospitalsService.GetHospitalDataById<HospitalInfoViewModel>(null, id.ToString());
 
             viewModel.Contact = new Contact
             {

@@ -29,6 +29,7 @@
 
         [HttpGet]
         [Authorize(Roles = "Donor")]
+        [Route("DonationEvents/Create/{requestId:guid}")]
         public IActionResult Create(string requestId, RequestInfoViewModel viewModel)
         {
             viewModel = this.requestsService.GetById<RequestInfoViewModel>(requestId);
@@ -38,9 +39,10 @@
 
         [HttpGet]
         [Authorize(Roles = "Donor")]
-        public IActionResult CreateWORequest(string hospitalId, DonationEventInputModel viewModel)
+        [Route("DonationEvents/CreateWORequest/{id:guid}")]
+        public IActionResult CreateWORequest(string id, DonationEventInputModel viewModel)
         {
-            viewModel.HospitalId = hospitalId;
+            viewModel.HospitalId = id;
 
             return this.View(viewModel);
         }

@@ -90,6 +90,8 @@
             return this.View(viewModel);
         }
 
+        [Authorize(Roles = "Hospital")]
+        [Route("Recipients/Delete/{recipientId:guid}")]
         public async Task<IActionResult> Delete(string recipientId)
         {
             var hospitalId = this.userManager.GetUserId(this.User);
@@ -99,6 +101,8 @@
             return this.RedirectToAction("AllHospRecip", "Recipients");
         }
 
+        [Authorize(Roles = "Hospital")]
+        [Route("Recipients/DetailsRecipient/{recipientId:guid}")]
         public IActionResult DetailsRecipient(string recipientId)
         {
             var viewModel = this.recipientsService.GetById<RecipientInfoViewModel>(recipientId);

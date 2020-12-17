@@ -40,21 +40,27 @@
                                 @if (this.User.IsInRole("Donor"))
                                 {
                                     <td>
-                                        <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="get">
-                                            <button class="btn btn-outline-danger">Donattion</button>
-                                            <input type="hidden" name="requestId" value="@request.Id" />
-                                            <span asp-validation-for="@request.Id"></span>
-                                        </form>
+                                        <a class="btn btn-outline-danger"
+                                           asp-area=""
+                                           asp-controller="DonationEvents"
+                                           asp-action="Create"
+                                           asp-route-requestId="@request.Id">
+                                            Donattion
+                                        </a>
+                                        <span asp-validation-for="@request.Id"></span>
                                     </td>
                                 }
                                 else if (this.User.IsInRole("Hospital"))
                                 {
                                     <td>
-                                        <form asp-area="" asp-controller="Requests" asp-action="Delete">
-                                            <button class="btn btn-danger">Delete</button>
-                                            <input type="hidden" name="requestId" value="@request.Id" />
-                                            <span asp-validation-for="@request.Id"></span>
-                                        </form>
+                                        <a class="btn btn-danger"
+                                           asp-area=""
+                                           asp-controller="Requests"
+                                           asp-action="Delete"
+                                           asp-route-requestId="@request.Id">
+                                            Delete
+                                        </a>
+                                        <span asp-validation-for="@request.Id"></span>
                                     </td>
                                 }
                             </tr>
