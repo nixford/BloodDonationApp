@@ -42,8 +42,7 @@
                 .Count();
 
             viewModel.HospitalsCount = this.hospitalsService
-                .GetAllHospitals<HospitalInfoViewModel>(0, 0)
-                .Count();
+                .GetAllHospitalsCount();
 
             viewModel.AdminsCount = this.usersService.GetAllAdmins()
                 .Count();

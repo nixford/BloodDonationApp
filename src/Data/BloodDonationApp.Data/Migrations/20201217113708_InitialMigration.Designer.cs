@@ -10,16 +10,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodDonationApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201201191334_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201217113708_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.ApplicationRole", b =>
                 {
@@ -43,12 +43,12 @@ namespace BloodDonationApp.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -56,7 +56,7 @@ namespace BloodDonationApp.Data.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
@@ -81,8 +81,8 @@ namespace BloodDonationApp.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -100,12 +100,12 @@ namespace BloodDonationApp.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -123,56 +123,22 @@ namespace BloodDonationApp.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("BloodDonationApp.Data.Models.ApplicationUserDonorData", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DonorDataId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("DonorDataId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("ApplicationUserDonorData");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.ApplicationUserHospitalData", b =>
@@ -677,8 +643,8 @@ namespace BloodDonationApp.Data.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -898,7 +864,7 @@ namespace BloodDonationApp.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -930,7 +896,7 @@ namespace BloodDonationApp.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -954,7 +920,7 @@ namespace BloodDonationApp.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -1029,17 +995,6 @@ namespace BloodDonationApp.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("BloodDonationApp.Data.Models.ApplicationUserDonorData", b =>
-                {
-                    b.HasOne("BloodDonationApp.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("BloodDonationApp.Data.Models.DonorData", "DonorData")
-                        .WithMany()
-                        .HasForeignKey("DonorDataId");
-                });
-
             modelBuilder.Entity("BloodDonationApp.Data.Models.ApplicationUserHospitalData", b =>
                 {
                     b.HasOne("BloodDonationApp.Data.Models.ApplicationUser", "ApplicationUser")
@@ -1049,6 +1004,10 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.HospitalData", "HospitalData")
                         .WithMany()
                         .HasForeignKey("HospitalDataId");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("HospitalData");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.BloodBag", b =>
@@ -1060,6 +1019,10 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.DonorData", "DonorData")
                         .WithMany()
                         .HasForeignKey("DonorDataId");
+
+                    b.Navigation("BloodBank");
+
+                    b.Navigation("DonorData");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.BloodBank", b =>
@@ -1067,6 +1030,8 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.HospitalData", "HospitalData")
                         .WithMany()
                         .HasForeignKey("HospitalDataId");
+
+                    b.Navigation("HospitalData");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.DonationEvent", b =>
@@ -1078,6 +1043,10 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.ApplicationUser", "UserDonor")
                         .WithMany()
                         .HasForeignKey("UserDonorId");
+
+                    b.Navigation("Request");
+
+                    b.Navigation("UserDonor");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.DonorData", b =>
@@ -1097,6 +1066,14 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Examination");
+
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.Examination", b =>
@@ -1104,6 +1081,8 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.Disease", "Disease")
                         .WithMany()
                         .HasForeignKey("DiseaseId");
+
+                    b.Navigation("Disease");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.ExaminationDonor", b =>
@@ -1115,6 +1094,10 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.Examination", "Examination")
                         .WithMany()
                         .HasForeignKey("ExaminationId");
+
+                    b.Navigation("DonorData");
+
+                    b.Navigation("Examination");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.HospitalData", b =>
@@ -1134,6 +1117,14 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("BloodBank");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.HospitalDataBloodBank", b =>
@@ -1145,6 +1136,10 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.HospitalData", "Hospital")
                         .WithMany()
                         .HasForeignKey("HospitalId");
+
+                    b.Navigation("BloodBank");
+
+                    b.Navigation("Hospital");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.HospitalDataRequest", b =>
@@ -1156,6 +1151,10 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.Request", "Request")
                         .WithMany()
                         .HasForeignKey("RequestId");
+
+                    b.Navigation("HospitalData");
+
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.Message", b =>
@@ -1165,6 +1164,8 @@ namespace BloodDonationApp.Data.Migrations
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.Recipient", b =>
@@ -1176,6 +1177,10 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.Request", "Request")
                         .WithMany()
                         .HasForeignKey("RequestId");
+
+                    b.Navigation("HospitalData");
+
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.RecipientHospitalData", b =>
@@ -1187,6 +1192,10 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.Recipient", "Recipient")
                         .WithMany()
                         .HasForeignKey("RecipientId");
+
+                    b.Navigation("HospitalData");
+
+                    b.Navigation("Recipient");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.RecipientRequest", b =>
@@ -1198,6 +1207,10 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.Request", "Request")
                         .WithMany()
                         .HasForeignKey("RequestId");
+
+                    b.Navigation("Recipient");
+
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("BloodDonationApp.Data.Models.Request", b =>
@@ -1213,6 +1226,12 @@ namespace BloodDonationApp.Data.Migrations
                     b.HasOne("BloodDonationApp.Data.Models.Recipient", "Recipient")
                         .WithMany()
                         .HasForeignKey("RecipientId");
+
+                    b.Navigation("HospitalData");
+
+                    b.Navigation("Location");
+
+                    b.Navigation("Recipient");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1264,6 +1283,27 @@ namespace BloodDonationApp.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BloodDonationApp.Data.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Claims");
+
+                    b.Navigation("Logins");
+
+                    b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("BloodDonationApp.Data.Models.BloodBank", b =>
+                {
+                    b.Navigation("BloodBags");
+                });
+
+            modelBuilder.Entity("BloodDonationApp.Data.Models.HospitalData", b =>
+                {
+                    b.Navigation("HospitalsDonationRequests");
+
+                    b.Navigation("Recipients");
                 });
 #pragma warning restore 612, 618
         }

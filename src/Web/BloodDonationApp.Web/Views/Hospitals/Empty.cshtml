@@ -1,0 +1,42 @@
+﻿@model BloodDonationApp.Web.ViewModels.Hospital.EmptyInputViewModel
+
+@if (this.User.IsInRole("Hospital"))
+{
+<body id="container1">
+    <div class="py-5">
+        <div class="container">
+            <div style="padding: 5%;">
+                <div class="signup-form">
+                    <form asp-area="" asp-controller="Hospitals" asp-action="Empty" method="post">
+                        <div class="text-center">
+                            <div>
+                                <label asp-for="@Model.BloodGroup" class="control-label">Blood Group</label>
+                                <select asp-for="@Model.BloodGroup"
+                                        class="form-Content"
+                                        asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.BloodGroup>()">
+                                    <option>Select type ...</option>
+                                </select>
+                                <span asp-validation-for="@Model.BloodGroup" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="form-group">
+                                <label asp-for="@Model.RhesusFactor" class="control-label">Rhesus Factor</label>
+                                <select asp-for="@Model.RhesusFactor"
+                                        class="form-Content"
+                                        asp-items="Html.GetEnumSelectList<BloodDonationApp.Data.Models.Enums.RhesusFactor>()">
+                                    <option>Select type ...</option>
+                                </select>
+                                <span asp-validation-for="@Model.RhesusFactor" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning">Empty reserve</button>
+                        </div>                        
+                    </form>
+                </div>
+            </div>
+        </div>        
+    </div>    
+</body>
+}

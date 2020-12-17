@@ -15,13 +15,18 @@
         <h4 class="text-md-left">Address: </h4>
         <table><tr height=20px></tr></table>
     </div>
-    @await Html.PartialAsync("_BloodBankCondition");
+    @await Html.PartialAsync("_BloodBankCondition")
     <div>
         <hr class="bg-success" style="height: 2px" />
     </div>
 </div>
-<div class="container">
-    <form asp-controller="Requests" asp-action="AllRequests">
-        <button class="btn btn-info">Back To All Hospitals</button>
-    </form>
+<div class="text-center">
+    <div class="py-3">
+        <a class="btn btn-success"
+           asp-area=""
+           asp-controller="Requests"
+           asp-action="AllRequests">
+           Back To All Hospitals
+        </a>
+    </div>
 </div>

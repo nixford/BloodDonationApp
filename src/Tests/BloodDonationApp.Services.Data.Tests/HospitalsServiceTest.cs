@@ -185,7 +185,7 @@
             await SeedDataAsync(dbContext);
             await service.CreateHospitalProfileAsync(this.SeedInputs(), this.SeedInputs().Id);
 
-            var result = service.GetHospitalDataById<HospitalProfileInputModel>("123");
+            var result = service.GetHospitalDataById<HospitalProfileInputModel>("123", "123");
 
             Assert.NotNull(result);
         }
@@ -222,7 +222,7 @@
 
             await service.CreateHospitalProfileAsync(this.SeedInputs(), user.Id);
 
-            var result = service.GetHospitalDataById<HospitalProfileInputModel>("111");
+            var result = service.GetHospitalDataById<HospitalProfileInputModel>("111", "111");
 
             Assert.Null(result);
         }
@@ -254,7 +254,7 @@
                 hospitalBloodBankRepository,
                 bagRepository);
 
-            Assert.Throws<ArgumentException>(() => service.GetHospitalDataById<HospitalProfileInputModel>(null));
+            Assert.Throws<ArgumentException>(() => service.GetHospitalDataById<HospitalProfileInputModel>(null, null));
         }
 
         private static async Task SeedDataAsync(ApplicationDbContext dbContext)

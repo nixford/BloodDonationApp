@@ -89,7 +89,7 @@
 
         public IActionResult DetailsHospital(string hospitalDataId, AllHospitalBloodBagsViewModel viewModel)
         {
-            viewModel.HospitalInfo = this.hospitalsService.GetHospitalDataById<HospitalInfoViewModel>(hospitalDataId);
+            viewModel.HospitalInfo = this.hospitalsService.GetHospitalDataById<HospitalInfoViewModel>(null, hospitalDataId);
 
             var allBags = this.bloodBanksService.GetHospitalBloodBagsById(hospitalDataId);
 
@@ -170,7 +170,7 @@
 
         public IActionResult Contacts(string hospitalDataId, HospitalInfoViewModel viewModel)
         {
-            var hospital = this.hospitalsService.GetHospitalDataById<HospitalInfoViewModel>(hospitalDataId);
+            var hospital = this.hospitalsService.GetHospitalDataById<HospitalInfoViewModel>(null, hospitalDataId);
 
             viewModel.Contact = new Contact
             {
@@ -186,6 +186,24 @@
             };
 
             return this.View(viewModel);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Hospital")]
+        public IActionResult Empty()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Hospital")]
+        public async Task<IActionResult> Empty(EmptyInputViewModel input)
+        {
+            var userHospitalId = this.userManager.GetUserId(this.User);
+
+            await this.hospitalsService.EmptyBloodAsync(userHospitalId, input.BloodGroup, input.RhesusFactor);
+
+            return this.RedirectToAction("HospitalBlBags", "BloodBanks");
         }
     }
 }

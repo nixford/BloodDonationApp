@@ -3,9 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using BloodDonationApp.Common;
     using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
+    using BloodDonationApp.Data.Models.Enums;
 
     public class BloodBanksService : IBloodBanksService
     {
@@ -15,11 +17,11 @@
 
         public BloodBanksService(
             IDeletableEntityRepository<BloodBank> bloodBankRepository,
-            IDeletableEntityRepository<BloodBag> bloodBangRepository, 
+            IDeletableEntityRepository<BloodBag> bloodBagRepository,
             IDeletableEntityRepository<HospitalData> hospitalDataRepository)
         {
             this.bloodBankRepository = bloodBankRepository;
-            this.bloodBagRepository = bloodBangRepository;
+            this.bloodBagRepository = bloodBagRepository;
             this.hospitalDataRepository = hospitalDataRepository;
         }
 

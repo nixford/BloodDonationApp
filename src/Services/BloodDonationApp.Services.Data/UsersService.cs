@@ -211,10 +211,5 @@
 
             return user.UserName;
         }
-
-        public object GetUserEmailById(object id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

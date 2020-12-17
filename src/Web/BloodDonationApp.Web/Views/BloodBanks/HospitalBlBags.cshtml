@@ -14,15 +14,13 @@
         <h4 class="text-md-left"></h4>
         <table><tr height=20px></tr></table>
     </div>
-
-    @await Html.PartialAsync("_BloodBankCondition");
-
+    @await Html.PartialAsync("_BloodBankCondition")
 </div>
 
 @*<partial name="_BloodBankCondition">*@
 
 <div class="container">
-    <form asp-controller="Recipients" asp-action="AllHospRecip">
-        <button class="btn btn-info">Back All Recipients</button>
+    <form class="text-center" asp-controller="Recipients" asp-action="AllHospRecip">
+        <button class="btn btn-success">Back All Recipients</button>
     </form>
 </div>

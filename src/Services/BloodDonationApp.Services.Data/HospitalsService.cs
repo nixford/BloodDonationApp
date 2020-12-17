@@ -7,6 +7,7 @@
     using BloodDonationApp.Common;
     using BloodDonationApp.Data.Common.Repositories;
     using BloodDonationApp.Data.Models;
+    using BloodDonationApp.Data.Models.Enums;
     using BloodDonationApp.Services.Mapping;
     using BloodDonationApp.Web.ViewModels.Hospital;
     using Microsoft.AspNetCore.Mvc;
@@ -129,26 +130,62 @@
             return hospitalDatas.To<T>().ToList();
         }
 
-        public T GetHospitalDataById<T>(string userHospitalOrHospitalDataId)
+        public int GetAllHospitalsCount()
         {
-            if (userHospitalOrHospitalDataId == null)
+            var hospitalDatasCount = this.hospitalsRepository.All()
+                .Where(hd => hd.IsDeleted == false)
+                .ToList()
+                .Count();
+
+            return hospitalDatasCount;
+        }
+
+        public T GetHospitalDataById<T>(string? userHospitalId, string? hospitalDataId)
+        {
+            if (userHospitalId == null && hospitalDataId == null)
             {
                 throw new ArgumentException(GlobalConstants.NoUserIdErrorMessage);
             }
 
             var userHospital = this.usersRepository
                 .All()
-                .Where(u => u.Id == userHospitalOrHospitalDataId)
+                .Where(u => u.Id == userHospitalId)
                 .FirstOrDefault();
 
             var hospitalData = this.hospitalsRepository
                 .All()
                 .Where(hd => userHospital != null ? hd.ApplicationUserId == userHospital.Id :
-                    hd.Id == userHospitalOrHospitalDataId)
+                    hd.Id == hospitalDataId)
                 .To<T>()
                 .FirstOrDefault();
 
             return hospitalData;
+        }
+
+        public async Task<IEnumerable<BloodBag>> EmptyBloodAsync(string userHospitalDataId, BloodGroup bloodGroup, RhesusFactor rhesusFactor)
+        {
+            var hospitalData = this.hospitalsRepository
+                .All()
+                .FirstOrDefault(hd => hd.ApplicationUserId == userHospitalDataId);
+
+            var bloodBank = this.bloodBankRepository
+                .All()
+                .FirstOrDefault(bb => bb.HospitalDataId == hospitalData.Id);
+
+            var bloodBags = this.bagRepository.All()
+                .Where(bag =>
+                bag.BloodBankId == bloodBank.Id &&
+                bag.BloodGroup == bloodGroup &&
+                bag.RhesusFactor == rhesusFactor);
+
+            foreach (var bag in bloodBags)
+            {
+                bag.IsDeleted = true;
+            }
+
+            await this.bagRepository.SaveChangesAsync();
+
+            return bloodBags.ToList();
         }
     }
 }
