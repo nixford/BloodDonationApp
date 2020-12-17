@@ -53,7 +53,7 @@
         {
             var userDonorId = this.userManager.GetUserId(this.User);
 
-            var id = model.UserId != null ? model.UserId : viewModel.HospitalId;
+            var id = model.HospitalDataId != null ? model.HospitalDataId : viewModel.HospitalId;
 
             double neededQuantity = model.NeededQuantity;
             double quantity = viewModel.Quantity;

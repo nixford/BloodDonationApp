@@ -10,7 +10,7 @@
     {
         public string Id { get; set; }
 
-        public string UserId { get; set; }
+        public string HospitalDataId { get; set; }
 
         public string HospitalName { get; set; }
 

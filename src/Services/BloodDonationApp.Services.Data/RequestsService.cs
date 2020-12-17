@@ -88,12 +88,33 @@
             return request.Id;
         }
 
-        public IEnumerable<T> AllRequests<T>(int? take = null, int skip = 0)
+        public IEnumerable<T> AllRequests<T>(string? userId, int? take = null, int skip = 0)
         {
-            var requests = this.requestsRepository.All()
+            var hospitaData = this.hospitalDataRepository
+                .All()
+                .FirstOrDefault(h => h.ApplicationUserId == userId);
+
+            var requests = this.requestsRepository.All();
+
+            if (hospitaData == null)
+            {
+                requests = this.requestsRepository.All()
                 .OrderByDescending(r => r.CreatedOn)
                 .Where(r => r.IsDeleted == false)
                 .Skip(skip);
+            }
+            else
+            {
+                requests = this.requestsRepository.All()
+                .OrderByDescending(r => r.CreatedOn)
+                .Where(r => r.IsDeleted == false && r.HospitalId == hospitaData.Id)
+                .Skip(skip);
+            }
+
+            if (take.HasValue)
+            {
+                requests = requests.Take(take.Value);
+            }
 
             return requests.To<T>().ToList();
         }

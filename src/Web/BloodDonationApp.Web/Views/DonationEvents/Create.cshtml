@@ -16,7 +16,7 @@
         <div class="text-center">
             <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="post">
                 <button class="btn btn-outline-danger">Donate blood and save live!</button>
-                <input type="hidden" asp-for="@Model.UserId" value="@Model.Id" />
+                <input type="hidden" asp-for="@Model.HospitalDataId" value="@Model.Id" />
                 <input type="hidden" asp-for="@Model.NeededQuantity" value="@Model.NeededQuantity" />
                 <span asp-validation-for="@Model.Id"></span>
                 <span asp-validation-for="@Model.NeededQuantity"></span>

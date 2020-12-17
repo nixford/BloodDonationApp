@@ -9,7 +9,8 @@
 
     public interface IRequestsService
     {
-        Task<string> CreateRequestAsync(string userId,
+        Task<string> CreateRequestAsync(
+            string userId,
             string content,
             DateTime publishedOn,
             EmergencyStatus emergencyStatus,
@@ -19,7 +20,7 @@
 
         T GetById<T>(string id);
 
-        IEnumerable<T> AllRequests<T>(int? take = null, int skip = 0);
+        IEnumerable<T> AllRequests<T>(string? userId, int? take = null, int skip = 0);
 
         Task DeleteAsync(string hospitalId);
     }

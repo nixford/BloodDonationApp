@@ -21,7 +21,7 @@
         public RequestsController(
             IRequestsService requestsService,
             UserManager<ApplicationUser> userManager,
-            IRecipientsService recipientsService = null)
+            IRecipientsService recipientsService)
         {
             this.requestsService = requestsService;
             this.userManager = userManager;
@@ -34,8 +34,8 @@
             return this.View();
         }
 
-        // [Authorize(Roles = "Hospital")]
         [HttpPost]
+        [Authorize(Roles = "Hospital")]
         [Route("Requests/AddRequest/{recipientId:guid}")]
         public async Task<IActionResult> AddRequest(string recipientId, RequestInputViewModel input)
         {
@@ -57,14 +57,18 @@
 
         public IActionResult AllRequests(AllRequestsViewModel viewModel, int page = 1)
         {
-            viewModel.Requests = this.requestsService.AllRequests<RequestInfoViewModel>(take, (int)(page - 1) * take);
+            var userId = this.userManager.GetUserId(this.User);
 
-            var count = this.requestsService.AllRequests<RequestInfoViewModel>().Count();
+            viewModel.Requests =
+                this.requestsService
+                .AllRequests<RequestInfoViewModel>(userId, take, (int)(page - 1) * take);
+
+            var count = this.requestsService.AllRequests<RequestInfoViewModel>(userId).Count();
 
             if (!string.IsNullOrEmpty(viewModel.SearchTerm))
             {
                 viewModel.Requests = this.requestsService
-                    .AllRequests<RequestInfoViewModel>(take, (int)(page - 1) * take)
+                    .AllRequests<RequestInfoViewModel>(userId, take, (int)(page - 1) * take)
                     .Where(r => r.EmergencyStatus.ToString().Contains(viewModel.SearchTerm)
                     || r.BloodGroup.ToString().Contains(viewModel.SearchTerm)
                     || r.RhesusFactor.ToString().Contains(viewModel.SearchTerm)
@@ -91,8 +95,6 @@
         [Route("Requests/Delete/{requestId:guid}")]
         public async Task<IActionResult> Delete(string requestId)
         {
-            // var hospitalId = this.userManager.GetUserId(this.User);
-
             await this.requestsService.DeleteAsync(requestId);
 
             return this.RedirectToAction("AllRequests", "Requests");
