@@ -33,7 +33,7 @@
                 recipientReques,
                 locationRepository);
 
-            var result = service.AllRequests<RequestInfoViewModel>().Count();
+            var result = service.AllRequests<RequestInfoViewModel>(null).Count();
 
             Assert.Equal(0, result);
         }
@@ -59,7 +59,7 @@
 
             await SeedDataAsync(dbContext);
 
-            var result = service.AllRequests<RequestInfoViewModel>().Count();
+            var result = service.AllRequests<RequestInfoViewModel>(null).Count();
 
             Assert.Equal(1, result);
         }
@@ -325,7 +325,7 @@
 
             await service.DeleteAsync(request.Id);
 
-            var result = service.AllRequests<RequestInfoViewModel>().Count();
+            var result = service.AllRequests<RequestInfoViewModel>(null).Count();
 
             Assert.Equal(0, result);
         }

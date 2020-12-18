@@ -55,7 +55,7 @@
         [EnumDataType(typeof(EmergencyStatus))]
         public EmergencyStatus DonorAveilableStatus { get; set; }
 
-        public DateTime ExaminationDate => DateTime.UtcNow;
+        public DateTime ExaminationDate { get; set; }
 
         [Required]
         public string DiseaseName { get; set; }

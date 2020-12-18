@@ -34,7 +34,7 @@
 
             var result = controller.AddHospital();
 
-            Assert.IsType<NotFoundResult>(result);
+            Assert.IsType<ViewResult>(result);
         }
 
         [Fact]
@@ -229,7 +229,7 @@
 
             var result = controller.DetailsHospital("123", viewModel);
 
-            Assert.IsType<ViewResult>(result);
+            Assert.IsType<RedirectToActionResult>(result);
         }
 
         private Mock<UserManager<ApplicationUser>> GetUserManagerMock()

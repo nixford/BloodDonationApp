@@ -28,7 +28,7 @@
 
             var result = controller.AddDonor();
 
-            Assert.IsType<NotFoundResult>(result);
+            Assert.IsType<ViewResult>(result);
         }
 
         [Fact]

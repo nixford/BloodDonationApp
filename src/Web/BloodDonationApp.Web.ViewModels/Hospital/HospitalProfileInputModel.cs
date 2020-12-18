@@ -8,7 +8,7 @@
     {
         public string Id { get; set; }
 
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(30, MinimumLength = 2)]

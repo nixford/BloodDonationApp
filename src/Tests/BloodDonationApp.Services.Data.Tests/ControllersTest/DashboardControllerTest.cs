@@ -39,11 +39,10 @@
             });
 
             var mockHospitalsService = new Mock<IHospitalsService>();
-            mockHospitalsService.Setup(x => x.GetAllHospitals<HospitalInfoViewModel>(0, 0)).Returns(new List<HospitalInfoViewModel>()
+            mockHospitalsService.Setup(x => x.GetAllHospitals<HospitalInfoViewModel>(null, 0)).Returns(new List<HospitalInfoViewModel>()
             {
                 new HospitalInfoViewModel
                 {
-                    Id = "123",
                     Name = "Hospital1",
                     RecipientCount = 5,
                 },
