@@ -12,7 +12,7 @@
         public string HospitalId { get; set; }
 
         [Required]
-        [Range(0, 10000)]
+        [Range(300, 10000)]
         public double Quantity { get; set; }
 
         public DateTime CollectionDate => DateTime.UtcNow;

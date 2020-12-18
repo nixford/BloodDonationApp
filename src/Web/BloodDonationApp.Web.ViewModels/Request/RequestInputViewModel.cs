@@ -8,8 +8,6 @@
     {
         public string RecipientId { get; set; }
 
-        [Required]
-        [StringLength(500, MinimumLength = 2)]
         public string Content { get; set; }
 
         public DateTime PublishedOn => DateTime.UtcNow;
@@ -27,7 +25,7 @@
         public RhesusFactor RhesusFactor { get; set; }
 
         [Required]
-        [Range(0, 10000)]
+        [Range(300, 10000)]
         public double NeededQuantity { get; set; }
     }
 }

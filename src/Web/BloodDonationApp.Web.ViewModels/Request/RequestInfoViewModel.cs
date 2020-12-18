@@ -18,7 +18,7 @@
 
         public DateTime PublishedOn { get; set; }
 
-        public string EmergencyStatus { get; set; }
+        public EmergencyStatus EmergencyStatus { get; set; }
 
         public BloodGroup BloodGroup { get; set; }
 

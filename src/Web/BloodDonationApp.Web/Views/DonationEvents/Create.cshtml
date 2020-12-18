@@ -17,9 +17,15 @@
             <form asp-area="" asp-controller="DonationEvents" asp-action="Create" method="post">
                 <button class="btn btn-outline-danger">Donate blood and save live!</button>
                 <input type="hidden" asp-for="@Model.HospitalDataId" value="@Model.Id" />
+                <input type="hidden" asp-for="@Model.EmergencyStatus" value="@Model.EmergencyStatus" />
                 <input type="hidden" asp-for="@Model.NeededQuantity" value="@Model.NeededQuantity" />
+                <input type="hidden" asp-for="@Model.BloodGroup" value="@Model.BloodGroup" />
+                <input type="hidden" asp-for="@Model.RhesusFactor" value="@Model.RhesusFactor" />
                 <span asp-validation-for="@Model.Id"></span>
+                <span asp-validation-for="@Model.EmergencyStatus"></span>
                 <span asp-validation-for="@Model.NeededQuantity"></span>
+                <span asp-validation-for="@Model.BloodGroup"></span>
+                <span asp-validation-for="@Model.RhesusFactor"></span>
             </form>
         </div>        
     </div>

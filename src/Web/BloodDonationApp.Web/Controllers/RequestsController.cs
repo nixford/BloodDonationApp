@@ -105,7 +105,7 @@
             var userId = this.userManager.GetUserId(this.User);
             var request = this.requestsService
                 .AllRequests<RequestInfoViewModel>(userId)
-                .FirstOrDefault(r => r.Id == userId);
+                .FirstOrDefault(r => r.Id == requestId);
             if (request == null)
             {
                 return this.RedirectToAction("HttpStatusCodeHandler", "Error", this.NotFound());
