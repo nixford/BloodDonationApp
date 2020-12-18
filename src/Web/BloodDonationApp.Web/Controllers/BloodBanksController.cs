@@ -27,9 +27,18 @@
         }
 
         [Authorize]
-        public IActionResult HospitalBlBags(string hospitalDataId, AllHospitalBloodBagsViewModel viewModel)
+        public IActionResult HospitalBlBags(AllHospitalBloodBagsViewModel viewModel)
         {
             var userHospitalId = this.userManager.GetUserId(this.User);
+
+            viewModel.HospitalInfo =
+                this.hospitalsService
+                .GetHospitalDataById<HospitalInfoViewModel>(userHospitalId, null);
+
+            if (viewModel.HospitalInfo == null)
+            {
+                return this.RedirectToAction("HttpStatusCodeHandler", "Error", this.NotFound());
+            }
 
             var allBags = this.bloodBanksService.GetHospitalBloodBagsById(userHospitalId);
 
@@ -104,10 +113,6 @@
                     }
                 }
             }
-
-            viewModel.HospitalInfo =
-                this.hospitalsService
-                .GetHospitalDataById<HospitalInfoViewModel>(userHospitalId, hospitalDataId);
 
             return this.View(viewModel);
         }

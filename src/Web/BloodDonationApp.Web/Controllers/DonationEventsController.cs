@@ -34,6 +34,11 @@
         {
             viewModel = this.requestsService.GetById<RequestInfoViewModel>(requestId);
 
+            if (viewModel == null)
+            {
+                return this.RedirectToAction("HttpStatusCodeHandler", "Error", this.NotFound());
+            }
+
             return this.View(viewModel);
         }
 
@@ -53,7 +58,12 @@
         {
             var userDonorId = this.userManager.GetUserId(this.User);
 
-            var id = model.HospitalDataId != null ? model.HospitalDataId : viewModel.HospitalId;
+            var hospitalDataId = model.HospitalDataId != null ? model.HospitalDataId : viewModel.HospitalId;
+
+            if (hospitalDataId == null)
+            {
+                return this.RedirectToAction("HttpStatusCodeHandler", "Error", this.NotFound());
+            }
 
             double neededQuantity = model.NeededQuantity;
             double quantity = viewModel.Quantity;
@@ -62,7 +72,7 @@
 
             await this.donationEventsService
                 .CreateDonation(
-                    id,
+                    hospitalDataId,
                     userDonorId,
                     neededQuantity,
                     quantity,

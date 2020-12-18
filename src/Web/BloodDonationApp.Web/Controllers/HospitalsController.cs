@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BloodDonationApp.Common;
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Web.ViewModels.BloodBank;
@@ -35,24 +35,24 @@
             this.usersService = usersService;
         }
 
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.HospitaltRoleName)]
         public IActionResult AddHospital()
         {
             var userId = this.userManager.GetUserId(this.User);
             var viewModel = this.usersService.GetUserById<HospitalProfileInputModel>(userId);
 
-            if (viewModel == null)
-            {
-                return this.NotFound();
-            }
-
             return this.View(viewModel);
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.HospitaltRoleName)]
         public async Task<IActionResult> AddHospital(HospitalProfileInputModel inputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputModel);
+            }
+
             var userId = this.userManager.GetUserId(this.User);
 
             await this.hospitalsService.CreateHospitalProfileAsync(inputModel, userId);
@@ -93,6 +93,11 @@
         public IActionResult DetailsHospital(string id, AllHospitalBloodBagsViewModel viewModel)
         {
             viewModel.HospitalInfo = this.hospitalsService.GetHospitalDataById<HospitalInfoViewModel>(null, id);
+
+            if (viewModel.HospitalInfo == null)
+            {
+                return this.RedirectToAction("HttpStatusCodeHandler", "Error", this.NotFound());
+            }
 
             var allBags = this.bloodBanksService.GetHospitalBloodBagsById(id);
 
@@ -179,6 +184,11 @@
 
             var hospital = this.hospitalsService.GetHospitalDataById<HospitalInfoViewModel>(null, id.ToString());
 
+            if (hospital == null)
+            {
+                return this.RedirectToAction("HttpStatusCodeHandler", "Error", this.NotFound());
+            }
+
             viewModel.Contact = new Contact
             {
                 Phone = hospital.Contact.Phone,
@@ -206,6 +216,11 @@
         [Authorize(Roles = "Hospital")]
         public async Task<IActionResult> Empty(EmptyInputViewModel input)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
             var userHospitalId = this.userManager.GetUserId(this.User);
 
             await this.hospitalsService.EmptyBloodAsync(userHospitalId, input.BloodGroup, input.RhesusFactor);

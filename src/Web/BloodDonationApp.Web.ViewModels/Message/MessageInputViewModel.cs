@@ -7,10 +7,11 @@
     public class MessageInputViewModel
     {
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
-        [MaxLength(500)]
+        [StringLength(500)]
         public string Content { get; set; }
     }
 }

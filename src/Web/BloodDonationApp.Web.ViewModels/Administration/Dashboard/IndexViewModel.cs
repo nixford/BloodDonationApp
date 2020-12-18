@@ -1,6 +1,7 @@
 ﻿namespace BloodDonationApp.Web.ViewModels.Administration.Dashboard
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using BloodDonationApp.Data.Models;
 

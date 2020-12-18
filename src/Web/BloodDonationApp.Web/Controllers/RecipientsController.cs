@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BloodDonationApp.Common;
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Web.ViewModels.Recipient;
@@ -28,16 +28,21 @@
             this.requestsService = requestsService;
         }
 
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.HospitaltRoleName)]
         public IActionResult AddRecipient()
         {
             return this.View();
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.HospitaltRoleName)]
         public async Task<IActionResult> AddRecipient(RecipientInputModel input)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
             var hospitalUserId = this.userManager.GetUserId(this.User);
 
             await this.recipientsService
@@ -55,7 +60,7 @@
             return this.RedirectToAction("AllHospRecip", "Recipients");
         }
 
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.HospitaltRoleName)]
         public IActionResult AllHospRecip(AllRecipientsViewMode viewModel, int page = 1)
         {
             var hospitalUserId = this.userManager.GetUserId(this.User);
@@ -91,21 +96,40 @@
             return this.View(viewModel);
         }
 
-        [Authorize(Roles = "Hospital")]
+        [Authorize(Roles = GlobalConstants.HospitaltRoleName)]
         [Route("Recipients/Delete/{recipientId:guid}")]
         public async Task<IActionResult> Delete(string recipientId)
         {
-            var hospitalId = this.userManager.GetUserId(this.User);
+            var userHospitalId = this.userManager.GetUserId(this.User);
 
-            await this.recipientsService.DeleteAsync(hospitalId, recipientId);
+            // Checks if the user-hospital has the recipient, which id is set for delete (if not - error 404)
+            var recipient = this.recipientsService
+                .AllHospitalRecipients<RecipientInfoViewModel>(userHospitalId)
+                .FirstOrDefault(r => r.Id == recipientId);
+            if (recipient == null)
+            {
+                return this.RedirectToAction("HttpStatusCodeHandler", "Error", this.NotFound());
+            }
+
+            await this.recipientsService.DeleteAsync(userHospitalId, recipientId);
 
             return this.RedirectToAction("AllHospRecip", "Recipients");
         }
 
-        [Authorize(Roles = "Hospital")]
+        [Authorize(Roles = GlobalConstants.HospitaltRoleName)]
         [Route("Recipients/DetailsRecipient/{recipientId:guid}")]
         public IActionResult DetailsRecipient(string recipientId)
         {
+            // Checks if the user-hospital has the recipient, which id is set for delete (if not - error 404)
+            var userHospitalId = this.userManager.GetUserId(this.User);
+            var recipient = this.recipientsService
+                .AllHospitalRecipients<RecipientInfoViewModel>(userHospitalId)
+                .FirstOrDefault(r => r.Id == recipientId);
+            if (recipient == null)
+            {
+                return this.RedirectToAction("HttpStatusCodeHandler", "Error", this.NotFound());
+            }
+
             var viewModel = this.recipientsService.GetById<RecipientInfoViewModel>(recipientId);
 
             return this.View(viewModel);

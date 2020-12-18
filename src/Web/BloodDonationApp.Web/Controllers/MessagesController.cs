@@ -35,6 +35,11 @@
         [HttpPost]
         public async Task<IActionResult> CreateMessage(MessageInputViewModel inputView)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(inputView);
+            }
+
             var authorId = this.userManager.GetUserId(this.User);
             var userName = this.userManager.GetUserName(this.User);
 
@@ -79,9 +84,18 @@
         [Route("Messages/Delete/{id:guid}")]
         public async Task<IActionResult> Delete(string id)
         {
-            var projectId = await this.messagesService.Delete(id);
+            var message = this.messagesService
+                .GetAllMessages<MessageViewModel>()
+                .FirstOrDefault(m => m.Id == id);
 
-            return this.RedirectToAction("AllMessages", "Messages", new { id = projectId });
+            if (message == null)
+            {
+                return this.RedirectToAction("HttpStatusCodeHandler", "Error", this.NotFound());
+            }
+
+            await this.messagesService.Delete(id);
+
+            return this.RedirectToAction("AllMessages", "Messages");
         }
     }
 }

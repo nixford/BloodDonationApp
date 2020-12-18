@@ -3,9 +3,10 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BloodDonationApp.Common;
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Data;
+    using BloodDonationApp.Web.ViewModels.Recipient;
     using BloodDonationApp.Web.ViewModels.Request;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -28,17 +29,22 @@
             this.recipientsService = recipientsService;
         }
 
-        [Authorize]
+        [Authorize (Roles = GlobalConstants.HospitaltRoleName)]
         public IActionResult AddRequest()
         {
             return this.View();
         }
 
         [HttpPost]
-        [Authorize(Roles = "Hospital")]
+        [Authorize(Roles = GlobalConstants.HospitaltRoleName)]
         [Route("Requests/AddRequest/{recipientId:guid}")]
         public async Task<IActionResult> AddRequest(string recipientId, RequestInputViewModel input)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
             var userId = this.userManager.GetUserId(this.User);
 
             var requestId = await this.requestsService.CreateRequestAsync(
@@ -92,10 +98,19 @@
             return this.View(viewModel);
         }
 
-        [Authorize(Roles = "Hospital")]
+        [Authorize(Roles = GlobalConstants.HospitaltRoleName)]
         [Route("Requests/Delete/{requestId:guid}")]
         public async Task<IActionResult> Delete(string requestId)
         {
+            var userId = this.userManager.GetUserId(this.User);
+            var request = this.requestsService
+                .AllRequests<RequestInfoViewModel>(userId)
+                .FirstOrDefault(r => r.Id == userId);
+            if (request == null)
+            {
+                return this.RedirectToAction("HttpStatusCodeHandler", "Error", this.NotFound());
+            }
+
             await this.requestsService.DeleteAsync(requestId);
 
             return this.RedirectToAction("AllRequests", "Requests");

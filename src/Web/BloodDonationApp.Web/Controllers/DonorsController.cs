@@ -1,7 +1,7 @@
 ﻿namespace BloodDonationApp.Web.Controllers
 {
     using System.Threading.Tasks;
-
+    using BloodDonationApp.Common;
     using BloodDonationApp.Data.Models;
     using BloodDonationApp.Services.Data;
     using BloodDonationApp.Web.ViewModels.Donor;
@@ -26,24 +26,24 @@
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.DonorRoleName)]
         public IActionResult AddDonor()
         {
             var userId = this.userManager.GetUserId(this.User);
             var viewModel = this.usersService.GetUserById<DonorDataProfileInputModel>(userId);
 
-            if (viewModel == null)
-            {
-                return this.NotFound();
-            }
-
             return this.View(viewModel);
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.DonorRoleName)]
         public async Task<IActionResult> AddDonor(DonorDataProfileInputModel input)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
             var userId = this.userManager.GetUserId(this.User);
 
             await this.donorsService.CreateDonorProfileAsync(input, userId);

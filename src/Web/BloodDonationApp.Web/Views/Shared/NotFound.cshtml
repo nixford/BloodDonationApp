@@ -1,0 +1,15 @@
+﻿@{ this.ViewData["Title"] = "Not Found"; }
+
+<div class="py-5">
+    <div class="text-center">
+        <img src="~/error404.png" alt="Alternate Text" width="300" height="300" />
+        <div class="py-3">
+            <h4 class="text-danger">@ViewBag.ErrorMessage</h4>
+            <div class="py-3">
+                <a class="btn btn-info" asp-area="" asp-controller="Home" asp-action="Index">
+                    Go back to home page!
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

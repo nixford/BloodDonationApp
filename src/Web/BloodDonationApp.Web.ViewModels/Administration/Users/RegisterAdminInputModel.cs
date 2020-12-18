@@ -13,12 +13,12 @@
         public string Email { get; set; }
 
         [Required]
-        [StringLength(30, ErrorMessage = "The {0} must be between {2} and {1} characters long.", MinimumLength = 3)]
+        [StringLength(30, ErrorMessage = "The Username must be between 3 and 30 characters long.", MinimumLength = 3)]
         [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be between {2} and {1} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The Password must be between 6 and 100 characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
