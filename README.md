@@ -13,7 +13,7 @@ My Asp.Net Core app for the course of C# Web - ASP.NET Core - October 2020 [Soft
  - **Donors** can choose the respective request and to donate blood. Donors can donate directly (without request published by hospital) to selected by them hospital. By clicking donate button, for the perpouse of the presentation the reserve of the blood bank (for the respective blood group) of the respective hospital is increasing. 
  - **Admins** can add adminis and delete donors and hospitals users.
 
-## Test accounts:
+## ⚙️ Test accounts:
 
   - Admin => Username: Admin1@admin1.bg / password: Admin1@admin1.bg
 
@@ -24,19 +24,18 @@ My Asp.Net Core app for the course of C# Web - ASP.NET Core - October 2020 [Soft
 
 ## :hammer_and_pick: Built With:
 - ASP.NET Core
-    ASP.NET Identity System
-    MVC Areas with Multiple Layouts
-    Razor Pages, Sections, Partial Views
-    View Components
-    Repository Pattern
-    Auto Мapping
-    Dependency Injection
-    Exception Handling
-    Data Validation, both Client-side and Server-side
-    Data Validation in the Models and Input View Models
-    Custom Validation Attributes
-    Responsive Design
-    Pagination
+    - ASP.NET Identity System
+    - MVC Areas with Multiple Layouts
+    - Razor Pages, Sections, Partial Views
+    - View Components
+    - Repository Pattern
+    - Auto Мapping
+    - Dependency Injection
+    - Exception Handling
+    - Data Validation, both Client-side and Server-side
+    - Data Validation in the Models and Input View Models
+    - Custom Validation Attributes
+    - Pagination
 - Entity Framework Core
 - MSSQL Server
 - JavaScript
@@ -63,5 +62,6 @@ My Asp.Net Core app for the course of C# Web - ASP.NET Core - October 2020 [Soft
 ### Error Handling
 ![ErrorHandling](https://github.com/nixford/BloodDonationApp/blob/master/src/Web/BloodDonationApp.Web/wwwroot/ImagesReadme/ErrorHandling.bmp)
 
-## :database: DB Diagram
+## :floppy_disk: Database Diagram
+![](https://github.com/nixford/BloodDonationApp/blob/master/src/Web/BloodDonationApp.Web/wwwroot/ImagesReadme/BDA-Diagram.png)
 
