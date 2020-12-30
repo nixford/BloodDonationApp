@@ -1,5 +1,8 @@
 # BloodDonationApp
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]
+(https://opensource.org/licenses/MIT)
+
 My Asp.Net Core app for the course of C# Web - ASP.NET Core - October 2020 [SoftUni](https://softuni.bg/).
 
 ## :pencil2: Overview
