@@ -26,7 +26,7 @@ My Asp.Net Core app for the course of C# Web - ASP.NET Core - October 2020 [Soft
 - ASP.NET Core
     - ASP.NET Identity System
     - MVC Areas with Multiple Layouts
-    - Razor Pages, Sections, Partial Views
+    - Razor View Engine, Sections, Partial Views
     - View Components
     - Repository Pattern
     - Auto Мapping
