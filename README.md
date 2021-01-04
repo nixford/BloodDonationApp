@@ -4,7 +4,7 @@
 
 My Asp.Net Core app for the course of C# Web - ASP.NET Core - October 2020 [SoftUni](https://softuni.bg/).
 
-https://blooddon.azurewebsites.net/
+https://blooddon.azurewebsites.net
 
 ## :point_right: Project Introduction
 
