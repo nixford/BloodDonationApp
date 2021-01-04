@@ -4,6 +4,8 @@
 
 My Asp.Net Core app for the course of C# Web - ASP.NET Core - October 2020 [SoftUni](https://softuni.bg/).
 
+https://blooddon.azurewebsites.net/
+
 ## :point_right: Project Introduction
 
 **BloodDonationApp** is a web application developed through ASP.NET Core 3.1 (further updated to ASP.NET 5) and it is using SQL Server for storing the data. 
